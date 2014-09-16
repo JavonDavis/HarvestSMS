@@ -1,3 +1,13 @@
+##Web Portals 
+
+There will be two web portals:
+
+1. A Web portal for use by extension officers to view and update relevant crop information.
+2. A Web portal for use by the "general public" to view crop information.
+
+Vendor information for the PHP Framework below.
+
+-- 
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
