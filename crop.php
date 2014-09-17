@@ -1,10 +1,15 @@
 <?php
-  mysql_connect("localhost","422892","Basketball14");
-  mysql_select_db("422892");
+  $conn = pg_pconnect("dbname=postgres");
+  if (!$conn){
+  	echo "An error occured. \n";
+  	exit;
+  }
 
-  $sql=mysql_query("select * from crops");
-  while($row=mysql_fetch_assoc($sql)) $output[]=$row;
-
+  $result = pg_query($conn, "select * from crops");
+  while ($row = pg_fetch_row($result)) {
+  	$output[]=$row;
+  }
   $jsonx = json_encode($output);
-  mysql_close();
+
+  
 ?>	
