@@ -1,9 +1,10 @@
-##Web Portals 
+##Web Portal
 
-There will be two web portals:
+The Web Portal will have two functions:
+ 
+1. It will allow extension officers to update relevant information.
+2. It will also provide this information to the general public. 
 
-1. A Web portal for use by extension officers to view and update relevant crop information.
-2. A Web portal for use by the "general public" to view crop information.
 
 Vendor information for the PHP Framework below.
 
