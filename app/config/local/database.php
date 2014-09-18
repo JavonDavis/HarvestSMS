@@ -18,6 +18,8 @@ return array(
 	|
 	*/
 
+	'default' => 'pgsql',
+
 	'connections' => array(
 
 		'mysql' => array(
