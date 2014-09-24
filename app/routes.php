@@ -15,3 +15,9 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::group(array('prefix' => 'api/v1'), function() {
+
+	Route::resource('crops', 'ApiController');
+
+});
