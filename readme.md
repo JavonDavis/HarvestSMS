@@ -1,3 +1,14 @@
+##Web Portal
+
+The Web Portal will have two functions:
+ 
+1. It will allow extension officers to update relevant information.
+2. It will also provide this information to the general public. 
+
+
+Vendor information for the PHP Framework below.
+
+-- 
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
