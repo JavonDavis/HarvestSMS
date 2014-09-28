@@ -33,7 +33,7 @@ class SMSController extends \BaseController {
 		}
 	}
 
-	public function showMainMenu()
+	public function replyWithMainMenu()
 	{
 
 		if (strcmp($this->message, self::MAIN_MENU_MESSAGE_CODE) == 0){

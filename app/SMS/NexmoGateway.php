@@ -28,11 +28,4 @@ class NexmoGateway implements SMSGateway {
 	{
 		$this->messageService->reply($message);
 	}
-
-	public function isValidMessage()
-	{	
-		$message = getTextMessage();
-		// if 
-	}
-
 }
