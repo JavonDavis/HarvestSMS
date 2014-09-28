@@ -4,8 +4,12 @@ use SMS\SMSGateway;
 
 class SMSController extends \BaseController {
 
+	const MAIN_MENU_MESSAGE_CODE = '400';
+	const CROP_MENU_MESSAGE_CODE = '1';
+	const WEATHER_MENU_MESSAGE_CODE = '2';
 
 	protected $gateway;
+	protected $message;
 
 	function __construct(SMSGateway $gateway){
 		$this->gateway = $gateway;
@@ -19,78 +23,41 @@ class SMSController extends \BaseController {
 	 */
 	public function index()
 	{
-		return $this->gateway->test();
+		// 
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	public function getText()
 	{
-		//
+		if (!isset($this->message)) {
+			$this->message = $gateway->getTextMessage();
+		}
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+	public function showMainMenu()
 	{
-		//
+
+		if (strcmp($this->message, self::MAIN_MENU_MESSAGE_CODE) == 0){
+			$this->gateway->reply("1.Crop Selection\n2.Weather Information\n");
+		}
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	public function replyWithCropMenu()
 	{
-		//
+		if (strcmp($this->message, self::CROP_MENU_MESSAGE_CODE) == 0){
+			$crops = Crop::all(); 
+
+			$replyMessage = '';
+
+			foreach ($crops as $crop) {
+				$replyMessage .= $crop->crop_id . ' - ' . $crop->name;
+			}
+
+			$this->gateway->reply($replyMessage);
+			return true;
+		} else {
+			return false;
+		}		
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 
 }
+

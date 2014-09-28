@@ -21,16 +21,4 @@ interface SMSGateway {
 	* @return boolean
 	*/
 	public function reply($relevantMessage);
-
-	/**
-	* Gets relevant response based on sms
-	* @return String
-	*/
-	public function getRelevantResponse($sms);
-
-	/**
-	* Checks whether or not the sms received contains a valid message
-	* @return boolean
-	*/
-	public function isValidMessage($message);
 }

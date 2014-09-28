@@ -8,37 +8,31 @@ class NexmoGateway implements SMSGateway {
 
 	public function __construct()
 	{
-		$messageService = new NexmoMessage(Config::get('Nexmo.NexmoID'), Config::get('Nexmo.NexmoSecret'));
+		$this->messageService = new NexmoMessage(Config::get('Nexmo.NexmoID'), Config::get('Nexmo.NexmoSecret'));
 	}
 
 	public function hasNewText()
 	{
-		return $messageService->inboundText();
+		return $this->messageService->inboundText();
 	}
 
 	public function getTextMessage()
 	{
-		return $messageService->text;
-	}
-
-	public function test()
-	{
-		return 'test';
+		if (hasNewText())
+			return $this->messageService->text;
+		else 
+			return null;
 	}
 
 	public function reply($message)
 	{
-		$messageService->reply($message);
+		$this->messageService->reply($message);
 	}
 
-	public function getRelevantResponse($sms)
-	{
-		# code...
-	}
-
-	public function isValidMessage($message)
-	{
-		if Config::get($message)
+	public function isValidMessage()
+	{	
+		$message = getTextMessage();
+		// if 
 	}
 
 }
