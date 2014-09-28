@@ -21,9 +21,9 @@ class SMSController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function test()
 	{
-		// 
+		return 'test';
 	}
 
 	public function getText()
