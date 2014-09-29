@@ -50,7 +50,6 @@ class SMSController extends \BaseController {
 
 		$this->gateway->reply($replyMessage);
 		return true;
-		
 	}
 
 	public function replyWithErrorMessage()
@@ -74,6 +73,32 @@ class SMSController extends \BaseController {
 			default: 
 				replyWithErrorMessage();
 		}
+	}
+
+
+	public function replyWithErrorMessage()
+	{
+		$this->gateway->reply("Sorry! That's an invalid message. Text 0 to get help.");
+	}
+
+	public function smsHandler()
+	{
+		if ($this->gateway->hasNewText(Input::all())) {
+			$this->message = $this->gateway->getTextMessage();
+		}
+
+		switch($this->message) {
+			case self::MAIN_MENU_MESSAGE_CODE:
+				replyWithMainMenu();
+				break;
+			case self::CROP_MENU_MESSAGE_CODE:
+				replyWithCropMenu();
+				break;
+			default: 
+				replyWithErrorMessage();
+		}
+
+>>>>>>> 66b5e03f57b1e78151743eff29eb501b9d9f1f93
 
 	}
 
