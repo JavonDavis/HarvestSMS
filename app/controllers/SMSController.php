@@ -23,7 +23,14 @@ class SMSController extends \BaseController {
 	 */
 	public function test()
 	{
-		return 'test';
+		// Step 1: Declare new NexmoMessage.
+		$nexmo_sms = new NexmoMessage(Config::get('Nexmo.NexmoID'), Config::get('Nexmo.NexmoSecret'));
+
+		// Step 2: Use sendText( $to, $from, $message ) method to send a message. 
+		$info = $nexmo_sms->sendText( '+18768540368', 'Bale', 'Hello!' );
+
+		// Step 3: Display an overview of the message
+		return $nexmo_sms->displayOverview($info);
 	}
 
 	public function getText()
