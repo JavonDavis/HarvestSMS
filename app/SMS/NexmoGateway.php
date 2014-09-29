@@ -21,6 +21,16 @@ class NexmoGateway implements SMSGateway {
 		return $this->messageService->text; 
 	}
 
+	public function sendText($data,$name,$message)
+	{
+		$this->messageService->sendText($data,$name,$message); 
+	}
+
+	public function displayOverView($data)
+	{
+		$this->messageService->sendText($data); 
+	}
+
 	public function reply($message)
 	{
 		$this->messageService->reply($message);
