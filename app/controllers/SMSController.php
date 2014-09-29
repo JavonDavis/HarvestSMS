@@ -35,28 +35,46 @@ class SMSController extends \BaseController {
 
 	public function replyWithMainMenu()
 	{
-
-		if (strcmp($this->message, self::MAIN_MENU_MESSAGE_CODE) == 0){
-			$this->gateway->reply("1.Crop Selection\n2.Weather Information\n");
-		}
+		$this->gateway->reply("Send 0 to get help\n Send 1 to receive crop information.\nSend 2 for weather information\nSend 3 to receive livestock information.\n");
 	}
 
 	public function replyWithCropMenu()
 	{
-		if (strcmp($this->message, self::CROP_MENU_MESSAGE_CODE) == 0){
-			$crops = Crop::all(); 
+		$crops = Crop::all(); 
 
-			$replyMessage = '';
+		$replyMessage = "Send the code beside each crop to receive information specific to that crop.\n";
 
-			foreach ($crops as $crop) {
-				$replyMessage .= $crop->crop_id . ' - ' . $crop->name;
-			}
+		foreach ($crops as $crop) {
+			$replyMessage .= $crop->crop_id . ' - ' . $crop->name . "\n";
+		}
 
-			$this->gateway->reply($replyMessage);
-			return true;
-		} else {
-			return false;
-		}		
+		$this->gateway->reply($replyMessage);
+		return true;
+		
+	}
+
+	public function replyWithErrorMessage()
+	{
+		$this->gateway->reply("Sorry! That's an invalid message. Text 0 to get help.");
+	}
+
+	public function smsHandler()
+	{
+		if ($this->gateway->hasNewText(Input::all())) {
+			$this->message = $this->gateway->getTextMessage();
+		}
+
+		switch($this->message) {
+			case self::MAIN_MENU_MESSAGE_CODE:
+				replyWithMainMenu();
+				break;
+			case self::CROP_MENU_MESSAGE_CODE:
+				replyWithCropMenu();
+				break;
+			default: 
+				replyWithErrorMessage();
+		}
+
 	}
 
 }

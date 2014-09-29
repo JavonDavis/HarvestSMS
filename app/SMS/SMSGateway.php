@@ -6,9 +6,10 @@ interface SMSGateway {
 
 	/**
 	* Checks whether or not a new text is present
+	* @param $data - Input data from request
 	* @return boolean
 	*/
-	public function hasNewText();
+	public function hasNewText($data);
 
 	/**
 	* Gets the latest text message as a String
