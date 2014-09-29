@@ -58,16 +58,17 @@ class SMSController extends \BaseController {
 			$this->message = $this->gateway->getTextMessage();
 		}
 
-		switch($this->message) {
-			case self::MAIN_MENU_MESSAGE_CODE:
-				replyWithMainMenu();
-				break;
-			case self::CROP_MENU_MESSAGE_CODE:
-				replyWithCropMenu();
-				break;
-			default: 
-				replyWithErrorMessage();
-		}
+		$this->reply($this->message);
+		// switch($this->message) {
+		// 	case self::MAIN_MENU_MESSAGE_CODE:
+		// 		replyWithMainMenu();
+		// 		break;
+		// 	case self::CROP_MENU_MESSAGE_CODE:
+		// 		replyWithCropMenu();
+		// 		break;
+		// 	default: 
+		// 		replyWithErrorMessage();
+		// }
 
 	}
 
