@@ -66,11 +66,9 @@ class SMSController extends \BaseController {
 		// if ($this->gateway->hasNewText(Input::all())) {
 		// 	$this->message = $this->gateway->getTextMessage();
 		// }
-		// $this->gateway->sendText('18768540368', 'BALE', 'message');
+		$this->gateway->sendText('18768540368', 'BALE', 'message');
+
 		// 'https://rest.nexmo.com/sms/json';
-
-		dd(function_exists('curl_version'));
-
 		// return $this->message;
 		// switch($this->message) {
 		// 	case self::MAIN_MENU_MESSAGE_CODE:

@@ -181,6 +181,7 @@ class NexmoMessage {
 			curl_setopt( $to_nexmo, CURLOPT_POST, true );
 			curl_setopt( $to_nexmo, CURLOPT_RETURNTRANSFER, true );
 			curl_setopt( $to_nexmo, CURLOPT_POSTFIELDS, $post );
+			curl_setopt( $to_nexmo, CURLOPT_TIMEOUT, value)
 
 			if (!$this->ssl_verify) {
 				curl_setopt( $to_nexmo, CURLOPT_SSL_VERIFYPEER, false);
@@ -250,6 +251,7 @@ class NexmoMessage {
 	 */
 	private function nexmoParse ( $from_nexmo ) {
 		$response = json_decode($from_nexmo);
+		dd($from_nexmo);
 
 		// Copy the response data into an object, removing any '-' characters from the key
 		$response_obj = $this->normaliseKeys($response);
