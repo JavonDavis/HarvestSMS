@@ -1,7 +1,7 @@
 <?php
 
 use SMS\SMSGateway;
-use SMS;
+use SMS\NexmoMessage;
 
 class SMSController extends \BaseController {
 
@@ -25,7 +25,7 @@ class SMSController extends \BaseController {
 	public function test()
 	{
 		// Step 1: Declare new NexmoMessage.
-		$nexmo_sms = new NexmoMessage(Config::get('Nexmo.NexmoID'), Config::get('Nexmo.NexmoSecret'));
+		$nexmo_sms = new \SMS\NexmoMessage(Config::get('Nexmo.NexmoID'), Config::get('Nexmo.NexmoSecret'));
 
 		// Step 2: Use sendText( $to, $from, $message ) method to send a message. 
 		$info = $nexmo_sms->sendText( '+18768540368', 'Bale', 'Hello!' );
