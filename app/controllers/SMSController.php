@@ -54,11 +54,11 @@ class SMSController extends \BaseController {
 
 	public function smsHandler()
 	{
+		$this->gateway->reply("gaza");
 		if ($this->gateway->hasNewText(Input::all())) {
 			$this->message = $this->gateway->getTextMessage();
 		}
-
-		$this->gateway->reply($this->message);
+		//return $this->message;
 		// switch($this->message) {
 		// 	case self::MAIN_MENU_MESSAGE_CODE:
 		// 		replyWithMainMenu();
