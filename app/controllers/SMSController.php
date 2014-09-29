@@ -63,10 +63,11 @@ class SMSController extends \BaseController {
 
 	public function smsHandler()
 	{
-		if ($this->gateway->hasNewText(Input::all())) {
-			$this->message = $this->gateway->getTextMessage();
-		}
-		dd($this->gateway->messageService);
+		// if ($this->gateway->hasNewText(Input::all())) {
+		// 	$this->message = $this->gateway->getTextMessage();
+		// }
+		$this->gateway->sendText('18768540368', 'BALE', 'message');
+
 		// return $this->message;
 		// switch($this->message) {
 		// 	case self::MAIN_MENU_MESSAGE_CODE:
