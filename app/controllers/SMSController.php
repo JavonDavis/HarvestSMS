@@ -67,7 +67,9 @@ class SMSController extends \BaseController {
 		if ($this->gateway->hasNewText(Input::all())) {
 			$this->message = $this->gateway->getTextMessage();
 		}
-		dd($this->gateway);
+		$info = $this->gateway->reply('wvnwoein');
+		$this->gateway->displayOverview($info);
+
 		//return $this->message;
 		// switch($this->message) {
 		// 	case self::MAIN_MENU_MESSAGE_CODE:

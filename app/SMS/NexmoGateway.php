@@ -28,7 +28,7 @@ class NexmoGateway implements SMSGateway {
 
 	public function displayOverView($data)
 	{
-		$this->messageService->sendText($data); 
+		$this->messageService->displayOverView($data); 
 	}
 
 	public function reply($message)
