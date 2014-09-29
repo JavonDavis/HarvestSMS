@@ -10,7 +10,6 @@ class SMSController extends \BaseController {
 	const WEATHER_MENU_MESSAGE_CODE = '2';
 
 	protected $gateway;
-	protected $message;
 
 	function __construct(SMSGateway $gateway){
 		$this->gateway = $gateway;
@@ -63,10 +62,9 @@ class SMSController extends \BaseController {
 
 	public function smsHandler()
 	{
-		// if ($this->gateway->hasNewText(Input::all())) {
-		// 	$this->message = $this->gateway->getTextMessage();
-		// }
-		$this->gateway->sendText('18768540368', 'BALE', 'message');
+		// $message = $this->gateway->getTextMessage(Input::all());
+
+		$this->gateway->sendText('18765095176', 'BALE', 'MESSAGETEST');
 
 		// 'https://rest.nexmo.com/sms/json';
 		// return $this->message;

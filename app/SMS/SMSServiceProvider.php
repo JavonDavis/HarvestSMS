@@ -14,7 +14,7 @@ class SMSServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'SMS\SMSGateway',
-			'SMS\NexmoGateway'
+			'SMS\Gateway'
 		);
 	}
 }
