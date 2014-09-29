@@ -24,14 +24,15 @@ class SMSController extends \BaseController {
 	 */
 	public function test()
 	{
-		// Step 1: Declare new NexmoMessage.
-		$nexmo_sms = new NexmoMessage('d1923006', 'f3252994');
+		// // Step 1: Declare new NexmoMessage.
+		// $nexmo_sms = new NexmoMessage('d1923006', 'f3252994');
 
-		// Step 2: Use sendText( $to, $from, $message ) method to send a message. 
-		$info = $nexmo_sms->sendText( '+18768540368', 'Bale', 'Hello!' );
+		// // Step 2: Use sendText( $to, $from, $message ) method to send a message. 
+		// $info = $nexmo_sms->sendText( '+18768540368', 'Bale', 'Hello!' );
 
-		// Step 3: Display an overview of the message
-		return $nexmo_sms->displayOverview($info);
+		// // Step 3: Display an overview of the message
+		// return $nexmo_sms->displayOverview($info);
+
 	}
 
 	public function getText()
@@ -62,10 +63,11 @@ class SMSController extends \BaseController {
 
 	public function smsHandler()
 	{
-		$this->gateway->reply("gaza");
+		// $this->gateway->reply("gaza");
 		if ($this->gateway->hasNewText(Input::all())) {
 			$this->message = $this->gateway->getTextMessage();
 		}
+		dd($this->gateway);
 		//return $this->message;
 		// switch($this->message) {
 		// 	case self::MAIN_MENU_MESSAGE_CODE:
