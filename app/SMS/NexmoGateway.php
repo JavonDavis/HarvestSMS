@@ -4,7 +4,7 @@ namespace SMS;
 
 class NexmoGateway implements SMSGateway {
 	
-	protected $messageService;
+	public $messageService;
 
 	public function __construct()
 	{
