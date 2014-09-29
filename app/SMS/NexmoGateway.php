@@ -11,17 +11,14 @@ class NexmoGateway implements SMSGateway {
 		$this->messageService = new NexmoMessage(Config::get('Nexmo.NexmoID'), Config::get('Nexmo.NexmoSecret'));
 	}
 
-	public function hasNewText()
+	public function hasNewText($data)
 	{
-		return $this->messageService->inboundText();
+		return $this->messageService->inboundText($data);
 	}
 
 	public function getTextMessage()
 	{
-		if (hasNewText())
-			return $this->messageService->text;
-		else 
-			return null;
+		return $this->messageService->text; 
 	}
 
 	public function reply($message)
