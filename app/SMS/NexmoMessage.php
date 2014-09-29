@@ -250,11 +250,10 @@ class NexmoMessage {
 	 */
 	private function nexmoParse ( $from_nexmo ) {
 		$response = json_decode($from_nexmo);
-		dd($response);
 
 		// Copy the response data into an object, removing any '-' characters from the key
 		$response_obj = $this->normaliseKeys($response);
-
+		dd($response_obj);
 		if ($response_obj) {
 			$this->nexmo_response = $response_obj;
 
