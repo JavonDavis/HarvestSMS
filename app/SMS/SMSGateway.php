@@ -8,7 +8,7 @@ interface SMSGateway {
 	* Gets the latest text message as a String
 	* @return String
 	*/
-	public function getTextMessage();
+	public function getTextMessage($data);
 
 	/**
 	* Checks if the gateway has a text
