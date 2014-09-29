@@ -23,3 +23,5 @@ Route::group(array('prefix' => 'api/v1'), function() {
 });
 
 Route::get('/test', array('uses' => 'SMSController@test'));
+
+Route::post('/sms', array('uses' => 'SMSController@SMSHandler'));
