@@ -35,6 +35,18 @@ Route::get('/msgreply', function(){
 	echo $sms->displayOverview($info);
 });
 
-Route::get('/test', array('uses' => 'SMSController@test'));
+Route::get('/createJohn', function(){
+	$user = new User;
+	$user->name = "John Brown";
+	$user->username = "JohnB";
+	$user->password = "Password";
+	$user->phone = '111111111';
+	$user->email = 'jb@jb.com';
+	$user->save();
+});
 
-Route::get('/sms', array('uses' => 'SMSController@smsHandler'));
+Route::get('/showJohn', function() {
+	$user = User::where('username', '=', 'JohnB');
+	return $user;
+});
+
