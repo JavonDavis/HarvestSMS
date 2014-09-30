@@ -2,7 +2,7 @@
 
 namespace SMS;
 
-use Illuminate\Config;
+use Config;
 
 class Gateway implements SMSGateway {
 	
