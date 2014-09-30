@@ -4,15 +4,14 @@
     "keywords": ["Nexmo"],
     "homepage": "https://github.com/prawnsalad/Nexmo-PHP-lib",
     "license": "MIT",
+    "require": { 
+        "ext-mbstring": "*"
+    },
     "autoload": {
         "psr-4": {
             "PrawnSalad\\Nexmo\\": ["src"]
         },
 
-    },
-
-    "require": { 
-        "ext-mbstring": "*"
     }
 }
 
