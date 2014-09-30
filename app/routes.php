@@ -43,6 +43,8 @@ Route::get('/createJohn', function(){
 	$user->phone = '111111111';
 	$user->email = 'jb@jb.com';
 	$user->save();
+
+	return 'saved';
 });
 
 Route::get('/showJohn', function() {
