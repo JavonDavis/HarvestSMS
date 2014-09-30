@@ -62,7 +62,7 @@ Route::get('/createJohn', function(){
 });
 
 Route::get('/login',function(){
-	return View::make('hello');
+	return View::make('login.blade');
 	});
 
 Route::get('/showJohn', function() {
