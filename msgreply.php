@@ -6,6 +6,7 @@
 		 
 		ini_set('display_errors', 'On');
 
+		echo "string";
      include ( "NexmoMessage.php" );
 	// include ("crop.php");
      // Declare new NexmoMessage.
@@ -91,6 +92,7 @@
 
 
   if ($sms->inboundText()) {
+  	echo "INBOUND TEXT";
 
          $text = $sms->text;
 $int_version = (int) $text;
@@ -98,8 +100,10 @@ $int_version = (int) $text;
          {
 			case 0: $sms->reply('Not a valid entryu') ;
 				break;
-                        case 400: $sms->reply("1.Crop Selection\n2.Weather Information\n") ;
-                        break;
+            case 400: $sms->reply("1.Crop Selection\n2.Weather Information\n") ;
+                break;
+            default:
+            	$sms->reply("NO TEXT");
 
      //                    case 2: $sms->reply("Please Reply With You're Farmer ID In Order To Receive Weather Information For You're Farm Location. In The Future Simply Send You're ID For Weather Updates");         
 		   //      break;
