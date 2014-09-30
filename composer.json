@@ -7,7 +7,12 @@
     "autoload": {
         "psr-4": {
             "PrawnSalad\\Nexmo\\": ["src"]
-        }
+        },
+
+        "require": { 
+        "ext-mbstring": "*"
+    }
+
     }
 }
 
