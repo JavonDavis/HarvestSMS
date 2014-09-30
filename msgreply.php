@@ -4,9 +4,10 @@
 		 * Callback function for when a text received
 		 */
 		 
-		 
+		ini_set('display_errors', 'On');
+
      include ( "NexmoMessage.php" );
-	include ("crop.php");
+	// include ("crop.php");
      // Declare new NexmoMessage.
      $sms = new NexmoMessage('d1923006', 'f3252994');
      
@@ -87,47 +88,7 @@
 	}
 }
 
-$stack =array();
-$jsony = json_decode($jsonx); // jsonx variable from crop.php
-foreach($jsony as $json){
-$crop = new Crop;	
-	
-	foreach($json as $prop => $value)
-	{
-                
-		switch($prop){
-			case "crop_id": $crop->{'setId'}($value);	
-			break;
-			
-			case "name": $crop->{'setName'}($value);
-			break;
-			
-			case "price":$crop->{'setPrice'}($value);
-			break;
-			
-			case "pest":$crop->{'setPest'}($value);
-			break;
-			
-			case "soil":$crop->{'setSoil'}($value);
-			break;
-			
-			case "fertilize":$crop->{'setFertilizer'}($value);
-			break;
-			
-			case "weather":$crop->{'setWeather'}($value);
-			break;
-			
-			case "harvest_time":$crop->{'setHarvestTime'}($value);
-			break;
-			
-			case "produced":$crop->{'setProduced'}($value);
-			break;
-			
-		}
-}
-		$stack[$crop->{'getId'}()]=$crop;
-	
-}
+
 
   if ($sms->inboundText()) {
 
@@ -140,75 +101,65 @@ $int_version = (int) $text;
                         case 400: $sms->reply("1.Crop Selection\n2.Weather Information\n") ;
                         break;
 
-                        case 2: $sms->reply("Please Reply With You're Farmer ID In Order To Receive Weather Information For You're Farm Location. In The Future Simply Send You're ID For Weather Updates");         
-		        break;
-                        case 1:	$reply = '';
-			    foreach($stack as $key => $crop )
-				{
-				     $reply.= ($key.'-'.$crop->{'getName'}()."\n");
-				}
-                $sms->reply($reply);
-                break;
-                default:
+     //                    case 2: $sms->reply("Please Reply With You're Farmer ID In Order To Receive Weather Information For You're Farm Location. In The Future Simply Send You're ID For Weather Updates");         
+		   //      break;
+     //                    case 1:	$reply = '';
+					// 	    foreach($stack as $key => $crop )
+					// 		{
+					// 		     $reply.= ($key.'-'.$crop->{'getName'}()."\n");
+					// 		}
+			  //               $sms->reply($reply);
+     //            			break;
+     //            			default:
                     
-				     if($int_version<999)
-					 {
-					 try
-					 {
-					 $crop = $stack[$int_version];
+				 //     			if($int_version<999)
+					// 				 {
+					// 				 try
+					// 				 	{
+					//  						$crop = $stack[$int_version];
 													
-							$option1 = $int_version."1. Last recorded price"; 
-							$option2 = $int_version."2. Methods of pest management";
-							$option3 = $int_version."3. Suggested soil that are best for this crop";
-							$option4 = $int_version."4. Suggested methods of fertilization";
-							$option5 = $int_version."5. Climate Suggestions";
-							$option6 = $int_version."6. Recorded amount of ".$crop->{'getName'}." sold last month"; 
-                                                        $option7 = $int_version."7. Suggested Time of Harvest";
+					// 						$option1 = $int_version."1. Last recorded price"; 
+					// 						$option2 = $int_version."2. Methods of pest management";
+					// 						$option3 = $int_version."3. Suggested soil that are best for this crop";
+					// 						$option4 = $int_version."4. Suggested methods of fertilization";
+					// 						$option5 = $int_version."5. Climate Suggestions";
+					// 						$option6 = $int_version."6. Recorded amount of ".$crop->{'getName'}." sold last month"; 
+				 //                                                        $option7 = $int_version."7. Suggested Time of Harvest";
 							
-							$sms->reply($option1."\n".$option2."\n".$option3."\n");
-                                                        $sms->reply($option4."\n".$option5."\n".$option6."\n".$option7."\n");
-					}
-					catch(Exception $e)
-					{
-					}
-					}
-					elseif(substr($int_version,0,3))
-					{
-						$key_code = substr($int_version,0,3);
-						$option=substr($int_version,3,3);
-                    
-						
-						$crop=$stack[$key_code];
-						
-						switch($option)
-						{
-						
-							case 1:$sms->reply($crop->{'getPrice'}());
-							break;
-						
-							case 2:$sms->reply($crop->{'getPest'}());
-							break;
-						
-							case 3:$sms->reply($crop->{'getSoil'}());
-							break;
-							
-							case 4:$sms->reply($crop->{'getFertilizer'}());
-							break;
-							
-							case 5:$sms->reply($crop->{'getWeather'}());
-							break;
-							
-							case 6:$sms->reply($crop->{'getProduced'}());
-							break;
- 
-							case 7:$sms->reply($crop->{'getHarvestTime'}());
-							break;
-						}
-						
-                                         
-					}
-                  }
+					// 						$sms->reply($option1."\n".$option2."\n".$option3."\n");
+				 //                                                        $sms->reply($option4."\n".$option5."\n".$option6."\n".$option7."\n");
+					// 					}
+					// 				catch(Exception $e){}
+					// 			}
+					// 				elseif(substr($int_version,0,3)) {
+					// 					$key_code = substr($int_version,0,3);
+					// 					$option=substr($int_version,3,3);						
+					// 					$crop=$stack[$key_code];
+					// 					switch($option)	{						
+					// 						case 1:$sms->reply($crop->{'getPrice'}());
+					// 						break;
+										
+					// 						case 2:$sms->reply($crop->{'getPest'}());
+					// 						break;
+										
+					// 						case 3:$sms->reply($crop->{'getSoil'}());
+					// 						break;
+											
+					// 						case 4:$sms->reply($crop->{'getFertilizer'}());
+					// 						break;
+											
+					// 						case 5:$sms->reply($crop->{'getWeather'}());
+					// 						break;
+											
+					// 						case 6:$sms->reply($crop->{'getProduced'}());
+					// 						break;
+				 
+					// 						case 7:$sms->reply($crop->{'getHarvestTime'}());
+					// 						break;
+					// 					}                       
+					// }
+     //              }
 				
-}
+}}
 ?>		
 		
