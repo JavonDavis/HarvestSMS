@@ -49,6 +49,6 @@ Route::get('/createJohn', function(){
 
 Route::get('/showJohn', function() {
 	$user = User::where('username', '=', 'JohnB');
-	return $user;
+	dd($user);
 });
 
