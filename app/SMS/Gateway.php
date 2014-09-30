@@ -35,7 +35,7 @@ class Gateway implements SMSGateway {
 								CURLOPT_POSTFIELDS => array(
 
 									'username' => Config::get('Nexmo.NexmoID'),
-									// 'password' => Config::get('Nexmo.NexmoSecret'),
+									'password' => Config::get('Nexmo.NexmoSecret'),
 									'text' => $message,
 									'from' => 'B.A.L.E',
 									'to' => $number
