@@ -22,6 +22,19 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	
 });
 
+Route::get('/msgreply', function(){
+	ini_set('display_errors', 'On');
+
+	echo "string";
+	include ( "NexmoMessage.php" );
+	// include ("crop.php");
+	// Declare new NexmoMessage.
+	$sms = new NexmoMessage('d1923006', 'f3252994');
+
+	$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+	echo $sms->displayOverview($info);
+});
+
 Route::get('/test', array('uses' => 'SMSController@test'));
 
 Route::get('/sms', array('uses' => 'SMSController@smsHandler'));
