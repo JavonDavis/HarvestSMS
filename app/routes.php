@@ -101,7 +101,7 @@ Route::get('/showAll', function() {
 	return User::all()->toJson();
 });
 
-Route::get('/auth',function() {
+Route::post('/auth',function() {
 	
 	$data = Input::all();
 	
