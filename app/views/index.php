@@ -10,7 +10,7 @@
 	  <div>
 			<h3>Sign In</h3>
 			<img src="Images/grass.jpg" alt="Grass" id="logo"> 
-			<form method="get">
+			<form method="get" action="/auth">
 			  <h5>Telephone Number</h5>
 			  <input type="text" maxlength="40"  id="user">
 			  </br>
