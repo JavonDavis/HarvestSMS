@@ -9,10 +9,10 @@
             "PrawnSalad\\Nexmo\\": ["src"]
         },
 
-        "require": { 
-        "ext-mbstring": "*"
-    }
+    },
 
+    "require": { 
+        "ext-mbstring": "*"
     }
 }
 
