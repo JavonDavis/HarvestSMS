@@ -49,23 +49,34 @@ Route::get('/msgreply', function(){
 	}
 });
 
-Route::get('/createJohn', function(){
+Route::get('/createJill', function(){
 	$user = new User;
-	$user->name = "John Brown";
-	$user->username = "JohnB";
+	$user->name = "Jill Brown";
+	$user->username = "JillB";
 	$user->password = "Password";
-	$user->phone = '111111111';
-	$user->email = 'jb@jb.com';
+	$user->phone = '2222222';
+	$user->email = 'jlb@jlb.com';
 	$user->save();
 
 	return 'saved';
 });
 
+/**
+
+$user->name = "John Brown";
+	$user->username = "JohnB";
+	$user->password = "Password";
+	$user->phone = '111111111';
+	$user->email = 'jb@jb.com';
+
+*/
+
+
 Route::get('/login',function(){
 	return View::make('login');
 	});
 
-Route::get('/showJohn', function() {
-	return User::find(1)->toJson();
+Route::get('/showAll', function() {
+	return User::all()->toJson();
 });
 
