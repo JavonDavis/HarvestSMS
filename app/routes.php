@@ -48,7 +48,6 @@ Route::get('/createJohn', function(){
 });
 
 Route::get('/showJohn', function() {
-	$user = User::find(1);
-	var_dump($user->name);
+	return User::find(1)->toJson();
 });
 
