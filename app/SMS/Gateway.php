@@ -30,7 +30,7 @@ class Gateway implements SMSGateway {
 	public function sendText($number, $message)
 	{
 		$curl = curl_init();
-		curl_setopt($curl, array(CURLOPT_URL => 'https://rest.nexmo.com/sms/json',
+		curl_setopt_array($curl, array(CURLOPT_URL => 'https://rest.nexmo.com/sms/json',
 								CURLOPT_POST => 1,
 								CURLOPT_POSTFIELDS => array(
 
