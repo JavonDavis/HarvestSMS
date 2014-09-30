@@ -43,11 +43,10 @@ class Gateway implements SMSGateway {
 									)
 								)
 					);
-		dd($curl);
-		// $response = curl_exec($curl);
-		// curl_close($curl);
+		$response = curl_exec($curl);
+		curl_close($curl);
 
-		// return $response;
+		return $response;
 	}
 
 	public function reply($message)
