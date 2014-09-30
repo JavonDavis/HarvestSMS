@@ -12,7 +12,7 @@ include ( "NexmoMessage.php" );
 // Declare new NexmoMessage.
 $sms = new NexmoMessage('d1923006', 'f3252994');
 
-$info = $nexmo_sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 echo $sms->displayOverview($info);
 
 ?>
