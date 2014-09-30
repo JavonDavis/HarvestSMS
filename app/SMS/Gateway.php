@@ -33,8 +33,8 @@ class Gateway implements SMSGateway {
 								CURLOPT_POST => 1,
 								CURLOPT_POSTFIELDS => array(
 
-									'api_key' => Config::get('Nexmo.NexmoID'),
-									'api_secret' => Config::get('Nexmo.NexmoSecret'),
+									'api_key' => \Illuminate\Config::get('Nexmo.NexmoID'),
+									'api_secret' => \Illuminate\Config::get('Nexmo.NexmoSecret'),
 									'text' => $message,
 									'from' => 'B.A.L.E',
 									'to' => $number
