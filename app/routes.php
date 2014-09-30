@@ -31,8 +31,22 @@ Route::get('/msgreply', function(){
 	// Declare new NexmoMessage.
 	$sms = new NexmoMessage('d1923006', 'f3252994');
 
-	$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
-	echo $sms->displayOverview($info);
+	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+	//echo $sms->displayOverview($info);
+	
+	if($sms->inboundText())
+	{
+		$text = $sms->text;
+		$int_version = (int) $text;
+		
+		switch($int_version)
+         {
+			case 0: $sms->reply('Not a valid entry') ;
+			break;
+			case 400: $sms->reply("Send 1 for Crops Section\nSend 2 for Crops Section\nSend 3 for weather information\n") ;
+			break;
+		 }
+	}
 });
 
 Route::get('/createJohn', function(){
@@ -46,6 +60,10 @@ Route::get('/createJohn', function(){
 
 	return 'saved';
 });
+
+Route::get('/login',function(){
+	return View::make('login.php');
+	});
 
 Route::get('/showJohn', function() {
 	return User::find(1)->toJson();
