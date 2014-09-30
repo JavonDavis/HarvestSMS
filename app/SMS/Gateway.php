@@ -1,6 +1,7 @@
 <?php 
 
 namespace SMS;
+use Illuminate/Config;
 
 class Gateway implements SMSGateway {
 	
