@@ -18,7 +18,21 @@ Route::get('/', function()
 
 Route::group(array('prefix' => 'api/v1'), function() {
 
-	Route::resource('crops', 'ApiController');
+	Route::resource('crops', 'CropApiController');
+	Route::get('/crops/{id}/fertilizers');
+	Route::get('/crops/{id}/fertilizers/{fertilizerid}');
+
+	Route::resource('fertilizers', 'FertilizerApiController');
+	Route::get('/fertilizers/{id}/crops');
+	Route::get('/fertilizers/{id}/crops/{cropID}');
+
+	Route::resource('animals', 'AnimalApiController');
+	Route::get('/animals/{id}/tips');
+	Route::get('/animals/{id}/tips/{tipid}');
+
+	Route::resource('tips', 'TipApiController');
+	Route::get('/tips/{id}/crops');
+	Route::get('/tips/{id}/crops/{cropID}');
 	
 });
 
@@ -61,7 +75,7 @@ Route::get('/createJill', function(){
 	return 'saved';
 });
 
-/**
+/*
 
 $user->name = "John Brown";
 	$user->username = "JohnB";
