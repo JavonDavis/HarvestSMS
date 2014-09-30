@@ -45,8 +45,9 @@ class Gateway implements SMSGateway {
 					);
 		$response = curl_exec($curl);
 		curl_close($curl);
+		dd(Config::get('Nexmo.NexmoID'));
 
-		return $response;
+		// return $response;
 	}
 
 	public function reply($message)
