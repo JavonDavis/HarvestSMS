@@ -28,12 +28,12 @@
 	  <div>
 			<h3>Sign In</h3>
 			<img src="grass.jpg" alt="Grass" id="logo"> 
-			<form method="get" action="/auth">
+			<form method="post" action="/auth">
 			  <h5>Telephone Number</h5>
-			  <input type="text" maxlength="40"  id="user">
+			  <input type="text" maxlength="40"  id="phone" name="number">
 			  </br>
 			  <h5>Password</h5>
-			  <input type="text" maxlength="50"  id="pass">
+			  <input type="text" maxlength="50"  id="pass" name="password">
 			  </br>
 			  <input type="submit" value="Login">
 			</form>
