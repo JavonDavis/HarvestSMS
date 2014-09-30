@@ -48,7 +48,7 @@ Route::get('/createJohn', function(){
 });
 
 Route::get('/showJohn', function() {
-	$user = User::where('username', '=', 'JohnB');
-	dd($user);
+	$user = User::find(1);
+	var_dump($user->name);
 });
 
