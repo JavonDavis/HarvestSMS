@@ -83,6 +83,13 @@ $user->name = "John Brown";
 	$user->phone = '111111111';
 	$user->email = 'jb@jb.com';
 
+$user = new User;
+	$user->name = "Jill Brown";
+	$user->username = "JillB";
+	$user->password = "Password";
+	$user->phone = '2222222';
+	$user->email = 'jlb@jlb.com';
+	$user->save();
 */
 
 
@@ -94,4 +101,15 @@ Route::get('/showAll', function() {
 	return User::all()->toJson();
 });
 
-Rout::get('/auth',function() {});
+Rout::get('/auth',function() {
+	
+	$data = Input::all();
+	
+	$number= $data['number'];
+	$password= $data['password'];
+	
+	if (Auth::attempt(array('phone' => $number, 'password' => $password)))
+	{
+		return Redirect::intended('home');
+	}
+});
