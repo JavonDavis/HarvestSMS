@@ -120,7 +120,7 @@ Route::post('/auth',function() {
 	foreach($users as $user)
 	{
 		echo $user->password."kk".strcmp($user->phone,$number)."jj".strcmp($user->password,$password);
-		if(strcmp($user->phone,$number) && strcmp($user->password,$password))
+		if($user->phone ==$number && strcmp($user->password,$password))
 		{
 			Session::put('user',$user);
 			return Redirect::inteded('home');
