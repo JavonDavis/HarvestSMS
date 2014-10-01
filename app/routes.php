@@ -112,4 +112,6 @@ Route::post('/auth',function() {
 	{
 		return Redirect::intended('home');
 	}
+	else 
+	{return "Fail";}
 });
