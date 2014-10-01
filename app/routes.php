@@ -63,7 +63,7 @@ Route::get('/msgreply', function(){
 				$reply ="";
 				foreach($crops as $crop)
 				{
-					$reply += ($crop->crop_id." for ".$crop->name."\n");
+					$reply += ((string) $crop->crop_id." for ".$crop->name."\n");
 				}
 				$sms->reply($reply);
 				break;
