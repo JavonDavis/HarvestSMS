@@ -119,10 +119,10 @@ Route::post('/auth',function() {
 	//echo 'HERjE';
 	foreach($users as $user)
 	{
-		echo $user->password."kk".strcmp($user->phone,$number) && strcmp($user->password,$password);
+		echo $user->password."kk".(strcmp($user->phone,$number) && strcmp($user->password,$password));
 		if(strcmp($user->phone,$number) && strcmp($user->password,$password))
 		{
-			Session::put('user',$user);
+			//Session::put('user',$user);
 			return Redirect::inteded('home');
 		}
 	}
