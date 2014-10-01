@@ -107,6 +107,10 @@ Route::get('/login',function(){
 	Session::flush();
 	return View::make('login');
 	});
+	
+Route::get('/logout',function(){
+	Session::flush();
+	});
 
 Route::get('/showAll', function() {
 	return User::all()->toJson();
@@ -134,7 +138,7 @@ Route::post('/auth',function() {
 	foreach($users as $user)
 	{
 		echo $user->password."js".(strcmp($user->phone,$number))."kk".(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0);
-		if(strcmp($user->phone,$number)==0 || strcmp($user->password,$password)==0)
+		if(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0)
 		{
 			Session::put('user',$user);
 			return Redirect::intended('home');
