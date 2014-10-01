@@ -116,16 +116,22 @@ Route::post('/auth',function() {
 	$password= $data['password'];
 	
 	$users = User::all();
-	echo 'HERjE';
+	//echo 'HERjE';
 	foreach($users as $user)
 	{
+		/*
 		echo $number.'HERE\n'.($user->number);
 		echo ($user->number).'|'.$number.'|'.($user->number == $number);
 		echo ($user->password).'|'.$password.'|'.($user->password == $password);
 		if($user->number == $number && $user->password == $password)
 		{
 			Session::put('user',$user);
-			Redirect::inteded('home');
+			return Redirect::inteded('home');
+		}*/
+		
+		if (Auth::attempt(array('phone' => ((string) $number), 'password' => $password)))
+		{
+			return Redirect::intended('home');
 		}
 	}
 });
