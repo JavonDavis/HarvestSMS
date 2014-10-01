@@ -122,8 +122,8 @@ Route::post('/auth',function() {
 		echo $user->password."js".(strcmp($user->phone,$number))."kk".(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0);
 		if(strcmp($user->phone,$number)==0 || strcmp($user->password,$password)==0)
 		{
-			//Session::put('user',$user);
-			return Redirect::inteded('home');
+			Session::put('user',$user);
+			return Redirect::intended('home');
 		}
 	}
 });
