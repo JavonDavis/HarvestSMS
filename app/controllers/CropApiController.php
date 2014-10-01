@@ -1,6 +1,6 @@
 <?php
 
-class ApiController extends \BaseController {
+class CropApiController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +9,7 @@ class ApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Crop::all();
+		return Crop::all()->toJson();
 	}
 
 
