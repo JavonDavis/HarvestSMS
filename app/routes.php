@@ -120,9 +120,9 @@ Route::post('/auth',function() {
 	foreach($users as $user)
 	{
 		
-		echo $number.'HERE\n'.($user->phone);
-		echo ($user->number).'|'.$number.'|'.($user->number == $number);
-		echo ($user->password).'|'.$password.'|'.($user->password == $password);
+		echo $number.'HERE'.($user->phone)+"\n";
+		echo ($user->phone).'|'.$number.'|'.($user->phone == $number)+"\n";
+		echo ($user->password).'|'.$password.'|'.($user->password == $password)+"\n";
 		if($user->number == $number && $user->password == $password)
 		{
 			Session::put('user',$user);
