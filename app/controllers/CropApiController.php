@@ -53,7 +53,7 @@ class CropApiController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$crop = Crop::find($id);
+		$crop = Crop::findOrFail($id);
 		return $crop->toJson();
 	}
 
