@@ -119,10 +119,7 @@ Route::post('/auth',function() {
 	//echo 'HERjE';
 	foreach($users as $user)
 	{
-		
-		echo $number.'HERE'.($user->phone)+"\n";
-		echo ($user->phone).'|'.$number.'|'.($user->phone == $number)+"\n";
-		echo ($user->password).'|'.$password.'|'.($user->password == $password)+"\n";
+		return ($user->phone == $number);
 		if($user->number == $number && $user->password == $password)
 		{
 			Session::put('user',$user);
