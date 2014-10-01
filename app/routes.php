@@ -119,19 +119,14 @@ Route::post('/auth',function() {
 	//echo 'HERjE';
 	foreach($users as $user)
 	{
-		/*
-		echo $number.'HERE\n'.($user->number);
+		
+		echo $number.'HERE\n'.($user->phone);
 		echo ($user->number).'|'.$number.'|'.($user->number == $number);
 		echo ($user->password).'|'.$password.'|'.($user->password == $password);
 		if($user->number == $number && $user->password == $password)
 		{
 			Session::put('user',$user);
 			return Redirect::inteded('home');
-		}*/
-		
-		if (Auth::attempt(array('phone' => ((string) $number), 'password' => $password)))
-		{
-			return Redirect::intended('home');
 		}
 	}
 });
