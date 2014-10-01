@@ -101,6 +101,11 @@ Route::get('/showAll', function() {
 	return User::all()->toJson();
 });
 
+Route::get('/home', function() {
+	if(Session::has('user'))
+		return $user->name ."is logged in";
+});
+
 Route::post('/auth',function() {
 	
 	$data = Input::all();
@@ -108,5 +113,14 @@ Route::post('/auth',function() {
 	$number= $data['number'];
 	$password= $data['password'];
 	
-	return User::all();
+	$users = User::all();
+	
+	foreach($users as $user)
+	{
+		if($user->number == $number && $user->password == $password)
+		{
+			Session::put('user',$user);
+			Redirect::inteded('home');
+		}
+	}
 });
