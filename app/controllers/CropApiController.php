@@ -12,18 +12,6 @@ class CropApiController extends \BaseController {
 		return Crop::all()->toJson();
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -42,7 +30,7 @@ class CropApiController extends \BaseController {
 		$crop->save();
 
 		return Response::json(array(
-			'error' => 'none'
+			'error' => 'none',
 			'message' => 'saved' 
 			));
 	}
@@ -66,19 +54,6 @@ class CropApiController extends \BaseController {
 				));
 		}
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Update the specified resource in storage.
