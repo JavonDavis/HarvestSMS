@@ -6,4 +6,7 @@ class Crop extends Eloquent {
 		return $this->belongsToMany('Pest');
 	}
 
+	public function fertilizers(){
+		return $this->belongsToMany('Fertilizer');
+	}
 }
