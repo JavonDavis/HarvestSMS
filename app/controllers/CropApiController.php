@@ -31,7 +31,6 @@ class CropApiController extends \BaseController {
 	 */
 	public function store()
 	{
-		dd(Input::all());
 		$crop = new Crop;
 
 		$crop->name = Input::get('name');

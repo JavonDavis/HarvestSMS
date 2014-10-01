@@ -16,10 +16,10 @@ class CreateCropsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->decimal('price');
-			$table->integer('days_until_harvest');
-			$table->integer('amount_produced');
-			$table->integer('crop_id');
+			$table->string('price');
+			$table->string('days_until_harvest');
+			$table->string('amount_produced');
+			$table->string('crop_id');
 			$table->timestamps();
 		});
 	}
