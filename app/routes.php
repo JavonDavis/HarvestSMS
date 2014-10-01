@@ -116,9 +116,10 @@ Route::post('/auth',function() {
 	$password= $data['password'];
 	
 	$users = User::all();
-	
+	echo 'HERjE';
 	foreach($users as $user)
 	{
+		echo 'HERE';
 		echo $user->number.'|'.$number.'|'.$user->number == $number;
 		echo $user->password.'|'.$password.'|'.$user->password == $password;
 		if($user->number == $number && $user->password == $password)
