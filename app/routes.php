@@ -45,6 +45,8 @@ Route::get('/msgreply', function(){
 	// Declare new NexmoMessage.
 	$sms = new NexmoMessage('d1923006', 'f3252994');
 
+
+	$crops = Crop::all();
 	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 	//echo $sms->displayOverview($info);
 	
@@ -55,21 +57,29 @@ Route::get('/msgreply', function(){
 		
 		switch($int_version)
          {
-			case 0: $sms->reply('Not a valid entry') ;
+			case 400: $sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Crops Section\nSend 3 for weather information\n") ;
 			break;
-			case 400: $sms->reply("Send 1 for Crops Section\nSend 2 for Crops Section\nSend 3 for weather information\n") ;
+			case 1:
+				$reply ="";
+				foreach($crops as $crop)
+				{
+					$reply += $crop->crop_id." for ".$crop->name;
+				}
+				$sms->reply($reply);
+				break;
+			default: $sms->reply("Not a valid option, Send 400 for home menu");
 			break;
+				
 		 }
 	}
 });
 
-Route::get('/createJill', function(){
-	$user = new User;
-	$user->name = "Jill Brown";
-	$user->username = "JillB";
+Route::get('/createJohn', function(){
+	$user->name = "John Brown";
+	$user->username = "JohnB";
 	$user->password = "Password";
-	$user->phone = '2222222';
-	$user->email = 'jlb@jlb.com';
+	$user->phone = '111111111';
+	$user->email = 'jb@jb.com';
 	$user->save();
 
 	return 'saved';
@@ -94,6 +104,7 @@ $user = new User;
 
 
 Route::get('/login',function(){
+	Session::flush();
 	return View::make('login');
 	});
 
@@ -105,7 +116,7 @@ Route::get('/home', function() {
 	if(Session::has('user'))
 	{
 		$user = Session::get('user');
-		return $user->name ."is logged in";
+		return $user->name ." is logged in";
 	}
 	else
 		return "nah";
