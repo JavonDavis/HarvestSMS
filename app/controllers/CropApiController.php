@@ -35,6 +35,28 @@ class CropApiController extends \BaseController {
 			));
 	}
 
+	public function getFertilizers($id)
+	{
+		$fertilizers = Crop::find($id)->fertilizers;
+		return $fertilizers->toJson();
+	}
+
+	public function getFertilizer($id, $fertilizerid)
+	{
+		return Fertilizer::find($fertilizerid);
+	}
+
+	public function getPests($id)
+	{
+		$pests = Crop::find($id)->pests;
+		return $pests->toJson();
+	}
+
+	public function getPest($id, $pestid)
+	{
+		return Pest::find($pestid);
+	}
+
 
 	/**
 	 * Display the specified resource.
@@ -44,15 +66,8 @@ class CropApiController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		try {
-			$crop = Crop::findOrFail($id);
-			return $crop->toJson();		
-		} catch (ModelNotFoundException $e) {
-
-			return Response::json(array(
-					'error' => 'Incorrect ID'
-				));
-		}
+		$crop = Crop::findOrFail($id);
+		return $crop->toJson();		
 	}
 
 	/**
@@ -63,7 +78,20 @@ class CropApiController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$crop = Crop::findOrFail($id);
+
+		$crop->name = Input::get('name');
+		$crop->price = Input::get('price');
+		$crop->days_until_harvest = Input::get('days_until_harvest');
+		$crop->amount_produced = Input::get('amount_produced');
+		$crop->crop_id = Input::get('crop_id');
+
+		$crop->save();
+
+			return Response::json(array(
+					'error' => 'none',
+					'message' => 'updated'
+				));
 	}
 
 
@@ -75,7 +103,13 @@ class CropApiController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$crop = Crop::findOrFail($id);
+		$crop->delete();
+
+		return Response::json(array(
+				'error' => 'none',
+				'deleted' => $id
+			));
 	}
 
 

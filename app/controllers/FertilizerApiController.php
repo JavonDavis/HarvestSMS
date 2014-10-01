@@ -9,7 +9,7 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		// 
 	}
 
 
@@ -20,7 +20,7 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		// 
 	}
 
 
