@@ -119,6 +119,8 @@ Route::post('/auth',function() {
 	
 	foreach($users as $user)
 	{
+		echo $user->number.'|'.$number.'|'.$user->number == $number;
+		echo $user->password.'|'.$password.'|'.$user->password == $password;
 		if($user->number == $number && $user->password == $password)
 		{
 			Session::put('user',$user);
