@@ -104,6 +104,8 @@ Route::get('/showAll', function() {
 Route::get('/home', function() {
 	if(Session::has('user'))
 		return $user->name ."is logged in";
+	else
+		return "nah";
 });
 
 Route::post('/auth',function() {
