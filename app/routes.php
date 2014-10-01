@@ -63,13 +63,27 @@ Route::get('/msgreply', function(){
 				$reply ="";
 				foreach($crops as $crop)
 				{
-					$reply .= ($crop->crop_id." for ".$crop->name."\n");
+					$reply .= ("Send ".$crop->crop_id." for ".$crop->name."\n");
 				}
 				$sms->reply($reply);
 				break;
-			default: $sms->reply("Not a valid option, Send 400 for home menu");
+			default:
+				foreach($crops as $crop)
+				{
+					if($int_version == $crop->crop_id)
+					{
+						$option1 = $int_version."1 - Last recorded price"; 
+						$option2 = $int_version."2 - Methods of pest management";
+						$option3 = $int_version."3 - Suggested methods of fertilization";
+						$option4 = $int_version."4 - Recorded amount of ".$crop->name." sold last month"; 
+						$option5 = $int_version."5. Suggested number of days before harvesting";
+						
+						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
+						break;
+					}
+				}
+				$sms->reply("Not a valid option, Send 400 for home menu");
 			break;
-				
 		 }
 	}
 });
