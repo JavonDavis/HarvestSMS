@@ -41,7 +41,10 @@ class CropApiController extends \BaseController {
 
 		$crop->save();
 
-		return Response::json(array('message' => 'saved' ));
+		return Response::json(array(
+			'error' => 'none'
+			'message' => 'saved' 
+			));
 	}
 
 
@@ -53,8 +56,15 @@ class CropApiController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$crop = Crop::findOrFail($id);
-		return $crop->toJson();
+		try {
+			$crop = Crop::findOrFail($id);
+			return $crop->toJson();		
+		} catch (ModelNotFoundException $e) {
+
+			return Response::json(array(
+					'error' => 'Incorrect ID'
+				));
+		}
 	}
 
 
