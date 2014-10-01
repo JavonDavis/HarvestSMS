@@ -103,7 +103,7 @@ Route::get('/showAll', function() {
 
 Route::post('/auth',function() {
 	
-	$data = Input::all();
+	$data = dd(Input::all());
 	
 	$number= $data['number'];
 	$password= $data['password'];
@@ -114,6 +114,4 @@ Route::post('/auth',function() {
 	}
 	else 
 	{return "Fail";}*/
-	
-	dd(Auth::attempt(array('phone' => $number, 'password' => $password)));
 });
