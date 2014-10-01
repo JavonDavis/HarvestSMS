@@ -103,7 +103,10 @@ Route::get('/showAll', function() {
 
 Route::get('/home', function() {
 	if(Session::has('user'))
+	{
+		$user = Session::get('user');
 		return $user->name ."is logged in";
+	}
 	else
 		return "nah";
 });
