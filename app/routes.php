@@ -119,7 +119,7 @@ Route::post('/auth',function() {
 	//echo 'HERjE';
 	foreach($users as $user)
 	{
-		return ($user->phone == $number);
+		echo ($user->phone == $number && $user->password == $password);
 		if($user->number == $number && $user->password == $password)
 		{
 			Session::put('user',$user);
