@@ -103,15 +103,10 @@ Route::get('/showAll', function() {
 
 Route::post('/auth',function() {
 	
-	$data = dd(Input::all());
+	$data = Input::all();
 	
 	$number= $data['number'];
 	$password= $data['password'];
-	/*
-	if (Auth::attempt(array('phone' => $number, 'password' => $password)))
-	{
-		return Redirect::intended('home');
-	}
-	else 
-	{return "Fail";}*/
+	
+	return User::all();
 });
