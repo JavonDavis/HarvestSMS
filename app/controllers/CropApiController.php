@@ -9,7 +9,7 @@ class ApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Crop::all();
+		return Crop::all()->toJson();
 	}
 
 
