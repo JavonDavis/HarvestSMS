@@ -107,11 +107,13 @@ Route::post('/auth',function() {
 	
 	$number= $data['number'];
 	$password= $data['password'];
-	
+	/*
 	if (Auth::attempt(array('phone' => $number, 'password' => $password)))
 	{
 		return Redirect::intended('home');
 	}
 	else 
-	{return "Fail";}
+	{return "Fail";}*/
+	
+	dd(Auth::attempt(array('phone' => $number, 'password' => $password)));
 });
