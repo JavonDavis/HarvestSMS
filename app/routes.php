@@ -119,7 +119,7 @@ Route::post('/auth',function() {
 	echo 'HERjE';
 	foreach($users as $user)
 	{
-		echo $number.'HERE\n';
+		echo $number.'HERE\n'.$user;
 		echo $user->number.'|'.$number.'|'.$user->number == $number;
 		echo $user->password.'|'.$password.'|'.$user->password == $password;
 		if($user->number == $number && $user->password == $password)
