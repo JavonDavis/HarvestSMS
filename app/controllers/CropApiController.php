@@ -34,7 +34,7 @@ class CropApiController extends \BaseController {
 		$crop = new Crop;
 
 		$crop->name = Input::get('name');
-		$crop->decimal = Input::get('price');
+		$crop->price = Input::get('price');
 		$crop->days_until_harvest = Input::get('days_until_harvest');
 		$crop->amount_produced = Input::get('amount_produced');
 		$crop->crop_id = Input::get('crop_id');
