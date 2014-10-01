@@ -101,17 +101,28 @@ Route::get('/showAll', function() {
 	return User::all()->toJson();
 });
 
+Route::get('/home', function() {
+	if(Session::has('user'))
+		return $user->name ."is logged in";
+	else
+		return "nah";
+});
+
 Route::post('/auth',function() {
 	
-	$data = dd(Input::all());
+	$data = Input::all();
 	
 	$number= $data['number'];
 	$password= $data['password'];
-	/*
-	if (Auth::attempt(array('phone' => $number, 'password' => $password)))
+	
+	$users = User::all();
+	
+	foreach($users as $user)
 	{
-		return Redirect::intended('home');
+		if($user->number == $number && $user->password == $password)
+		{
+			Session::put('user',$user);
+			Redirect::inteded('home');
+		}
 	}
-	else 
-	{return "Fail";}*/
 });
