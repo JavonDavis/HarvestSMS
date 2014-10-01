@@ -9,9 +9,7 @@ class ApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		foreach (Crop::with('pests')->get() as $crop) {
-			echo $crop;
-		}
+		return Crop::all();
 	}
 
 
@@ -33,7 +31,17 @@ class ApiController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$crop = new Crop;
+
+		$crop->name = Input::get('name');
+		$crop->decimal = Input::get('price');
+		$crop->days_until_harvest = Input::get('days_until_harvest');
+		$crop->amount_produced = Input::get('amount_produced');
+		$crop->crop_id = Input::get('crop_id');
+
+		$crop->save();
+
+		return Response::json(array('message' => 'saved' ));
 	}
 
 
@@ -45,7 +53,8 @@ class ApiController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$crop = Crop::firstOrFail($id);
+		return $crop->toJson();
 	}
 
 
