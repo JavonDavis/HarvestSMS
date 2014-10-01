@@ -29,7 +29,6 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	Route::get('/fertilizers/{id}/crops/{cropID}', 'FertilizerApiController@getCrop');
 
 	Route::resource('pests', 'PestApiController');
-	Route::get('/')
 
 	Route::resource('animals', 'AnimalApiController');
 	Route::get('/animals/{id}/tips', 'AnimalApiController@getTips');
