@@ -63,7 +63,7 @@ Route::get('/msgreply', function(){
 				$reply ="";
 				foreach($crops as $crop)
 				{
-					$reply += $crop->crop_id." for ".$crop->name;
+					$reply += $crop->crop_id." for ".$crop->name."\n";
 				}
 				$sms->reply($reply);
 				break;
@@ -135,7 +135,6 @@ Route::post('/auth',function() {
 	$password= $data['password'];
 	
 	$users = User::all();
-	//echo 'HERjE';
 	foreach($users as $user)
 	{
 		echo $user->password."js".(strcmp($user->phone,$number))."kk".(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0);
