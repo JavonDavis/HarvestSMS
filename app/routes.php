@@ -75,6 +75,7 @@ Route::get('/msgreply', function(){
 });
 
 Route::get('/createJohn', function(){
+	$user = new User;
 	$user->name = "John Brown";
 	$user->username = "JohnB";
 	$user->password = "Password";
