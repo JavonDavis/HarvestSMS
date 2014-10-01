@@ -119,8 +119,8 @@ Route::post('/auth',function() {
 	//echo 'HERjE';
 	foreach($users as $user)
 	{
-		echo $user->password."kk".(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0);
-		if(strcmp($user->phone,$number) || strcmp($user->password,$password))
+		echo $user->password."js".(strcmp($user->phone,$number))."kk".(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0);
+		if(strcmp($user->phone,$number)==0 || strcmp($user->password,$password)==0)
 		{
 			//Session::put('user',$user);
 			return Redirect::inteded('home');
