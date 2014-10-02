@@ -74,7 +74,7 @@
 	  		<div class="checkbox">
 	  			<label>
 	  				Form::checkbox('fertilizers[]', {{ fertilizer-> name }});
-	  				{{ fertilizer ->name }}
+	  				{{ fertilizer->name }}
 	  			</label>
 	  		</div>
 	  	@endforeach
