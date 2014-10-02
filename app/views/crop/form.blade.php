@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -31,28 +32,20 @@
 		{{ Form::open(array('url' => '/dashboard/crops', 'class' => 'form-horizontal')) }}
 
 		<div class="form-group">
-			{{ Form::label('name', 'Crop Name', array('class' => 'colsm-2 control-label')) }}
-			<div class="col-sm-10">
-				{{ Form::text('name', 'Crop Name', array('class' => 'form-control')) }}
-			</div>
+			{{ Form::label('name', 'Crop Name') }}
+			{{ Form::text('name', 'Crop Name', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
 			{{ Form::label('price', 'Last Recorded Price', array('class' => 'col-sm-2 control-label')) }}
-			<div class="col-sm-10">
-				{{ Form::text('price', 'Price', array('class' => 'form-control')) }}
-			</div>
+			{{ Form::text('price', 'Price', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
 			{{ Form::label('days', 'Recommended Days Before Harvest', array('class' => 'col-sm-2 control-label')) }}
-			<div class="col-sm-10">
-				{{ Form::text('days', '100 days', array('class' => 'form-control')) }}
-			</div>
+			{{ Form::text('days', '100 days', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
 			{{ Form::label('amount', 'Amount Produced Last Month', array('class' => 'col-sm-2 control-label')) }}
-			<div class="col-sm-10">
-				{{ Form::text('amount', '500', array('class' => 'form-control')) }}
-			</div>
+			{{ Form::text('amount', '500', array('class' => 'form-control')) }}
 		</div>
 
 	 	<h2>Fertilizers</h2>
