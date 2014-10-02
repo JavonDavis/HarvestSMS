@@ -11,10 +11,6 @@
 |
 */
 
-define('CROP_PREFIX', 100);
-define('PEST_PREFIX', 200);
-define('FERTILIZER_PREFIX', 300);
-
 Route::get('/', function()
 {
 	return View::make('hello');
@@ -45,6 +41,10 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
 Route::get('/msgreply', function(){
 	ini_set('display_errors', 'On');
+
+	$crop_prefix = 100;
+	$pest_prefix = 200;
+	$fertilizer_prefix = 300;
 
 	echo "string";
 	include ( "NexmoMessage.php" );
@@ -79,12 +79,12 @@ Route::get('/msgreply', function(){
 				{
 					if($int_version == $crop->crop_id)
 					{
-						$code = ((string) Constants::CROP_PREFIX).$int_version;
-						$option1 = $code." - Last recorded price"; 
-						$option2 = $code." - Methods of pest management";
-						$option3 = $code." - Suggested methods of fertilization";
-						$option4 = $code." - Recorded amount of ".$crop->name." sold last month"; 
-						$option5 = $code." - Suggested number of days before harvesting";
+						$code = $crop_prefix.$int_version;
+						$option1 = $code."1 - Last recorded price"; 
+						$option2 = $code."2 - Methods of pest management";
+						$option3 = $code."3 - Suggested methods of fertilization";
+						$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
+						$option5 = $code."5 - Suggested number of days before harvesting";
 						
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
@@ -104,7 +104,7 @@ Route::get('/msgreply', function(){
 							$reply = "";
 							foreach($pests as $pest)
 							{
-								$code = ((string) Constants::PEST_PREFIX).$pest->id;
+								$code = $pest_prefix.$pest->id;
 								$reply.= ($code." - ".$pest->type."\n");
 							}
 							$reply.="Send in the codes beside the pests to get direct link for information about the pest";
