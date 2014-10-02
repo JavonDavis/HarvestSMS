@@ -76,6 +76,7 @@ class FertilizerApiController extends \BaseController {
 	public function destroy($id)
 	{
 		$fertilizer = Fertilizer::findOrFail($id);
+		$fertilizer->crops()->detach();
 		$fertilizer->delete();
 
 		return Response::json(array(

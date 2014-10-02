@@ -104,6 +104,8 @@ class CropApiController extends \BaseController {
 	public function destroy($id)
 	{
 		$crop = Crop::findOrFail($id);
+		$crop->fertilizers()->detach();
+		$crop->pests()->detach();
 		$crop->delete();
 
 		return Response::json(array(
