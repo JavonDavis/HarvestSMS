@@ -10,4 +10,9 @@ class CropController extends \BaseController {
 		return View::make('crop.form', compact('fertilizers', 'pests'));
 	}
 
+	public function postCropForm()
+	{
+		dd (Input::all());
+	}
+
 }
