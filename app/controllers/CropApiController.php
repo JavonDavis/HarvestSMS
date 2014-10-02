@@ -79,10 +79,8 @@ class CropApiController extends \BaseController {
 	public function update($id)
 	{
 		$crop = Crop::findOrFail($id);
-		$crop->delete();
-
-		$newCrop = new Crop;
-		$newCrop->name = isset(Input::get('name')) ? Input::get('name') : $crop->name;
+		
+		$crop->name = isset(Input::get('name')) ? Input::get('name') : $crop->name;
 		$crop->price = isset(Input::get('price')) ? Input::get('price') : $crop->price;
 		$crop->days_until_harvest = isset(Input::get('days_until_harvest')) ? Input::get('days_until_harvest') : $crop->days_until_harvest;
 		$crop->amount_produced = isset(Input::get('amount_produced')) ? Input::get('amount_produced') : $crop->amount_produced;
