@@ -86,7 +86,7 @@ Route::get('/msgreply', function(){
 						
 						$lastDigit = $int_version[substr($int_version,0, strlen($int_version-1))];
 						
-						switch($option)
+						switch($lastDigit)
 						{
 							case 1:$sms->reply("The price is ".($crop->price));
 							break;
@@ -102,7 +102,7 @@ Route::get('/msgreply', function(){
 							break;
 						}
 						
-                                         
+                       break;                  
 					}
 				}
 				$sms->reply("Not a valid option, Send 400 for home menu");
