@@ -72,54 +72,60 @@ Route::get('/msgreply', function(){
 				$sms->reply($reply);
 				break;
 			default:
-				foreach($crops as $crop)
+				if(substr($int_version,0, 3) == $crop_prefix)
 				{
-					if($int_version == $crop->crop_id)
+					foreach($crops as $crop)
 					{
-						$code = $crop_prefix.$int_version;
-						$option1 = $code."1 - Last recorded price"; 
-						$option2 = $code."2 - Methods of pest management";
-						$option3 = $code."3 - Suggested methods of fertilization";
-						$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
-						$option5 = $code."5 - Suggested number of days before harvesting";
-						
-						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
-						break;
-					}
-					elseif(substr($int_version,0, 3) == constant(CROP_PREFIX))
-					{
-						
-						$lastDigit = substr($int_version, 3);
-						
-						switch($lastDigit)
+						if($int_version == $crop->crop_id)
 						{
-							case 1:$sms->reply("The price is ".($crop->price));
+							$code = $crop_prefix.$int_version;
+							$option1 = $code."1 - Last recorded price"; 
+							$option2 = $code."2 - Methods of pest management";
+							$option3 = $code."3 - Suggested methods of fertilization";
+							$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
+							$option5 = $code."5 - Suggested number of days before harvesting";
+							
+							$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 							break;
-						
-							case 2:
-							$pests = $crop->pests()->get();
-							$reply = "";
-							foreach($pests as $pest)
+						}
+						elseif(substr($int_version,3,strlen($int_version)-1) == $crop->crop_id)
+						{
+							$lastDigit = substr($int_version, strlen($int_version)-1,strlen($int_version));
+							
+							switch($lastDigit)
 							{
-								$code = $pest_prefix.$pest->id;
-								$reply.= ($code." - ".$pest->type."\n");
-							}
-							$reply.="Send in the codes beside the pests to get direct link for information about the pest";
-							$sms->reply("The pests that normally affect ".$crop->name." are ".$reply);
-							break;
-						
-							case 3:$sms->reply("The fertilizers are".$crop->fertilizers()->get());
-							break;
-							case 4:$sms->reply("The last recorded amount produced is ".$crop->amount_produced);
-							break;
-							case 5:$sms->reply("The number of days until harvest are ".$crop->days_until_harvest);
-							break;
-							default: $sms->reply($lastDigit);
-							break;
-						}					
-                       break;                  
-					}
-				}	
+								case 1:$sms->reply("The price is ".($crop->price));
+								break;
+							
+								case 2:
+								$pests = $crop->pests()->get();
+								$reply = "";
+								foreach($pests as $pest)
+								{
+									$code = $pest_prefix.$pest->id;
+									$reply.= ($code." - ".$pest->type."\n");
+								}
+								$reply.="Send in the codes beside the pests to get direct link for information about the pest";
+								$sms->reply("The pests that normally affect ".$crop->name." are ".$reply);
+								break;
+							
+								case 3:$sms->reply("The fertilizers are".$crop->fertilizers()->get());
+								break;
+								case 4:$sms->reply("The last recorded amount produced is ".$crop->amount_produced);
+								break;
+								case 5:$sms->reply("The number of days until harvest are ".$crop->days_until_harvest);
+								break;
+								default: $sms->reply($lastDigit);
+								break;
+							}					
+						   break;                  
+						}
+					}	
+				}
+				else
+				{
+					$sms->reply("not valid -".$text);
+				}
 			break;
 		 }
 	}
