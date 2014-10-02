@@ -230,16 +230,12 @@ Route::post('/auth',function() {
 	$password= $data['password'];
 	
 	$users = User::all();
-	$user = User::where('phone','=', $number);
-	if (strcmp($user->password,$password)==0){
-		Session::put('user',$user);
-		return Redirect::intended('home');
+	foreach($users as $user)
+	{
+		if(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0)
+		{
+			Session::put('user',$user);
+			return Redirect::intended('home');
+		}
 	}
-	// foreach($users as $user)
-	// {
-	// 	if(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0)
-	// 	{
-			
-	// 	}
-	// }
 });
