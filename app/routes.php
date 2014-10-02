@@ -64,7 +64,9 @@ Route::get('/msgreply', function(){
 		
 		switch($int_version)
          {
-			case 400: $sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Crops Section\nSend 3 for weather information\n") ;
+			case 0: $sms->reply("This is the help section");
+			break;
+			case 400: $sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Livestock Section\nSend 3 for weather information\n") ;
 			break;
 			case 1:
 				$reply ="";
@@ -204,7 +206,6 @@ Route::post('/auth',function() {
 	$users = User::all();
 	foreach($users as $user)
 	{
-		echo $user->password."js".(strcmp($user->phone,$number))."kk".(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0);
 		if(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0)
 		{
 			Session::put('user',$user);
