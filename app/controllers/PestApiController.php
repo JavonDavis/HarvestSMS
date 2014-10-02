@@ -78,6 +78,7 @@ class PestApiController extends \BaseController {
 	public function destroy($id)
 	{
 		$pest = Pest::findOrFail($id);
+		$pest->crops()->detach();
 		$pest->delete();
 
 		return Response::json(array(
