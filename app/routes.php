@@ -81,6 +81,29 @@ Route::get('/msgreply', function(){
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
 					}
+					elseif(substr($int_version,0, strlen($int_version-2)) == $crop->crop_id)
+					{
+						
+						$lastDigit = $int_version[substr($int_version,0, strlen($int_version-1))];
+						
+						switch($lastDigit)
+						{
+							case 1:$sms->reply("The price is ".($crop->price));
+							break;
+						
+							case 2:$sms->reply("The pests are ".$crop->pests()->get());
+							break;
+						
+							case 3:$sms->reply("The fertilizers are".$crop->fertilizers()->get());
+							break;
+							case 4:$sms->reply("The last recorded amount produced is ".$crop->amount_produced);
+							break;
+							case 5:$sms->reply("The number of days until harvest are ".$crop->days_until_harvest);
+							break;
+						}
+						
+                       break;                  
+					}
 				}
 				$sms->reply("Not a valid option, Send 400 for home menu");
 			break;
