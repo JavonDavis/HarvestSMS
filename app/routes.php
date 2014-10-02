@@ -11,6 +11,10 @@
 |
 */
 
+define('CROP_PREFIX', 100);
+define('PEST_PREFIX', 200);
+define('FERTILIZER_PREFIX', 300);
+
 Route::get('/', function()
 {
 	return View::make('hello');
@@ -72,26 +76,36 @@ Route::get('/msgreply', function(){
 				{
 					if($int_version == $crop->crop_id)
 					{
-						$option1 = $int_version."1 - Last recorded price"; 
-						$option2 = $int_version."2 - Methods of pest management";
-						$option3 = $int_version."3 - Suggested methods of fertilization";
-						$option4 = $int_version."4 - Recorded amount of ".$crop->name." sold last month"; 
-						$option5 = $int_version."5. Suggested number of days before harvesting";
+						$code = ((string) Constants::CROP_PREFIX).$int_version;
+						$option1 = $code." - Last recorded price"; 
+						$option2 = $code." - Methods of pest management";
+						$option3 = $code." - Suggested methods of fertilization";
+						$option4 = $code." - Recorded amount of ".$crop->name." sold last month"; 
+						$option5 = $code." - Suggested number of days before harvesting";
 						
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
 					}
-					elseif(substr($int_version,0, strlen($int_version)-1) == $crop->crop_id)
+					elseif(substr($int_version,0, 3) == constant(CROP_PREFIX))
 					{
 						
-						$lastDigit = substr($int_version, strlen($int_version)-1, strlen($int_version));
+						$lastDigit = substr($int_version, 3);
 						
 						switch($lastDigit)
 						{
 							case 1:$sms->reply("The price is ".($crop->price));
 							break;
 						
-							case 2:$sms->reply("The pests are ".$crop->pests()->get());
+							case 2:
+							$pests = $crop->pests()->get();
+							$reply = "";
+							foreach($pests as $pest)
+							{
+								$code = ((string) Constants::PEST_PREFIX).$pest->id;
+								$reply.= ($code." - ".$pest->type."\n");
+							}
+							$reply.="Send in the codes beside the pests to get direct link for information about the pest";
+							$sms->reply("The pests that normally affect ".$crop->name." are ".$reply);
 							break;
 						
 							case 3:$sms->reply("The fertilizers are".$crop->fertilizers()->get());
