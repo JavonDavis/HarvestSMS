@@ -92,10 +92,10 @@ Route::get('/msgreply', function(){
 						}
 						elseif(substr($int_version,0, 3) == $crop_prefix)
 						{
-							$sms->reply(substr($int_version,3,strlen($int_version)-1));
-							if(substr($int_version,3,strlen($int_version)-1) == $crop->crop_id)
+							$sms->reply(substr($int_version,3,strlen($int_version)-2));
+							if(substr($int_version,3,strlen($int_version)-2) == $crop->crop_id)
 							{
-							$lastDigit = substr($int_version, strlen($int_version)-1,strlen($int_version));
+							$lastDigit = substr($int_version, strlen($int_version)-2,strlen($int_version)-1);
 							
 							switch($lastDigit)
 							{
