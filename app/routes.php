@@ -77,11 +77,11 @@ Route::get('/msgreply', function(){
 					if($int_version == $crop->crop_id)
 					{
 						$code = $crop_prefix.$int_version;
-						$option1 = $code." - Last recorded price"; 
-						$option2 = $code." - Methods of pest management";
-						$option3 = $code." - Suggested methods of fertilization";
-						$option4 = $code." - Recorded amount of ".$crop->name." sold last month"; 
-						$option5 = $code." - Suggested number of days before harvesting";
+						$option1 = $code."1 - Last recorded price"; 
+						$option2 = $code."2 - Methods of pest management";
+						$option3 = $code."3 - Suggested methods of fertilization";
+						$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
+						$option5 = $code."5 - Suggested number of days before harvesting";
 						
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
