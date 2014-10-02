@@ -16,10 +16,6 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/test', function(){
-	dd(Input::get('swag'));
-});
-
 Route::group(array('prefix' => 'api/v1'), function() {
 
 	Route::resource('crops', 'CropApiController');

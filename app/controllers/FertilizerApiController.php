@@ -56,7 +56,7 @@ class FertilizerApiController extends \BaseController {
 	{
 		$fertilizer = Fertilizer::findOrFail($id);
 
-		$fertilizer->name = isset(Input::get('name')) ? Input::get('name') : $fertilizer->name;
+		$fertilizer->name = (Input::get('name') !== NULL) ? Input::get('name') : $fertilizer->name;
 
 		$fertilizer->save();
 

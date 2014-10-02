@@ -57,8 +57,8 @@ class PestApiController extends \BaseController {
 	{
 		$pest = Pest::findOrFail($id);
 
-		$pest->type = isset(Input::get('type')) ? Input::get('type') : $pest->type;
-		$pest->management_method = isset(Input::get('management_method')) ? Input::get('management_method') : $pest->management_method;
+		$pest->type = (Input::get('type') !== NULL) ? Input::get('type') : $pest->type;
+		$pest->management_method = (Input::get('management_method') !== NULL) ? Input::get('management_method') : $pest->management_method;
 
 		$pest->save();
 
