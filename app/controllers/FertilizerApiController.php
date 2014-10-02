@@ -9,18 +9,7 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		// 
-	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		// 
+		return Fertilizer::all()->toJson();
 	}
 
 
@@ -52,19 +41,8 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		$fertilizer = Fertilizer::findOrFail($id);
+		return $fertilizer->toJson();
 	}
 
 
@@ -76,7 +54,16 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$fertilizer = Fertilizer::findOrFail($id);
+
+		$fertilizer->name = isset(Input::get('name')) ? Input::get('name') : $fertilizer->name;
+
+		$fertilizer->save();
+
+		return Response::json(array(
+				"error" => "none",
+				"message" => "updated"
+			));
 	}
 
 
@@ -88,7 +75,13 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$fertilizer = Fertilizer::findOrFail($id);
+		$fertilizer->delete();
+
+		return Response::json(array(
+				'error' => 'none',
+				'deleted' => $id
+			));
 	}
 
 
