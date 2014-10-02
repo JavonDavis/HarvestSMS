@@ -110,7 +110,7 @@ Route::get('/msgreply', function(){
 									$reply.= ($code." - ".$pest->type."\n");
 								}
 								$reply.="Send in the codes beside the pests to get direct link for information about the pest";
-								$sms->reply("The pests that normally affect ".$crop->name." are ".$reply);
+								$sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
 								break;
 							
 								case 3:$sms->reply("The fertilizers are".$crop->fertilizers()->get());
