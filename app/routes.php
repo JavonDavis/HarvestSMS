@@ -81,10 +81,10 @@ Route::get('/msgreply', function(){
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
 					}
-					elseif(substr($int_version,0, strlen($int_version-1)) == $crop->crop_id)
+					elseif(substr($int_version,0, strlen($int_version-2)) == $crop->crop_id)
 					{
 						
-						$lastDigit = $int_version[substr($int_version,0, strlen($int_version-2))];
+						$lastDigit = $int_version[substr($int_version,0, strlen($int_version-3))];
 						
 						switch($lastDigit)
 						{
