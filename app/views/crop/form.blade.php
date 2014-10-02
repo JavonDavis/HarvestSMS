@@ -64,7 +64,7 @@
 		<div class="form-group">
 			echo Form::label('amount', 'Amount Produced Last Month', array('class' => 'col-sm-2 control-label'));
 			<div class="col-sm-10">
-				Form::text('amount', '500', array('class' => 'form-control'));
+				echo Form::text('amount', '500', array('class' => 'form-control'));
 			</div>
 		</div>
 
