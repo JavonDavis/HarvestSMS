@@ -84,7 +84,7 @@ Route::get('/msgreply', function(){
 					elseif(substr($int_version,0, strlen($int_version)-1) == $crop->crop_id)
 					{
 						
-						$lastDigit = substr($int_version, strlen($int_version)-2, strlen($int_version)-1);
+						$lastDigit = substr($int_version, strlen($int_version)-1, strlen($int_version));
 						
 						switch($lastDigit)
 						{
@@ -106,7 +106,6 @@ Route::get('/msgreply', function(){
                        break;                  
 					}
 				}	
-				$sms->reply("Not a valid option, Send 400 for home menu ".substr($int_version,0, strlen($int_version)-1));
 			break;
 		 }
 	}
