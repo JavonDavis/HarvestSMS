@@ -18,21 +18,9 @@
 
     <style type="text/css">
 
-    	#sub{
-    		margin-left: 10%;
-    	}
-
-    	.checkbox, h2{
-    		margin-left: 10%;
-    	}
-
     	body{
     		margin: 0 auto;
     		max-width: 1200px;
-    	}
-
-    	h1{
-    		margin-left: 5%;
     	}
 
     </style>
