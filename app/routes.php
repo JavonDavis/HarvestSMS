@@ -81,10 +81,10 @@ Route::get('/msgreply', function(){
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
 					}
-					elseif(substr($int_version,0, strlen($int_version-3)) == $crop->crop_id)
+					elseif(substr($int_version,0, strlen($int_version)-1) == $crop->crop_id)
 					{
 						
-						$lastDigit = $int_version[substr($int_version,0, strlen($int_version-2))];
+						$lastDigit = substr($int_version, strlen($int_version)-1, strlen($int_version));
 						
 						switch($lastDigit)
 						{
@@ -100,12 +100,12 @@ Route::get('/msgreply', function(){
 							break;
 							case 5:$sms->reply("The number of days until harvest are ".$crop->days_until_harvest);
 							break;
-						}
-						
+							default: $sms->reply($lastDigit);
+							break;
+						}					
                        break;                  
 					}
-				}
-				$sms->reply("Not a valid option, Send 400 for home menu");
+				}	
 			break;
 		 }
 	}
