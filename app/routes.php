@@ -81,10 +81,10 @@ Route::get('/msgreply', function(){
 						$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 						break;
 					}
-					elseif(substr($int_version,0, strlen($int_version-2)) == $crop->crop_id)
+					elseif(substr($int_version,0, strlen($int_version)-2) == $crop->crop_id)
 					{
 						
-						$lastDigit = substr($int_version,0, strlen($int_version-3));
+						$lastDigit = substr($int_version, strlen($int_version)-2, strlen($int_version)-1);
 						
 						switch($lastDigit)
 						{
@@ -106,7 +106,7 @@ Route::get('/msgreply', function(){
                        break;                  
 					}
 				}	
-				$sms->reply("Not a valid option, Send 400 for home menu ".substr($int_version,0, strlen($int_version-2)));
+				$sms->reply("Not a valid option, Send 400 for home menu ".substr($int_version,0, strlen($int_version)-2));
 			break;
 		 }
 	}
