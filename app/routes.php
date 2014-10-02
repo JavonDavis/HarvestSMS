@@ -39,6 +39,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	
 });
 
+
 Route::get('/msgreply', function(){
 	ini_set('display_errors', 'On');
 
@@ -151,6 +152,17 @@ Route::get('/createJohn', function(){
 	$user->save();
 
 	return 'saved';
+});
+
+Route::get('/creatCow', function(){
+	$livestock = new Livestock;
+
+	$livestock->name = "Cow";
+	$livestock->price = "3000.00";
+	$livestock->care_methods = "Brushing";
+	$livestock->feed = "Grass";
+
+	$livestock->save();
 });
 
 /*
