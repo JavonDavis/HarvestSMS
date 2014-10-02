@@ -76,7 +76,7 @@ Route::get('/msgreply', function(){
 				{
 					if($int_version == $crop->crop_id)
 					{
-						$code = Constants::CROP_PREFIX.$int_version;
+						$code = ((string) Constants::CROP_PREFIX).$int_version;
 						$option1 = $code." - Last recorded price"; 
 						$option2 = $code." - Methods of pest management";
 						$option3 = $code." - Suggested methods of fertilization";
@@ -101,7 +101,7 @@ Route::get('/msgreply', function(){
 							$reply = "";
 							foreach($pests as $pest)
 							{
-								$code = Constants::CROP_PREFIX.$pest->id;
+								$code = ((string) Constants::PEST_PREFIX).$pest->id;
 								$reply.= ($code." - ".$pest->type."\n");
 							}
 							$reply.="Send in the codes beside the pests to get direct link for information about the pest";
