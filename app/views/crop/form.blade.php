@@ -81,7 +81,7 @@
 
 	  	<br/>
 
-	  	Form::submit('Submit', array('class' => 'btn-default', 'id' => 'sub', 'onclick' => 'myFunction()'));
+	  	echo Form::submit('Submit', array('class' => 'btn-default', 'id' => 'sub', 'onclick' => 'myFunction()'));
 
 		{{ Form::close() }}
 		<br/>
