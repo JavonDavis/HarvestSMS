@@ -81,12 +81,9 @@
 
 	  	<br/>
 
-	  	echo Form::submit('Submit', array('class' => 'btn-default', 'id' => 'sub', 'onclick' => 'myFunction()'));
+	  	{{ Form::submit('Submit', array('class' => 'btn-default', 'id' => 'sub', 'onclick' => 'myFunction()')) }}
 
 		{{ Form::close() }}
-		<br/>
-		 <button onclick="myfunction()" type="submit" class="btn-default" id="sub">Submit</button>
-		</form>
 		
 		<script type="text/javascript">
 		function myfunction() {
