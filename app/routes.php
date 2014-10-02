@@ -113,7 +113,16 @@ Route::get('/msgreply', function(){
 								$sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
 								break;
 							
-								case 3:$sms->reply("The fertilizers are".$crop->fertilizers()->get());
+								case 3:
+								$fertilizers = $crop->fertilizers()->get();
+								$reply = "";
+								foreach($fertilizers as $fertilizer)
+								{
+									$code = $fertilizer_prefix.$fertilizer->id;
+									$reply.= ($code." - ".$fertilizer->type."\n");
+								}
+								$reply.="Send in the codes beside the fertilizers to get direct link for information about the fertilizer";
+								$sms->reply("This best fertilizers for ".$crop->name." are \n".$reply);
 								break;
 								case 4:$sms->reply("The last recorded amount produced is ".$crop->amount_produced);
 								break;
