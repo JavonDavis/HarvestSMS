@@ -70,13 +70,12 @@ Route::get('/msgreply', function(){
 				$reply ="";
 				foreach($crops as $crop)
 				{
-					$reply .= ("Send ".$crop->crop_id." for ".$crop->name."\n");
+					$code = $crop_prefix.$int_version;
+					$reply .= ("Send ".$code." for ".$crop->name."\n");
 				}
 				$sms->reply($reply);
 				break;
 			default:
-				if(substr($int_version,0, 3) == $crop_prefix)
-				{
 					foreach($crops as $crop)
 					{
 						if($int_version == $crop->crop_id)
@@ -91,8 +90,10 @@ Route::get('/msgreply', function(){
 							$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 							break;
 						}
-						elseif(substr($int_version,3,strlen($int_version)-1) == $crop->crop_id)
+						elseif(substr($int_version,0, 3) == $crop_prefix)
 						{
+							if(substr($int_version,3,strlen($int_version)-1) == $crop->crop_id)
+							{
 							$lastDigit = substr($int_version, strlen($int_version)-1,strlen($int_version));
 							
 							switch($lastDigit)
@@ -121,14 +122,10 @@ Route::get('/msgreply', function(){
 								default: $sms->reply($lastDigit);
 								break;
 							}					
-						   break;                  
+						   break;       
+							}
 						}
 					}	
-				}
-				else
-				{
-					$sms->reply("not valid -".$text);
-				}
 			break;
 		 }
 	}
