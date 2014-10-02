@@ -7,9 +7,8 @@
 	<title>BALE - Basic Agricultural Learning Environment</title>
 
     <!-- Bootstrap -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" rel="stylesheet"/>
-	<link href="css/style.css" rel="stylesheet"/>
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +40,7 @@
 	<body>
 		<h1>Crop Input</h1>
 
-		{{ Form::open(array('url' => '/postCrops', 'class' => 'form-horizontal')) }}
+		{{ Form::open(array('url' => '/dashboard/crops', 'class' => 'form-horizontal')) }}
 
 		<div class="form-group">
 			{{ Form::label('name', 'Crop Name', array('class' => 'colsm-2 control-label')) }}
@@ -86,7 +85,8 @@
 		{{ Form::close() }}
 		
 		<script type="text/javascript">
-		function myfunction() {
+		function myfunction( event ) {
+			event.preventDefault();
 			var r = confirm("Are You Sure?");
 			if (r == true) {
 				alert("ok");
