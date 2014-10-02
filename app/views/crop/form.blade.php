@@ -59,6 +59,8 @@
 	  		</div>
 	  	@endforeach
 
+	  	<h2>Pests</h2>
+
 	 	@foreach ($pests as $pest)
 	 		<div class="checkbox">
 	 			<label>
