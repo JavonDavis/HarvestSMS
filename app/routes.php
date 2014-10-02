@@ -230,7 +230,7 @@ Route::post('/auth',function() {
 	$password= $data['password'];
 	
 	$users = User::all();
-	$user = User::where('phone','=', $phone);
+	$user = User::where('phone','=', $number);
 	if (strcmp($user->password,$password)==0){
 		Session::put('user',$user);
 		return Redirect::intended('home');
