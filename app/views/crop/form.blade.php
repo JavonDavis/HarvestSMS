@@ -8,7 +8,7 @@
 
     <!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,8 +27,8 @@
     	}
 
     	body{
-    		margin-left: 30%;
-    		margin-top: 10%;
+    		margin: 0 auto;
+    		max-width: 1200px;
     	}
 
     	h1{
