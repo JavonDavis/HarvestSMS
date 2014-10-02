@@ -53,7 +53,7 @@
 	 	@foreach ($fertilizers as $fertilizer)
 	  		<div class="checkbox">
 	  			<label>
-	  				{{ Form::checkbox('fertilizers[]', '$fertilizer->name' ) }}
+	  				{{ Form::checkbox('fertilizers[]', $fertilizer->name ) }}
 	  				{{ $fertilizer->name }}
 	  			</label>
 	  		</div>
