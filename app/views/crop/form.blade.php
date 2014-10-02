@@ -36,15 +36,15 @@
 			{{ Form::text('name', 'Crop Name', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::label('price', 'Last Recorded Price', array('class' => 'col-sm-2 control-label')) }}
+			{{ Form::label('price', 'Last Recorded Price') }}
 			{{ Form::text('price', 'Price', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::label('days', 'Recommended Days Before Harvest', array('class' => 'col-sm-2 control-label')) }}
+			{{ Form::label('days', 'Recommended Days Before Harvest') }}
 			{{ Form::text('days', '100 days', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::label('amount', 'Amount Produced Last Month', array('class' => 'col-sm-2 control-label')) }}
+			{{ Form::label('amount', 'Amount Produced Last Month') }}
 			{{ Form::text('amount', '500', array('class' => 'form-control')) }}
 		</div>
 
@@ -59,7 +59,14 @@
 	  		</div>
 	  	@endforeach
 
-	  	<br/>
+	 	@foreach ($pests as $pest)
+	 		<div class="checkbox">
+	 			<label>
+	 				{{ Form::checkbox('pests[]', '$pest->type') }}
+	 				{{ $pest->type }}
+	 			</label>
+	 		</div>
+	 	@endforeach
 
 	  	{{ Form::submit('Submit', array('class' => 'btn-default', 'id' => 'sub', 'onclick' => 'myFunction()')) }}
 
