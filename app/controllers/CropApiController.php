@@ -43,7 +43,7 @@ class CropApiController extends \BaseController {
 
 	public function getFertilizer($id, $fertilizerid)
 	{
-		return Fertilizer::find($fertilizerid);
+		return Fertilizer::find($fertilizerid)->toJson();
 	}
 
 	public function getPests($id)

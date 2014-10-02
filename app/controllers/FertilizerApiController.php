@@ -32,6 +32,16 @@ class FertilizerApiController extends \BaseController {
 			));
 	}
 
+	public function getCrops($id)
+	{
+		$crops = Fertilizer::find($id)->crops;
+		$return $crops->toJson();
+	}
+
+	public function getCrop($id, $cropid)
+	{
+		return Crop::find($cropid)->toJson();
+	}
 
 	/**
 	 * Display the specified resource.
