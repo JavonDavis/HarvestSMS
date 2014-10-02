@@ -70,7 +70,7 @@ Route::get('/msgreply', function(){
 				$reply ="";
 				foreach($crops as $crop)
 				{
-					$code = $crop_prefix.$int_version;
+					$code = $crop_prefix.$crop->crop_ids;
 					$reply .= ("Send ".$code." for ".$crop->name."\n");
 				}
 				$sms->reply($reply);
@@ -78,9 +78,9 @@ Route::get('/msgreply', function(){
 			default:
 					foreach($crops as $crop)
 					{
-						if($int_version == $crop->crop_id)
+						if(substr($int_version,3) == $crop->crop_id)
 						{
-							$code = $crop_prefix.$int_version;
+							$code = $int_version;
 							$option1 = $code."1 - Last recorded price"; 
 							$option2 = $code."2 - Methods of pest management";
 							$option3 = $code."3 - Suggested methods of fertilization";
