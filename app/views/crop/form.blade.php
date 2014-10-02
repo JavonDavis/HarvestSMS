@@ -41,7 +41,7 @@
 	<body>
 		<h1>Crop Input</h1>
 
-		{{ Form::open(array('url' => '/postCrops', array('class' => 'form-horizontal'))) }}
+		{{ Form::open(array('url' => '/postCrops', 'class' => 'form-horizontal')) }}
 
 		<div class="form-group">
 			{{ Form::label('name', 'Crop Name', array('class' => 'colsm-2 control-label')) }}
