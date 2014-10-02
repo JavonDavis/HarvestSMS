@@ -7,6 +7,7 @@ class CropController extends \BaseController {
 		$fertilizers = Fertilizer::all();
 		$pests = Pest::all();
 
+		dd(compact('fertilizers', 'pests'));
 		return View::make('crop.form', compact('fertilizers', 'pests'));
 	}
 
