@@ -31,7 +31,16 @@ class FertilizerApiController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$fertilizer = new Fertilizer;
+
+		$fertilizer->name = Input::get('name');
+
+		$fertilizer->save();
+
+		return Response::json(array(
+				'error' => 'none',
+				'message' => 'saved'
+			));
 	}
 
 
