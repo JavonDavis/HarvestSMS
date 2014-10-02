@@ -14,8 +14,10 @@ class CreateCropFertilizerTable extends Migration {
 	{
 		Schema::create('crop_fertilizer', function(Blueprint $table)
 		{
-			$table->increments('id');
-			$table->timestamps();
+			$table->integer('crop_id')->unsigned();
+			$table->foreign('crop_id')->references('id')->on('crops');
+			$table->integer('fertilizer_id')->unsigned();
+			$table->foreign('fertilizer_id')->references('id')->on('fertilizers');
 		});
 	}
 
