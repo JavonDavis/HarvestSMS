@@ -92,7 +92,7 @@ Route::get('/msgreply', function(){
 						}
 						elseif(substr($int_version,0, 3) == $crop_prefix)
 						{
-							$sms->reply(substr($int_version,3,4));
+							$sms->reply(substr($int_version,3,3));
 							if(substr($int_version,3,strlen($int_version)-2) == $crop->crop_id)
 							{
 							$lastDigit = substr($int_version, strlen($int_version)-2,strlen($int_version)-1);
