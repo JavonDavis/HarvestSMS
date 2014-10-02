@@ -33,6 +33,17 @@ class PestApiController extends \BaseController {
 			));
 	}
 
+	public function getCrops($id)
+	{
+		$crops = Pest::find($id)->crops();
+		return $crops->toJson();
+	}
+
+	public function getCrop($id, $cropid)
+	{
+		return Crop::find($cropid);
+	}
+
 
 	/**
 	 * Display the specified resource.
