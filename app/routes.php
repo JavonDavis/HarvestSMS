@@ -46,6 +46,7 @@ Route::get('/msgreply', function(){
 	$crop_prefix = 100;
 	$pest_prefix = 200;
 	$fertilizer_prefix = 300;
+	$livestock_prefix = 400;
 
 	echo "string";
 	include ( "NexmoMessage.php" );
@@ -55,6 +56,7 @@ Route::get('/msgreply', function(){
 
 
 	$crops = Crop::all();
+	$livestocks = Livestock::all();
 	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 	//echo $sms->displayOverview($info);
 	
@@ -77,7 +79,16 @@ Route::get('/msgreply', function(){
 					$reply .= ("Send ".$code." for ".$crop->name."\n");
 				}
 				$sms->reply($reply);
-				break;
+			break;
+			case 2:
+				$reply ="";
+				foreach($livestocks as $livestock)
+				{
+					$code = $livestock_prefix.$livestock->id;
+					$reply .=("Send ".$code." for ".$livestock->name."\n");
+				}
+				$sms->reply($reply);
+			break;
 			default:
 				if(substr($int_version,0, 3) == $crop_prefix)
 				{
@@ -156,13 +167,13 @@ Route::get('/createJohn', function(){
 	return 'saved';
 });
 
-Route::get('/creatCow', function(){
+Route::get('/creatChicken', function(){
 	$livestock = new Livestock;
 
-	$livestock->name = "Cow";
-	$livestock->price = "3000.00";
-	$livestock->care_methods = "Brushing";
-	$livestock->feed = "Grass";
+	$livestock->name = "Chicken";
+	$livestock->price = "1000.00";
+	$livestock->care_methods = "Keep out of cold areas";
+	$livestock->feed = "Chicken Feed";
 
 	$livestock->save();
 });
