@@ -76,7 +76,7 @@ Route::get('/msgreply', function(){
 				{
 					if($int_version == $crop->crop_id)
 					{
-						$code = $CROP_PREFIX.$int_version;
+						$code = constant(CROP_PREFIX).$int_version;
 						$option1 = $code." - Last recorded price"; 
 						$option2 = $code." - Methods of pest management";
 						$option3 = $code." - Suggested methods of fertilization";
