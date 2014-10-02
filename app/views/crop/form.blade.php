@@ -41,30 +41,30 @@
 	<body>
 		<h1>Crop Input</h1>
 
-		{{ Form::open(array('url' => '/postCrops', array('class' => 'form-horizontal')))}}
+		{{ Form::open(array('url' => '/postCrops', array('class' => 'form-horizontal'))) }}
 
 		<div class="form-group">
-			echo Form::label('name', 'Crop Name', array('class' => 'colsm-2 control-label'));
+			{{ Form::label('name', 'Crop Name', array('class' => 'colsm-2 control-label')) }}
 			<div class="col-sm-10">
-				echo Form::text('name', 'Crop Name' array('class' => 'form-control'));
+				{{ Form::text('name', 'Crop Name', array('class' => 'form-control')) }}
 			</div>
 		</div>
 		<div class="form-group">
-			echo Form::label('price', 'Last Recorded Price', array('class' => 'col-sm-2 control-label'));
+			{{ Form::label('price', 'Last Recorded Price', array('class' => 'col-sm-2 control-label')) }}
 			<div class="col-sm-10">
-				echo Form::text('price', 'Price', array('class' => 'form-control'));
+				{{ Form::text('price', 'Price', array('class' => 'form-control')) }}
 			</div>
 		</div>
 		<div class="form-group">
-			echo Form::label('days', 'Recommended Days Before Harvest', array('class' => 'col-sm-2 control-label'));
+			{{ Form::label('days', 'Recommended Days Before Harvest', array('class' => 'col-sm-2 control-label')) }}
 			<div class="col-sm-10">
-				echo Form::text('days', '100 days', array('class' => 'form-control'));
+				{{ Form::text('days', '100 days', array('class' => 'form-control')) }}
 			</div>
 		</div>
 		<div class="form-group">
-			echo Form::label('amount', 'Amount Produced Last Month', array('class' => 'col-sm-2 control-label'));
+			{{ Form::label('amount', 'Amount Produced Last Month', array('class' => 'col-sm-2 control-label')) }}
 			<div class="col-sm-10">
-				echo Form::text('amount', '500', array('class' => 'form-control'));
+				{{ Form::text('amount', '500', array('class' => 'form-control')) }}
 			</div>
 		</div>
 
@@ -73,7 +73,7 @@
 	 	@foreach ($fertilizers as $fertilizer)
 	  		<div class="checkbox">
 	  			<label>
-	  				echo Form::checkbox('fertilizers', {{ $fertilizer->name }});
+	  				{{ Form::checkbox('fertilizers', {{ $fertilizer->name }}) }}
 	  				{{ $fertilizer->name }}
 	  			</label>
 	  		</div>
