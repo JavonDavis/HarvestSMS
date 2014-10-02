@@ -9,7 +9,7 @@ class PestApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		Pest::all()->toJson();
+		return Pest::all()->toJson();
 	}
 
 
@@ -57,8 +57,8 @@ class PestApiController extends \BaseController {
 	{
 		$pest = Pest::findOrFail($id);
 
-		$pest->type = Input::get('type');
-		$pest->management_method = Input::get('management_method');
+		$pest->type = (Input::get('type') !== NULL) ? Input::get('type') : $pest->type;
+		$pest->management_method = (Input::get('management_method') !== NULL) ? Input::get('management_method') : $pest->management_method;
 
 		$pest->save();
 
