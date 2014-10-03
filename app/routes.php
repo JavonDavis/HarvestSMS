@@ -151,8 +151,48 @@ Route::get('/msgreply', function(){
 								  break;
 							  }					
 						 break;       
-						  }
+						 }
 					}	
+				}
+				elseif(substr($int_version,0, 3) == $livestock_prefix)
+				{
+					$id = substr($int_version,3,strlen($int_version)-4);
+					foreach($livestocks as $livestock)
+					{
+						if(substr($int_version,3) == $livestock->id)
+						{
+							$code = $int_version;
+							$option1 = $code."1 - Last recorded price"; 
+							$option2 = $code."2 - Recommended feed for ".$livestock->name;
+							$option3 = $code."3 - Tips for caring for ".$livestock->name;
+							
+							$sms->reply($option1."\n".$option2."\n".$option3);
+							break;
+						}
+						elseif($id == $livestock>id)
+						{
+							  $lastDigit = substr($int_version, strlen($int_version)-1);
+							  
+							  switch($lastDigit)
+							  {
+								  case 1:$sms->reply("The last recorded price for ".$livestock->name." is ".($livestock->price));
+								  break;
+							  
+								  case 2:$sms->reply("The recommended feed for ".$livestock->name." is ".($livestock->feed));
+								  break;
+							  
+								  case 3:$sms->reply("Some recommended tips for ".$livestock->name." are\n".($livestock->care_methods));
+								  break;
+								  default: $sms->reply($lastDigit);
+								  break;
+							  }					
+						 break;       
+						 }
+					}
+				}
+				else
+				{
+					$sms->reply(substr($int_version,3,strlen($int_version)-4));
 				}
 			break;
 		 }
