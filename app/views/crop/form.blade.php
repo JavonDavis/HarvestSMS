@@ -53,7 +53,7 @@
 	 	@foreach ($fertilizers as $fertilizer)
 	  		<div class="checkbox">
 	  			<label>
-	  				{{ Form::checkbox('fertilizers[]', $fertilizer->name ) }}
+	  				{{ Form::checkbox('fertilizers[]', $fertilizer->id ) }}
 	  				{{ $fertilizer->name }}
 	  			</label>
 	  		</div>
@@ -64,7 +64,7 @@
 	 	@foreach ($pests as $pest)
 	 		<div class="checkbox">
 	 			<label>
-	 				{{ Form::checkbox('pests[]', '$pest->type') }}
+	 				{{ Form::checkbox('pests[]', '$pest->id') }}
 	 				{{ $pest->type }}
 	 			</label>
 	 		</div>

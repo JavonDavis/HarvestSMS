@@ -22,9 +22,9 @@ class CropController extends \BaseController {
 
 		$crop->save();
 
-		$fertilizers = Input::get('fertilizers');
-		foreach ($fertilizers as $fertilizer) {
-			$toAttach = Fertilizer::where('name', '=', $fertilizer)->first();
+		$fertilizerids = Input::get('fertilizers');
+		foreach ($fertilizerids as $fertilizerid) {
+			$toAttach = Fertilizer::find($fertilizerid);
 			$crop->fertilizers()->associate($toAttach);
 		}
 
