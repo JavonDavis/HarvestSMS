@@ -189,6 +189,10 @@ Route::get('/msgreply', function(){
 						 }
 					}
 				}
+				else
+				{
+					$sms->reply(substr($int_version,3,strlen($int_version)-4));
+				}
 			break;
 		 }
 	}
