@@ -12,7 +12,7 @@ class CropController extends \BaseController {
 
 	public function postCropForm()
 	{
-		dd (Input::get('fertilizers');
+		dd (Input::get('fertilizers'));
 	}
 
 }
