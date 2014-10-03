@@ -22,6 +22,8 @@ class CropController extends \BaseController {
 
 		$crop->save();
 
+		return Redirect::to('/dashboard/crops');
+
 	}
 
 	public function getCropTable()

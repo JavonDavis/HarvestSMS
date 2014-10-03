@@ -27,7 +27,7 @@
   </head>
   <body>
 	<h1>Crops</h1>
-		 <button type="button" class="btn btn-primary btn-lg" id="add"><a href = "/dashboard/crops/new">Add Record</a></button>
+		 <a href = "/dashboard/crops/new"><button type="button" class="btn btn-primary btn-lg" id="add">Add Record</button></a>
 		<table class="table table-striped">
 			<tr>
 				<td>Crop Name</td>
