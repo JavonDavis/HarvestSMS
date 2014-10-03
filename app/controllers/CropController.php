@@ -22,12 +22,15 @@ class CropController extends \BaseController {
 
 		$crop->save();
 
-		$fertilizerids = Input::get('fertilizers');
-		foreach ($fertilizerids as $fertilizerid) {
-			$toAttach = Fertilizer::find($fertilizerid);
-			$crop->fertilizers()->associate($toAttach);
-		}
+		return Redirect::to('/dashboard/crops');
 
+	}
+
+	public function getCropTable()
+	{
+		$crops = Crop::all();
+
+		return View::make('crop.table')->with(compact('crops'));
 	}
 
 }
