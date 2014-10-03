@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,8 +8,7 @@
 	<title>BALE - Basic Agricultural Learning Environment</title>
 
     <!-- Bootstrap -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" rel="stylesheet"/>
-	<link href="css/style.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,21 +19,9 @@
 
     <style type="text/css">
 
-    	#sub{
-    		margin-left: 10%;
-    	}
-
-    	.checkbox, h2{
-    		margin-left: 10%;
-    	}
-
     	body{
-    		margin-left: 30%;
-    		margin-top: 10%;
-    	}
-
-    	h1{
-    		margin-left: 5%;
+    		margin: 0 auto;
+    		max-width: 800px;
     	}
 
     </style>
@@ -41,69 +29,54 @@
 	<body>
 		<h1>Crop Input</h1>
 
-		{{ Form::open(array('url' => '/postCrops', array('class' => 'form-horizontal')))}}
-			echo Form::label('');
-		{{ Form::close() }}
-		<form class="form-horizontal" role="form" id="crop_form" action = "">
-	  	<div class="form-group">
-			<label for="name" class="col-sm-2 control-label">Crop Name</label>
-			<div class="col-sm-10">
-		  		<input type="text" class="form-control" id="crop" placeholder="Crop Name" name = "name">
-			</div>
-	  	</div>
-	  	<div class="form-group">
-			<label for="price" class="col-sm-2 control-label">Last Recorded Price</label>
-			<div class="col-sm-10">
-		  		<input type="number" class="form-control" id="price" placeholder="Price" name = "price">
-			</div>
-	  	</div>
-	  	<div class="form-group">
-			<label for="days" class="col-sm-2 control-label">Recommended Days Before Harvest</label>
-			<div class="col-sm-10">
-	  			<input type="number" class="form-control" id="days" placeholder="Days" name = "days">
-			</div>
-	  	</div>
-	  	<div class="form-group">
-			<label for="amount" class="col-sm-2 control-label">Amount Produced Last Month</label>
-			<div class="col-sm-10">
-		  		<input type="number" class="form-control" id="amount" placeholder="Amount Produced" name = "amount">
-			</div>
-	  	</div>
-	  	<h2>Fertlizers</h2>
+		{{ Form::open(array('url' => '/dashboard/crops', 'class' => 'form-horizontal')) }}
 
-	  	@foreach ($fertilizers as $fertilizer)
-	  		<div class="checkbox"></div>
-	  		<label for = "{{ $fertilizer->name }}">{{ $fertilizer->name }}</label>
-	  		<input type = "checkbox" name = "fertilizers[]" id = "{{ $fertilizer->name }}" value = "{{ $fertilizer->name }}">
+		<div class="form-group">
+			{{ Form::label('name', 'Crop Name') }}
+			{{ Form::text('name', 'Crop Name', array('class' => 'form-control')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::label('price', 'Last Recorded Price') }}
+			{{ Form::text('price', 'Price', array('class' => 'form-control')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::label('days', 'Recommended Days Before Harvest') }}
+			{{ Form::text('days', '100 days', array('class' => 'form-control')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::label('amount', 'Amount Produced Last Month') }}
+			{{ Form::text('amount', '500', array('class' => 'form-control')) }}
+		</div>
+
+	 	<h2>Fertilizers</h2>
+
+	 	@foreach ($fertilizers as $fertilizer)
+	  		<div class="checkbox">
+	  			<label>
+	  				{{ Form::checkbox('fertilizers[]', $fertilizer->id ) }}
+	  				{{ $fertilizer->name }}
+	  			</label>
+	  		</div>
 	  	@endforeach
-				<input type="checkbox" value="">
-		  </label>
-		</div>
-		<div class="checkbox">
-		  <label>
-			<input type="checkbox" value="">
-			Synthetic Fertilizer
-		  </label>
-		</div>
-		<h2>Pests</h2>
-		<div class="checkbox">
-		  <label>
-			<input type="checkbox" value="">
-			Beetles
-		  </label>
-		</div>
-		<div class="checkbox">
-		  <label>
-			<input type="checkbox" value="">
-			Moles
-		  </label>
-		</div>
-		<br/>
-		 <button onclick="myfunction()" type="submit" class="btn-default" id="sub">Submit</button>
-		</form>
+
+	  	<h2>Pests</h2>
+
+	 	@foreach ($pests as $pest)
+	 		<div class="checkbox">
+	 			<label>
+	 				{{ Form::checkbox('pests[]', '$pest->id') }}
+	 				{{ $pest->type }}
+	 			</label>
+	 		</div>
+	 	@endforeach
+
+	  	{{ Form::submit('Submit', array('class' => 'btn-default', 'id' => 'sub', 'onclick' => 'myFunction()')) }}
+
+		{{ Form::close() }}
 		
 		<script type="text/javascript">
-		function myfunction() {
+		function myfunction( event ) {
+			event.preventDefault();
 			var r = confirm("Are You Sure?");
 			if (r == true) {
 				alert("ok");
