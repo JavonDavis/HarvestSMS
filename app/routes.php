@@ -41,6 +41,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
 Route::get('/dashboard/crops/new', 'CropController@getCropForm');
 Route::post('/dashboard/crops', 'CropController@postCropForm');
+Route::get('/dashboard/crops', 'CropController@getCropTable');
 
 
 Route::get('/msgreply', function(){
