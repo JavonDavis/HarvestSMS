@@ -164,7 +164,7 @@ Route::get('/msgreply', function(){
 							$option2 = $code."2 - Recommended feed for ".$livestock->name;
 							$option3 = $code."3 - Tips for caring for ".$livestock->name;
 							
-							$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
+							$sms->reply($option1."\n".$option2."\n".$option3);
 							break;
 						}
 						elseif($id == $livestock>id)
@@ -179,7 +179,7 @@ Route::get('/msgreply', function(){
 								  case 2:$sms->reply("The recommended feed for ".$livestock->name." is ".($livestock->feed));
 								  break;
 							  
-								  case 3:$sms->reply("Some recommended tips for ".$livestock->name." are\n".($livestock->care));
+								  case 3:$sms->reply("Some recommended tips for ".$livestock->name." are\n".($livestock->care_methods));
 								  break;
 								  default: $sms->reply($lastDigit);
 								  break;
