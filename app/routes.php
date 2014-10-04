@@ -83,7 +83,7 @@ Route::get('/msgreply', function(){
 			}
 			$sms->reply($reply);
 		}
-		elseif($int_version ==1)
+		elseif($int_version ==2)
 		{
 			$reply ="";
 			foreach($livestocks as $livestock)
