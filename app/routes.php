@@ -70,6 +70,10 @@ Route::get('/msgreply', function(){
 	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 	//echo $sms->displayOverview($info);
 	
+	// question = new Question;
+			//question->content = whateve rcontent
+			//question->save();
+	
 	if($sms->inboundText())
 	{
 		$text = $sms->text;
@@ -77,8 +81,7 @@ Route::get('/msgreply', function(){
 		
 		if($int_version== 0)
 		{
-			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";
-			
+			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";	
 			$sms->reply($help_msg);
 		}
 		elseif($int_version== 400)
@@ -88,7 +91,7 @@ Route::get('/msgreply', function(){
 			$reply ="";
 			foreach($crops as $crop)
 			{
-				$code = $crop_prefix.$crop->crop_id;
+				$code = $crop_prefix.$crop->id;
 				$reply .= ("Send ".$code." for ".$crop->name."\n");
 			}
 			$sms->reply($reply);
@@ -116,7 +119,7 @@ Route::get('/msgreply', function(){
 		elseif(substr($int_version,0, 3) == $crop_prefix)
 		{
 			$id = substr($int_version,3,strlen($int_version)-4);
-			if(Crop::findOrFail($id))
+			try
 			{
 				$crop = Crop::findOrFail($id);
 				if(substr($int_version,3) == $crop->id)
@@ -171,6 +174,10 @@ Route::get('/msgreply', function(){
 					  }					    
 				 }
 			}	
+			catch(Exception $e)
+			{
+				$sms->reply($e);
+			}
 		}
 		elseif(substr($int_version,0, 3) == $livestock_prefix)
 		{
