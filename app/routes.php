@@ -125,11 +125,13 @@ Route::get('/msgreply', function(){
 				$id = substr($text,3,strlen($text)-4);
 			else 
 				$id = substr($text,3);
-			$sms->reply($id);
-			break;
+			
 			try
 			{
 				$crop = Crop::findOrFail($id);
+				
+				$sms->reply($crop->name);
+				break;
 				
 				if(substr($text,3) == $crop->id)
 				{
