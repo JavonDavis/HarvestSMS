@@ -1,7 +1,6 @@
 <?php
 
-include ( "NexmoMessage.php" );
-$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+
 
 
 /*
@@ -85,6 +84,9 @@ Route::get('/msgreply', function(){
 	// question = new Question;
 			//question->content = whateve rcontent
 			//question->save();
+			
+	include ( "NexmoMessage.php" );
+$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 	
 	if($sms->inboundText())
 	{
