@@ -93,13 +93,12 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$text = $sms->text;
 		if(Session::has('question'))
 		{
+			$reply = "Thank you for asking we'll get back to you as soon as possible :(";
+			$sms->reply($reply);
 			$question = new Question;
 			$question->content = $text;
 			$question->from = $sms->from;
 			$question->save();
-			
-			$reply = "Thank you for asking we'll get back to you as soon as possible :(";
-			$sms->reply($reply);
 		}
 		elseif($text== 0)
 		{
