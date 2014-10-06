@@ -119,12 +119,14 @@ Route::get('/msgreply', function(){
 			$sms->reply($reply);
 		}
 		elseif(substr($int_version,0, 3) == $crop_prefix)
-		{
+		{ 
 			if(strlen($int_version) >4)
 				$id = substr($int_version,3,strlen($int_version)-4);
 			else 
 				$id = substr($int_version,3);
-			
+				
+			$sms-reply($id);
+			break;
 			try
 			{
 				$crop = Crop::findOrFail($id);
