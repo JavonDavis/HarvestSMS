@@ -39,10 +39,16 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	
 });
 
-Route::get('/dashboard/crops/new', 'CropController@getCropForm');
-Route::post('/dashboard/crops', 'CropController@postCropForm');
-Route::get('/dashboard/crops', 'CropController@getCropTable');
+Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
+{
+	Route::get('/crops/new', 'DashboardController@getCropForm');
+	Route::post('/crops', 'DashboardController@postCropForm');
+	Route::get('/crops', 'DashboardController@getCropTable');
 
+	Route::get('/announcements/new', 'DashboardController@getAnnouncementForm');
+	Route::post('/announcements', 'DashboardController@postAnnouncementForm');
+	Route::get('/announcements', 'DashboardController@getAnnouncementTable');
+});
 
 Route::get('/msgreply', function(){
 	ini_set('display_errors', 'On');

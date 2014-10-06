@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCropsTable extends Migration {
+class CreateQuestionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreateCropsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('crops', function(Blueprint $table)
+		Schema::create('questions', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->string('days_until_harvest');
-			$table->string('getting_started');
+			$table->string('content');
 			$table->timestamps();
 		});
 	}
@@ -29,7 +27,7 @@ class CreateCropsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('crops');
+		Schema::drop('questions');
 	}
 
 }

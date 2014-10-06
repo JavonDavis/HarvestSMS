@@ -30,25 +30,12 @@
     </style>
   </head>
   <body>
-	<h1>Crops</h1>
-		 <a href = "/dashboard/crops/new"><button type="button" class="btn btn-primary btn-md" id="add">Add Record</button></a>
+	<h1>Announcements</h1>
+		 <a href = "/dashboard/announcements/new"><button type="button" class="btn btn-primary btn-lg" id="add">New Announcement</button></a>
 		<table class="table table-striped">
+			@foreach ($announcements as $announcement)
 			<tr>
-				<th>Crop Name</th>
-				<th>Recommend Days Before Harvesting(Days)</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				
-			</tr>
-
-			@foreach ($crops as $crop)
-			<tr>
-				<td>{{ $crop->name }}</td>
-				<td>{{ $crop->days_until_harvest }}</td>
-				<td><button type="button" class="btn btn-primary btn-sm">Add Tip</button></td>
-				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
-				<td><button onclick="myfunction()" type="button" class="btn btn-primary btn-sm">Delete</button></td>
+				<td>{{ $announcement->description }}</td>
 			</tr>
 			@endforeach		
 	
