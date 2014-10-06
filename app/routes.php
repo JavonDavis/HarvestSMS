@@ -87,6 +87,7 @@ Route::get('/msgreply', function(){
 		elseif($text==1)
 		{
 			$reply ="";
+			$crops = Crop::all();
 			foreach($crops as $crop)
 			{
 				$code = $crop_prefix.$crop->id;
