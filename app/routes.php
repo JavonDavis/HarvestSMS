@@ -121,7 +121,7 @@ Route::get('/msgreply', function(){
 		elseif(substr($int_version,0, 3) == $crop_prefix)
 		{
 			if(strlen($int_version) == 4)
-			$id =  substr($int_version,3,strlen($int_version)-3);
+			$id =  substr($int_version,3);
 			else
 			{ 
 			$id = substr($int_version,3,strlen($int_version)-4);
