@@ -13,7 +13,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+include ( "NexmoMessage.php" );
 Route::get('/', function()
 {
 	return View::make('hello');
@@ -44,6 +44,8 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 {
+	$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+	
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
@@ -60,6 +62,9 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::post('/questions/{id}', function(){
 		$question = Question::find($id);
 		$answer = Input::get('answer');
+		
+		$info = $sms->sendText( $question->from, 'BALE',$answer );
+		echo $sms->displayOverview($info);
 	});
 });
 Route::get('/msgreply', function(){
@@ -80,12 +85,7 @@ Route::get('/msgreply', function(){
 	//$livestocks = Livestock::all();
 	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 	//echo $sms->displayOverview($info);
-	
-	// question = new Question;
-			//question->content = whateve rcontent
-			//question->save();
 			
-	include ( "NexmoMessage.php" );
 $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 	
 	if($sms->inboundText())
@@ -93,7 +93,13 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$text = $sms->text;
 		if(Session::has('number'))
 		{
-			$sms->reply("you deh ya");
+			$question = new Question;
+			$question->content = $text;
+			$question->from = $sms->from;
+			$question->save();
+			
+			$reply = "Thank you for asking we'll get back to you as soon as possible :)";
+			$sms->reply($reply);
 		}
 		elseif($text== 0)
 		{
