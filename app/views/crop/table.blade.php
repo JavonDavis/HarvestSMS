@@ -31,26 +31,24 @@
   </head>
   <body>
 	<h1>Crops</h1>
-		 <a href = "/dashboard/crops/new"><button type="button" class="btn btn-primary btn-lg" id="add">Add Record</button></a>
+		 <a href = "/dashboard/crops/new"><button type="button" class="btn btn-primary btn-md" id="add">Add Record</button></a>
 		<table class="table table-striped">
 			<tr>
-				<td>Crop Name</td>
-				<td>Last Recorded Price(per lb)</td>
-				<td>Recommend Days Before Harvesting(Days)</td>
-				<td>Amount Produced Last Month(Kg)</td>
-				<td>Tips</td>
-				<td></td>
+				<th>Crop Name</th>
+				<th>Recommend Days Before Harvesting(Days)</th>
+				<th></th>
+				<th></th>
+				<th></th>
 				
 			</tr>
 
 			@foreach ($crops as $crop)
 			<tr>
 				<td>{{ $crop->name }}</td>
-				<td>{{ $crop->price }}</td>
 				<td>{{ $crop->days_until_harvest }}</td>
-				<td>{{ $crop->amount_produced }}</td>
 				<td><button type="button" class="btn btn-primary btn-sm">Add Tip</button></td>
-				<td> <button type="button" class="btn btn-primary btn-sm">Edit</button> / <button onclick="myfunction()" type="button" class="btn btn-default btn-sm">Delete</button>
+				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
+				<td><button onclick="myfunction()" type="button" class="btn btn-primary btn-sm">Delete</button></td>
 			</tr>
 			@endforeach		
 	
