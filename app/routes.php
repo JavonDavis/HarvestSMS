@@ -82,6 +82,8 @@ Route::get('/msgreply', function(){
 			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";	
 			$sms->reply($help_msg);
 		}
+		elseif($int_version== 400)
+			$sms->reply("Send\n0 for help\n1 for Crops Section\n2 for Livestock Section\n3 for announcements section\n4 for questions section"); // predial larceny
 		else
 		{
 			$sms->reply("Unknown code");
