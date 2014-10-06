@@ -77,8 +77,7 @@ Route::get('/msgreply', function(){
 	if($sms->inboundText())
 	{
 		$text = $sms->text;
-		$int_version = (int) $text;
-		if($int_version== 0)
+		if($text== 0)
 		{
 			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";	
 			$sms->reply($help_msg);
