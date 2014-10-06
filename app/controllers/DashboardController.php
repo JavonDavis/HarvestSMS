@@ -58,7 +58,7 @@ class DashboardController extends \BaseController {
 
 	public function getAnnouncementTable()
 	{
-		$announcements = Announcement::all()->orderBy('created_at')->get();
+		$announcements = Announcement::orderBy('created_at')->get();
 
 		return View::make('announcement.table')->with(compact('announcements'));
 	}
