@@ -84,7 +84,7 @@ Route::get('/msgreply', function(){
 		}
 		elseif($text== 400)
 			$sms->reply("Send\n0 for help\n1 for Crops Section\n2 for Livestock Section\n3 for announcements section\n4 for questions section"); // predial larceny
-		elseif($int_version ==1)
+		elseif($text==1)
 		{
 			$reply ="";
 			foreach($crops as $crop)
