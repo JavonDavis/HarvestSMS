@@ -95,6 +95,27 @@ Route::get('/msgreply', function(){
 			}
 			$sms->reply($reply);
 		}
+		elseif($text ==2)
+		{
+			$reply ="";
+			$livestocks = Livestock::all();
+			foreach($livestocks as $livestock)
+			{
+				$code = $livestock_prefix.$livestock->id;
+				$reply .=("Send ".$code." for ".$livestock->name."\n");
+			}
+			$sms->reply($reply);
+		}
+		elseif($text ==3)
+		{
+			$reply = "The latest announcement is {generic announcement}";
+			$sms->reply($reply);
+		}
+		elseif($text ==4)
+		{
+			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
+			$sms->reply($reply);
+		}
 		else
 		{
 			$sms->reply("Unknown code");
