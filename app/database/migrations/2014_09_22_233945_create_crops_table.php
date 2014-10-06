@@ -16,10 +16,8 @@ class CreateCropsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('price');
 			$table->string('days_until_harvest');
-			$table->string('amount_produced');
-			$table->string('crop_id');
+			$table->string('getting_started');
 			$table->timestamps();
 		});
 	}

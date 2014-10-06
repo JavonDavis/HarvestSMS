@@ -27,48 +27,18 @@
     </style>
 	</head>
 	<body>
-		<h1>Crop Input</h1>
+		<h1>New Announcement</h1>
 
-		{{ Form::open(array('url' => '/dashboard/crops', 'class' => 'form-horizontal')) }}
+		{{ Form::open(array('url' => '/dashboard/announcements', 'class' => 'form-horizontal')) }}
 
 		<div class="form-group">
-			{{ Form::label('name', 'Crop Name') }}
-			{{ Form::text('name', 'Crop Name', array('class' => 'form-control')) }}
+			{{ Form::label('description', 'Announcement description') }}
+			{{ Form::text('description', 'Announcement Description', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::label('price', 'Last Recorded Price') }}
-			{{ Form::text('price', 'Price', array('class' => 'form-control')) }}
+			{{ Form::label('content', 'Announcement') }}
+			{{ Form::textarea('content', '', array('class' => 'form-control')) }}
 		</div>
-		<div class="form-group">
-			{{ Form::label('days', 'Recommended Days Before Harvest') }}
-			{{ Form::text('days', '100 days', array('class' => 'form-control')) }}
-		</div>
-		<div class="form-group">
-			{{ Form::label('amount', 'Amount Produced Last Month') }}
-			{{ Form::text('amount', '500', array('class' => 'form-control')) }}
-		</div>
-
-	 	<h2>Fertilizers</h2>
-
-	 	@foreach ($fertilizers as $fertilizer)
-	  		<div class="checkbox">
-	  			<label>
-	  				{{ Form::checkbox('fertilizers[]', $fertilizer->id ) }}
-	  				{{ $fertilizer->name }}
-	  			</label>
-	  		</div>
-	  	@endforeach
-
-	  	<h2>Pests</h2>
-
-	 	@foreach ($pests as $pest)
-	 		<div class="checkbox">
-	 			<label>
-	 				{{ Form::checkbox('pests[]', '$pest->id') }}
-	 				{{ $pest->type }}
-	 			</label>
-	 		</div>
-	 	@endforeach
 
 	  	{{ Form::submit('Submit', array('class' => 'btn', 'id' => 'sub', 'onclick' => 'myFunction()')) }}
 
