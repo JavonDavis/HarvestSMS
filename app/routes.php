@@ -100,6 +100,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 			
 			$reply = "Thank you for asking we'll get back to you as soon as possible :)";
 			$sms->reply($reply);
+			Session::flush();
 		}
 		elseif($text== 0)
 		{
@@ -139,7 +140,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		elseif($text ==4)
 		{
 			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
-			Session::flash('number',$sms->from);
+			Session::put('number',$sms->from);
 			$sms->reply($reply);
 		}
 		elseif(substr($text,0, 3) == $crop_prefix)
