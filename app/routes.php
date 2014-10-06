@@ -122,6 +122,7 @@ Route::get('/msgreply', function(){
 			try
 			{
 				$crop = Crop::findOrFail($id);
+				$sms->reply($id);
 				if(substr($int_version,3) == $crop->id)
 				{
 					$code = $int_version;
