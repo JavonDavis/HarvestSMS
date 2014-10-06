@@ -57,7 +57,7 @@ Route::get('/msgreply', function(){
 	// include ("crop.php");
 	// Declare new NexmoMessage.
 	$sms = new NexmoMessage('d1923006', 'f3252994');
-
+	
 
 	$crops = Crop::all();
 	$livestocks = Livestock::all();
@@ -110,9 +110,10 @@ Route::get('/msgreply', function(){
 		elseif(substr($int_version,0, 3) == $crop_prefix)
 		{
 			$id = substr($int_version,3,strlen($int_version)-4);
-			foreach($crops as $crop)
+			if(Crop::findOrFail($id))
 			{
-				if(substr($int_version,3) == $crop->crop_id)
+				$crop = Crop::findOrFail($id);
+				if(substr($int_version,3) == $crop->id)
 				{
 					$code = $int_version;
 					$option1 = $code."1 - Getting started with ".$crop->name; 
@@ -123,7 +124,7 @@ Route::get('/msgreply', function(){
 					
 					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 				}
-				elseif($id == $crop->crop_id)
+				elseif($id == $crop->id)
 				{
 					  $lastDigit = substr($int_version, strlen($int_version)-1);
 					  

@@ -69,6 +69,8 @@ class CropApiController extends \BaseController {
 		$crop = Crop::findOrFail($id);
 		return $crop->toJson();		
 	}
+	
+	
 
 	/**
 	 * Update the specified resource in storage.
