@@ -130,7 +130,7 @@ Route::get('/msgreply', function(){
 			{
 				$crop = Crop::findOrFail($id);
 				
-				$sms->reply($crop->name);
+				$sms->reply($id."|".$crop->name);
 				break;
 				
 				if(substr($text,3) == $crop->id)
