@@ -1,5 +1,9 @@
 <?php
 
+include ( "NexmoMessage.php" );
+$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -54,9 +58,11 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 
 	Route::get('/questions', 'DashboardController@getQuestionTable');
 	Route::get('/answer{id}', 'DashboardController@getAnswerForm');
-	Route::post('/questions/{id}', 'DashboardController@postAnswer');
+	Route::post('/questions/{id}', function(){
+		$question = Question::find($id);
+		$answer = Input::get('answer');
+	});
 });
-include ( "NexmoMessage.php" );
 Route::get('/msgreply', function(){
 	//ini_set('display_errors', 'On');
 
@@ -70,8 +76,6 @@ Route::get('/msgreply', function(){
 	
 	// include ("crop.php");
 	// Declare new NexmoMessage.
-	$sms = new NexmoMessage('a8ca5821', '3d21bce2');
-	
 
 	//$crops = Crop::all();
 	//$livestocks = Livestock::all();
