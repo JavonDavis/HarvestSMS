@@ -135,10 +135,9 @@ Route::get('/msgreply', function(){
 			
 			try
 			{
-				
-				$crop = Crop::findOrFail(((int) $id));
-				
-				
+				$id = (int) $id;
+				$crop = Crop::findOrFail($id);
+		
 				if(substr($text,3) == $crop->id)
 				{
 					$code = $text;
