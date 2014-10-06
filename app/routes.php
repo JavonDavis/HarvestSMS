@@ -70,9 +70,13 @@ Route::get('/msgreply', function(){
 		$int_version = (int) $text;
 		
 		if($int_version== 0)
-			$sms->reply("This is the help section");
+		{
+			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code.The weather section provides the weather forecast for the next 4 upcoming days. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the tips section is where you will find the latest topics regarding best practices in the agricultural field. Thank you for using BALE SMS.";
+			
+			$sms->reply($help_msg);
+		}
 		elseif($int_version== 400)
-			$sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Livestock Section\nSend 3 for weather information\n");
+			$sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Livestock Section\nSend 3 for weather information\nSend 4 for announcements section\nSend 5 for the tips section"); // predial larceny
 		elseif($int_version ==1)
 		{
 			$reply ="";
@@ -93,6 +97,16 @@ Route::get('/msgreply', function(){
 			}
 			$sms->reply($reply);
 		}
+		elseif($int_version ==4)
+		{
+			$reply = "The latest announcement is {generic announcement}";
+			$sms->reply($reply);
+		}
+		elseif($int_version ==5)
+		{
+			$reply = "The current topics are {generic topic code}-{generic topic title}";
+			$sms->reply($reply);
+		}
 		elseif(substr($int_version,0, 3) == $crop_prefix)
 		{
 			$id = substr($int_version,3,strlen($int_version)-4);
@@ -101,11 +115,11 @@ Route::get('/msgreply', function(){
 				if(substr($int_version,3) == $crop->crop_id)
 				{
 					$code = $int_version;
-					$option1 = $code."1 - Last recorded price"; 
-					$option2 = $code."2 - Methods of pest management";
-					$option3 = $code."3 - Suggested methods of fertilization";
+					$option1 = $code."1 - Last recorded price for ".$crop->name; 
+					$option2 = $code."2 - Recommended methods of pest management for ".$crop->name;
+					$option3 = $code."3 - Suggested methods of fertilization for ".$crop->name;
 					$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
-					$option5 = $code."5 - Suggested number of days before harvesting";
+					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
 					
 					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 				}
@@ -115,7 +129,7 @@ Route::get('/msgreply', function(){
 					  
 					  switch($lastDigit)
 					  {
-						  case 1:$sms->reply("The price is ".($crop->price));
+						  case 1:$sms->reply("The latest price for ".($crop->name)." is ".($crop->price));
 						  break;
 					  
 						  case 2:
@@ -141,9 +155,9 @@ Route::get('/msgreply', function(){
 						  $reply.="Send in the codes beside the fertilizers to get direct link for information about the fertilizer";
 						  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
 						  break;
-						  case 4:$sms->reply("The last recorded amount produced is ".$crop->amount_produced);
+						  case 4:$sms->reply("The last recorded amount produced for ".$crop->name." is ".$crop->amount_produced);
 						  break;
-						  case 5:$sms->reply("The number of days until harvest are ".$crop->days_until_harvest);
+						  case 5:$sms->reply("The recommended number of days to wait before harvesting ".$crop->name." are ".$crop->days_until_harvest);
 						  break;
 						  default: $sms->reply($lastDigit);
 						  break;
@@ -187,7 +201,7 @@ Route::get('/msgreply', function(){
 		}
 		else
 		{
-			$sms->reply(substr($int_version,3,strlen($int_version)-4));
+			$sms->reply("Unknown code");
 		}
 	}
 });
@@ -204,7 +218,7 @@ Route::get('/createJohn', function(){
 	return 'saved';
 });
 
-Route::get('/creatChicken', function(){
+Route::get('/createChicken', function(){
 	$livestock = new Livestock;
 
 	$livestock->name = "Chicken";
