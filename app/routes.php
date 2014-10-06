@@ -126,67 +126,7 @@ Route::get('/msgreply', function(){
 				$id = substr($int_version,3);
 				
 			$sms-reply($id);
-			break;
-			try
-			{
-				$crop = Crop::findOrFail($id);
-				
-				if(substr($int_version,3) == $crop->id)
-				{
-					$code = $int_version;
-					$option1 = $code."1 - Getting started with ".$crop->name; 
-					$option2 = $code."2 - latest tips for caring your ".$crop->name;
-					$option3 = $code."3 - Recommended fertilizers for ".$crop->name;
-					$option4 = $code."4 - Pests that normally affect ".$crop->name;
-					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
-					
-					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
-				}
-				elseif($id == $crop->id)
-				{
-					  $lastDigit = substr($int_version, strlen($int_version)-1);
-					  
-					  switch($lastDigit)
-					  {
-						  case 1:$sms->reply("Getting start with ".($crop->name)." is ".($crop->getting_started));
-						  break;
-					  
-						  case 2:
-						  $sms->reply("Under Construction");
-						  break;
-					  
-						  case 3:
-						  $fertilizers = $crop->fertilizers()->get();
-						  $reply = "";
-						  foreach($fertilizers as $fertilizer)
-						  {
-							  $code = $fertilizer_prefix.$fertilizer->id;
-							  $reply.= ($fertilizer->type."\n");
-						  }
-						  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
-						  break;
-						  case 4:
-						  $pests = $crop->pests()->get();
-						  $reply = "";
-						  foreach($pests as $pest)
-						  {
-							  $code = $pest_prefix.$pest->id;
-							  $reply.= ($code." - ".$pest->type."\n");
-						  }
-						  $reply.="Send in the codes beside the pests to get direct link for information about the pest";
-						  $sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
-						  break;
-						  case 5:$sms->reply("The recommended number of days to wait before harvesting ".$crop->name." are ".$crop->days_until_harvest);
-						  break;
-						  default: $sms->reply($lastDigit);
-						  break;
-					  }					    
-				 }
-			}	
-			catch(Exception $e)
-			{
-				$sms->reply($e);
-			}
+			
 		}
 		elseif(substr($int_version,0, 3) == $livestock_prefix)
 		{
