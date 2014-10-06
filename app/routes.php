@@ -136,7 +136,7 @@ Route::get('/msgreply', function(){
 			try
 			{
 				
-				$crop = Crop::findOrFail(1);
+				$crop = Crop::findOrFail(((int) $id));
 				$sms->reply($crop);
 				break;
 				
