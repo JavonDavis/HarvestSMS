@@ -91,7 +91,11 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 	if($sms->inboundText())
 	{
 		$text = $sms->text;
-		if($text== 0)
+		if(Session::has('number'))
+		{
+			$sms->reply("you deh ya");
+		}
+		elseif($text== 0)
 		{
 			$sms->reply($help_msg);
 		}
@@ -129,8 +133,8 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		elseif($text ==4)
 		{
 			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
-			//Session::put('number',$sms->from);
-			$sms->reply($sms->from);
+			Session::flash('number',$sms->from);
+			$sms->reply($reply);
 		}
 		elseif(substr($text,0, 3) == $crop_prefix)
 		{ 
