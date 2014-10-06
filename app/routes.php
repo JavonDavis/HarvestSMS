@@ -128,6 +128,7 @@ Route::get('/msgreply', function(){
 		elseif(substr($text,0, 3) == $crop_prefix)
 		{ 
 			$id = 1;
+			$text = (int) $text;
 			if(strlen($text) >4)
 				$id = substr($text,3,strlen($text)-4);
 			else 
@@ -135,7 +136,6 @@ Route::get('/msgreply', function(){
 			
 			try
 			{
-				$id = (int) $id;
 				$crop = Crop::findOrFail($id);
 		
 				if(substr($text,3) == $crop->id)
