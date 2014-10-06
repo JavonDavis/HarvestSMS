@@ -104,12 +104,79 @@ class DashboardController extends \BaseController {
 		return View::make('question.answer')->withQuestion($question);
 	}
 
-	public function postAnswer($id)
+	public function getFertilizerTable()
 	{
-		$question = Question::find($id);
-		$answer = Input::get('answer');
+		$fertilizers = Fertilizer::all();
+		return View::make('fertilizer.table')->with(compact('fertilizers'));
+	}
 
-		// Send text message with answer ...
+	public function getFertilizerForm()
+	{
+		return View::make('fertilizer.form');
+	}
+
+	public function postFertilizerForm()
+	{
+		# code...
+	}
+
+	public function getPestTable()
+	{
+		$pests = Pest::all();
+		return View::make('pest.table')->with(compact('pests'));
+	}
+
+	public function getPestForm()
+	{
+		return View::make('pest.form');
+	}
+
+	public function postPestForm()
+	{
+		# code...
+	}
+
+	public function getLivestockTable()
+	{
+		$livestocks = Livestock::all();
+		return View::make('livestock.table')->with(compact('livestocks'));
+	}
+
+	public function getLivestockForm()
+	{
+		return View::make('livestock.form');
+	}
+
+	public function postLivestockForm()
+	{
+		# code...
+	}
+
+	public function getLivestockTips($id)
+	{
+		$livestock = Livestock::find($id);
+		$tips = $livestock->livestocktips()->get();
+		return View::make('livestock.tips')->with(array('tips' => $tips, 'livestock' => $livestock));
+	}
+
+	public function getLivestockTipForm($id)
+	{
+		$livestock = Livestock::find($id);
+
+		return View::make('livestock.tipform')->with('livestock', $livestock);
+	}
+
+	public function postLivestockTipForm($id)
+	{
+		$livestocktip = new Livestocktip;
+
+		$livestocktip->description = Input::get('description');
+		$livestocktip->content = Input::get('content');
+		$livestocktip->livestock_id = $id;
+
+		$livestocktip->save();
+
+		return Redirect::to('dashboard/livestocks/$id/tips');
 	}
 
 

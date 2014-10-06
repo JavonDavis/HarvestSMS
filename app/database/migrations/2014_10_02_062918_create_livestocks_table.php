@@ -16,9 +16,9 @@ class CreateLivestocksTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('price');
 			$table->string('care_methods');
 			$table->string('feed');
+			$table->string('getting_started');
 			$table->timestamps();
 		});
 	}

@@ -52,13 +52,28 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/crops/{id}/tips/new', 'DashboardController@getCropTipForm');
 	Route::post('/crops/{id}/tips', 'DashboardController@postCropTipForm');
 
+	Route::get('/fertilizers', 'DashboardController@getFertilizerTable');
+	Route::get('/fertilizers/new', 'DashboardController@getFertilizerForm');
+	Route::post('/fertilizers', 'DashboardController@postfertilizerForm');
+
+	Route::get('/pests/new', 'DashboardController@getPestForm');
+	Route::get('/pests', 'DashboardController@getPestTable');
+	Route::post('/pests', 'DashboardController@postPestForm');
+
+	Route::get('/livestock/new', 'DashboardController@getLivestockForm');
+	Route::get('/livestock', 'DashboardController@getLivestockTable');
+	Route::post('/livestock', 'DashboardController@postLivestockForm');
+	Route::get('/livestock/{id}/tips', 'DashboardController@getLivestockTips');
+	Route::get('/livestock/{id}/tips/new', 'DashboardController@getLivestockTipForm');
+	Route::post('/livestock/{id}/tips', 'DashboardController@postLivestockTipForm');
+
 	Route::get('/announcements/new', 'DashboardController@getAnnouncementForm');
 	Route::post('/announcements', 'DashboardController@postAnnouncementForm');
 	Route::get('/announcements', 'DashboardController@getAnnouncementTable');
 
 	Route::get('/questions', 'DashboardController@getQuestionTable');
-	Route::get('/answer{id}', 'DashboardController@getAnswerForm');
-	Route::post('/questions/{id}', function(){
+	Route::get('/answer/{id}', 'DashboardController@getAnswerForm');
+	Route::post('/questions/{id}', function($id){
 		$question = Question::find($id);
 		$answer = Input::get('answer');
 	});
