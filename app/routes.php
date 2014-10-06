@@ -62,7 +62,7 @@ Route::get('/msgreply', function(){
 	include ( "NexmoMessage.php" );
 	// include ("crop.php");
 	// Declare new NexmoMessage.
-	$sms = new NexmoMessage('d1923006', 'f3252994');
+	$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 	
 
 	$crops = Crop::all();
