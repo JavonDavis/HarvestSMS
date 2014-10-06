@@ -120,11 +120,11 @@ Route::get('/msgreply', function(){
 		}
 		elseif(substr($int_version,0, 3) == $crop_prefix)
 		{
-			$id = substr($int_version,3,1);
+			$id = substr($int_version,3,strlen($int_version)-3);
 			try
 			{
-				$sms->reply($id);
-				$crop = Crop::find($id);
+				$crop = Crop::findOrFail($id);
+				
 				if(substr($int_version,3) == $crop->id)
 				{
 					$code = $int_version;
