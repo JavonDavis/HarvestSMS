@@ -37,14 +37,23 @@ class DashboardController extends \BaseController {
 
 	public function postAnnouncementForm()
 	{
-		$announcement = new Announcement;
+		if (Session::has('user')) {
+			$user = Session::get('user');
 
-		$announcement->description = Input::get('description');
-		$announcement->content = Input::get('content');
+			$announcement = new Announcement;
 
-		$announcement->save();
+			$announcement->description = Input::get('description');
+			$announcement->content = Input::get('content');
+			$announcement->user_id = $user->id;
 
-		return Redirect::to('/dashboard/announcements');
+			$announcement->save();
+
+			return Redirect::to('/dashboard/announcements');
+
+		} else {
+			return Redirect::to('/login');
+		}
+		
 	}
 
 	public function getAnnouncementTable()
