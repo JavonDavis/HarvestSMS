@@ -123,7 +123,8 @@ Route::get('/msgreply', function(){
 		elseif($text ==4)
 		{
 			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
-			$sms->reply($reply);
+			//Session::put('number',$sms->from);
+			$sms->reply($sms->from);
 		}
 		elseif(substr($text,0, 3) == $crop_prefix)
 		{ 
