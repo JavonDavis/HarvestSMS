@@ -1,7 +1,6 @@
 <?php
 
-include ( "NexmoMessage.php" );
-$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+
 
 
 /*
@@ -14,7 +13,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+include ( "NexmoMessage.php" );
 Route::get('/', function()
 {
 	return View::make('hello');
@@ -45,6 +44,8 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 {
+	$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+	
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
@@ -76,6 +77,9 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::post('/questions/{id}', function($id){
 		$question = Question::find($id);
 		$answer = Input::get('answer');
+		
+		$info = $sms->sendText( $question->from, 'BALE',$answer );
+		echo $sms->displayOverview($info);
 	});
 });
 Route::get('/msgreply', function(){
@@ -96,15 +100,22 @@ Route::get('/msgreply', function(){
 	//$livestocks = Livestock::all();
 	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 	//echo $sms->displayOverview($info);
-	
-	// question = new Question;
-			//question->content = whateve rcontent
-			//question->save();
+			
+$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 	
 	if($sms->inboundText())
 	{
 		$text = $sms->text;
-		if($text== 0)
+		if(Session::has('question'))
+		{
+			$reply = "Thank you for asking we'll get back to you as soon as possible :(";
+			$sms->reply($reply);
+			$question = new Question;
+			$question->content = $text;
+			$question->from = $sms->from;
+			$question->save();
+		}
+		elseif($text== 0)
 		{
 			$sms->reply($help_msg);
 		}
@@ -143,6 +154,7 @@ Route::get('/msgreply', function(){
 		{
 			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
 			$sms->reply($reply);
+			Session::flash('question',$sms->from);
 		}
 		elseif(substr($text,0, 3) == $crop_prefix)
 		{ 
