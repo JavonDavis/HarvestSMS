@@ -120,8 +120,7 @@ Route::get('/msgreply', function(){
 		}
 		elseif(substr($int_version,0, 3) == $crop_prefix)
 		{
-			$id = substr($int_version,3,strlen($int_version)-3);
-			$sms-reply($id);
+			strlen($int_version) == 4 ? $id = ssubstr($int_version,3,strlen($int_version)-3):ubstr($int_version,3,strlen($int_version)-4);
 			try
 			{
 				$crop = Crop::findOrFail($id);
@@ -185,7 +184,7 @@ Route::get('/msgreply', function(){
 		}
 		elseif(substr($int_version,0, 3) == $livestock_prefix)
 		{
-			$id = substr($int_version,3,strlen($int_version)-3);
+			strlen($int_version) == 4 ? $id = ssubstr($int_version,3,strlen($int_version)-3):ubstr($int_version,3,strlen($int_version)-4);
 			foreach($livestocks as $livestock)
 			{
 				if(substr($int_version,3) == $livestock->id)
