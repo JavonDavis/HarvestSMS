@@ -72,133 +72,140 @@ Route::get('/msgreply', function(){
 		$text = $sms->text;
 		$int_version = (int) $text;
 		
-		switch($int_version)
-         {
-			case 0: $sms->reply("This is the help section");
-			break;
-			case 400: $sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Livestock Section\nSend 3 for weather information\n") ;
-			break;
-			case 1:
-				$reply ="";
-				foreach($crops as $crop)
+		if($int_version== 0)
+		{
+			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";
+			
+			$sms->reply($help_msg);
+		}
+		elseif($int_version== 400)
+			$sms->reply("Send\n0 for help\n1 for Crops Section\n2 for Livestock Section\n3 for announcements section\n4 for questions section"); // predial larceny
+		elseif($int_version ==1)
+		{
+			$reply ="";
+			foreach($crops as $crop)
+			{
+				$code = $crop_prefix.$crop->crop_id;
+				$reply .= ("Send ".$code." for ".$crop->name."\n");
+			}
+			$sms->reply($reply);
+		}
+		elseif($int_version ==2)
+		{
+			$reply ="";
+			foreach($livestocks as $livestock)
+			{
+				$code = $livestock_prefix.$livestock->id;
+				$reply .=("Send ".$code." for ".$livestock->name."\n");
+			}
+			$sms->reply($reply);
+		}
+		elseif($int_version ==3)
+		{
+			$reply = "The latest announcement is {generic announcement}";
+			$sms->reply($reply);
+		}
+		elseif($int_version ==4)
+		{
+			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
+			$sms->reply($reply);
+		}
+		elseif(substr($int_version,0, 3) == $crop_prefix)
+		{
+			$id = substr($int_version,3,strlen($int_version)-4);
+			foreach($crops as $crop)
+			{
+				if(substr($int_version,3) == $crop->crop_id)
 				{
-					$code = $crop_prefix.$crop->crop_id;
-					$reply .= ("Send ".$code." for ".$crop->name."\n");
+					$code = $int_version;
+					$option1 = $code."1 - Getting started with ".$crop->name; 
+					$option2 = $code."2 - latest tips for caring your ".$crop->name;
+					$option3 = $code."3 - latest methods of fertilization for ".$crop->name;
+					$option4 = $code."2 - Recommended methods of pest management for ".$crop->name;
+					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
+					
+					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
 				}
-				$sms->reply($reply);
-			break;
-			case 2:
-				$reply ="";
-				foreach($livestocks as $livestock)
+				elseif($id == $crop->crop_id)
 				{
-					$code = $livestock_prefix.$livestock->id;
-					$reply .=("Send ".$code." for ".$livestock->name."\n");
-				}
-				$sms->reply($reply);
-			break;
-			default:
-				if(substr($int_version,0, 3) == $crop_prefix)
+					  $lastDigit = substr($int_version, strlen($int_version)-1);
+					  
+					  switch($lastDigit)
+					  {
+						  case 1:$sms->reply("The latest price for ".($crop->name)." is ".($crop->price));
+						  break;
+					  
+						  case 2:
+						  $pests = $crop->pests()->get();
+						  $reply = "";
+						  foreach($pests as $pest)
+						  {
+							  $code = $pest_prefix.$pest->id;
+							  $reply.= ($code." - ".$pest->type."\n");
+						  }
+						  $reply.="Send in the codes beside the pests to get direct link for information about the pest";
+						  $sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
+						  break;
+					  
+						  case 3:
+						  $fertilizers = $crop->fertilizers()->get();
+						  $reply = "";
+						  foreach($fertilizers as $fertilizer)
+						  {
+							  $code = $fertilizer_prefix.$fertilizer->id;
+							  $reply.= ($code." - ".$fertilizer->type."\n");
+						  }
+						  $reply.="Send in the codes beside the fertilizers to get direct link for information about the fertilizer";
+						  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
+						  break;
+						  case 4:$sms->reply("The last recorded amount produced for ".$crop->name." is ".$crop->amount_produced);
+						  break;
+						  case 5:$sms->reply("The recommended number of days to wait before harvesting ".$crop->name." are ".$crop->days_until_harvest);
+						  break;
+						  default: $sms->reply($lastDigit);
+						  break;
+					  }					    
+				 }
+			}	
+		}
+		elseif(substr($int_version,0, 3) == $livestock_prefix)
+		{
+			$id = substr($int_version,3,strlen($int_version)-4);
+			foreach($livestocks as $livestock)
+			{
+				if(substr($int_version,3) == $livestock->id)
 				{
-					$id = substr($int_version,3,strlen($int_version)-4);
-					foreach($crops as $crop)
-					{
-						if(substr($int_version,3) == $crop->crop_id)
-						{
-							$code = $int_version;
-							$option1 = $code."1 - Last recorded price"; 
-							$option2 = $code."2 - Methods of pest management";
-							$option3 = $code."3 - Suggested methods of fertilization";
-							$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
-							$option5 = $code."5 - Suggested number of days before harvesting";
-							
-							$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
-							break;
-						}
-						elseif($id == $crop->crop_id)
-						{
-							  $lastDigit = substr($int_version, strlen($int_version)-1);
-							  
-							  switch($lastDigit)
-							  {
-								  case 1:$sms->reply("The price is ".($crop->price));
-								  break;
-							  
-								  case 2:
-								  $pests = $crop->pests()->get();
-								  $reply = "";
-								  foreach($pests as $pest)
-								  {
-									  $code = $pest_prefix.$pest->id;
-									  $reply.= ($code." - ".$pest->type."\n");
-								  }
-								  $reply.="Send in the codes beside the pests to get direct link for information about the pest";
-								  $sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
-								  break;
-							  
-								  case 3:
-								  $fertilizers = $crop->fertilizers()->get();
-								  $reply = "";
-								  foreach($fertilizers as $fertilizer)
-								  {
-									  $code = $fertilizer_prefix.$fertilizer->id;
-									  $reply.= ($code." - ".$fertilizer->type."\n");
-								  }
-								  $reply.="Send in the codes beside the fertilizers to get direct link for information about the fertilizer";
-								  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
-								  break;
-								  case 4:$sms->reply("The last recorded amount produced is ".$crop->amount_produced);
-								  break;
-								  case 5:$sms->reply("The number of days until harvest are ".$crop->days_until_harvest);
-								  break;
-								  default: $sms->reply($lastDigit);
-								  break;
-							  }					
-						 break;       
-						 }
-					}	
+					$code = $int_version;
+					$option1 = $code."1 - Last recorded price"; 
+					$option2 = $code."2 - Recommended feed for ".$livestock->name;
+					$option3 = $code."3 - Tips for caring for ".$livestock->name;
+					
+					$sms->reply($option1."\n".$option2."\n".$option3);
 				}
-				elseif(substr($int_version,0, 3) == $livestock_prefix)
+				elseif($id == $livestock->id)
 				{
-					$id = substr($int_version,3,strlen($int_version)-4);
-					foreach($livestocks as $livestock)
-					{
-						if(substr($int_version,3) == $livestock->id)
-						{
-							$code = $int_version;
-							$option1 = $code."1 - Last recorded price"; 
-							$option2 = $code."2 - Recommended feed for ".$livestock->name;
-							$option3 = $code."3 - Tips for caring for ".$livestock->name;
-							
-							$sms->reply($option1."\n".$option2."\n".$option3);
-							break;
-						}
-						elseif($id == $livestock>id)
-						{
-							  $lastDigit = substr($int_version, strlen($int_version)-1);
-							  
-							  switch($lastDigit)
-							  {
-								  case 1:$sms->reply("The last recorded price for ".$livestock->name." is ".($livestock->price));
-								  break;
-							  
-								  case 2:$sms->reply("The recommended feed for ".$livestock->name." is ".($livestock->feed));
-								  break;
-							  
-								  case 3:$sms->reply("Some recommended tips for ".$livestock->name." are\n".($livestock->care_methods));
-								  break;
-								  default: $sms->reply($lastDigit);
-								  break;
-							  }					
-						 break;       
-						 }
-					}
-				}
-				else
-				{
-					$sms->reply(substr($int_version,3,strlen($int_version)-4));
-				}
-			break;
-		 }
+					  $lastDigit = substr($int_version, strlen($int_version)-1);
+					  
+					  switch($lastDigit)
+					  {
+						  case 1:$sms->reply("The last recorded price for ".$livestock->name." is ".($livestock->price));
+						  break;
+					  
+						  case 2:$sms->reply("The recommended feed for ".$livestock->name." is ".($livestock->feed));
+						  break;
+					  
+						  case 3:$sms->reply("Some recommended tips for ".$livestock->name." are\n".($livestock->care_methods));
+						  break;
+						  default: $sms->reply($lastDigit);
+						  break;
+					  }					    
+				 }
+			}
+		}
+		else
+		{
+			$sms->reply("Unknown code");
+		}
 	}
 });
 
@@ -214,7 +221,7 @@ Route::get('/createJohn', function(){
 	return 'saved';
 });
 
-Route::get('/creatChicken', function(){
+Route::get('/createChicken', function(){
 	$livestock = new Livestock;
 
 	$livestock->name = "Chicken";
