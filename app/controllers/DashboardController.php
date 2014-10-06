@@ -16,6 +16,7 @@ class DashboardController extends \BaseController {
 
 		$crop->name = Input::get('name');
 		$crop->days_until_harvest = Input::get('days');
+		$crop->getting_started = Input::get('getting_started');
 
 		$crop->save();
 
@@ -28,6 +29,31 @@ class DashboardController extends \BaseController {
 		$crops = Crop::all();
 
 		return View::make('crop.table')->with(compact('crops'));
+	}
+
+	public function getCropTips($id)
+	{
+		$crop = Crop::find($id);
+		$tips = $crop->croptips()->get();
+		return View::make('crop.tips')->with(array('tips' => $tips, 'crop' => $crop));
+	}
+
+	public function getCropTipForm($id)
+	{
+		$crop = Crop::find($id);
+
+		return View::make('crop.tipform')->with('crop', $crop);
+	}
+
+	public function postCropTipForm($id)
+	{
+		$croptip = new Croptip;
+
+		$croptip->description = Input::get('description');
+		$croptip->content = Input::get('content');
+		$croptip->crop_id = $id;
+
+		$croptip->save();
 	}
 
 	public function getAnnouncementForm()
@@ -62,5 +88,27 @@ class DashboardController extends \BaseController {
 
 		return View::make('announcement.table')->with(compact('announcements'));
 	}
+
+	public function getQuestionTable()
+	{
+		$questions = Question::orderBy('created_at')->get();
+
+		return View::make('question.table')->with(compact('questions'));
+	}
+
+	public function getAnswerForm($id)
+	{
+		$question = Question::find($id);
+		return View::make('question.answer')->withQuestion($question);
+	}
+
+	public function postAnswer($id)
+	{
+		$question = Question::find($id);
+		$answer = Input::get('answer');
+
+		// Send text message with answer ...
+	}
+
 
 }

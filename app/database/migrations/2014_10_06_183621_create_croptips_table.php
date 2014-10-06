@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionsTable extends Migration {
+class CreateCroptipsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,13 @@ class CreateQuestionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('questions', function(Blueprint $table)
+		Schema::create('croptips', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('description');
 			$table->string('content');
-			$table->string('from');
+			$table->integer('crop_id')->unsigned();
+			$table->foreign('crop_id')->references('id')->on('crops');
 			$table->timestamps();
 		});
 	}
@@ -28,7 +30,7 @@ class CreateQuestionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('questions');
+		Schema::drop('croptips');
 	}
 
 }

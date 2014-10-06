@@ -44,10 +44,17 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
+	Route::get('/crops/{id}/tips', 'DashboardController@getCropTips');
+	Route::get('/crops/{id}/tips/new', 'DashboardController@getCropTipForm');
+	Route::post('/crops/{id}/tips', 'DashboardController@postCropTipForm');
 
 	Route::get('/announcements/new', 'DashboardController@getAnnouncementForm');
 	Route::post('/announcements', 'DashboardController@postAnnouncementForm');
 	Route::get('/announcements', 'DashboardController@getAnnouncementTable');
+
+	Route::get('/questions', 'DashboardController@getQuestionTable');
+	Route::get('/answer{id}', 'DashboardController@getAnswerForm');
+	Route::post('/questions/{id}', 'DashboardController@postAnswer');
 });
 
 Route::get('/msgreply', function(){
@@ -213,13 +220,14 @@ Route::get('/msgreply', function(){
 	}
 });
 
-Route::get('/createJohn', function(){
+Route::get('/createJill', function(){
+
 	$user = new User;
-	$user->name = "John Brown";
-	$user->username = "JohnB";
+	$user->name = "Jill Brown";
+	$user->username = "JillB";
 	$user->password = "Password";
-	$user->phone = '111111111';
-	$user->email = 'jb@jb.com';
+	$user->phone = '2222222';
+	$user->email = 'jlb@jlb.com';
 	$user->save();
 
 	return 'saved';
@@ -244,13 +252,7 @@ $user->name = "John Brown";
 	$user->phone = '111111111';
 	$user->email = 'jb@jb.com';
 
-$user = new User;
-	$user->name = "Jill Brown";
-	$user->username = "JillB";
-	$user->password = "Password";
-	$user->phone = '2222222';
-	$user->email = 'jlb@jlb.com';
-	$user->save();
+
 */
 
 
@@ -277,7 +279,7 @@ Route::get('/home', function() {
 		return "nah";
 });
 
-Route::post('/auth',function() {
+Route::post('/login',function() {
 	
 	$data = Input::all();
 	
@@ -290,7 +292,7 @@ Route::post('/auth',function() {
 		if(strcmp($user->phone,$number)==0 && strcmp($user->password,$password)==0)
 		{
 			Session::put('user',$user);
-			return Redirect::intended('home');
+			return Redirect::to('/dashboard');
 		}
 	}
 });

@@ -28,7 +28,7 @@
 	  <div>
 			<h3>Sign In</h3>
 			<img src="grass.jpg" alt="Grass" id="logo"> 
-			<form method="post" action="/auth">
+			<form method="post" action="/login">
 			  <h5>Telephone Number</h5>
 			  <input type="text" maxlength="40"  id="phone" name="number">
 			  </br>
