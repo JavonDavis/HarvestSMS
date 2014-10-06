@@ -130,8 +130,8 @@ Route::get('/msgreply', function(){
 					$code = $int_version;
 					$option1 = $code."1 - Getting started with ".$crop->name; 
 					$option2 = $code."2 - latest tips for caring your ".$crop->name;
-					$option3 = $code."3 - latest methods of fertilization for ".$crop->name;
-					$option4 = $code."2 - Recommended methods of pest management for ".$crop->name;
+					$option3 = $code."3 - Recommended fertilizers for ".$crop->name;
+					$option4 = $code."4 - Pests that normally affect ".$crop->name;
 					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
 					
 					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
@@ -142,10 +142,24 @@ Route::get('/msgreply', function(){
 					  
 					  switch($lastDigit)
 					  {
-						  case 1:$sms->reply("The latest price for ".($crop->name)." is ".($crop->price));
+						  case 1:$sms->reply("Getting start with ".($crop->name)." is ".($crop->getting_started));
 						  break;
 					  
 						  case 2:
+						  $sms->reply("Under Construction");
+						  break;
+					  
+						  case 3:
+						  $fertilizers = $crop->fertilizers()->get();
+						  $reply = "";
+						  foreach($fertilizers as $fertilizer)
+						  {
+							  $code = $fertilizer_prefix.$fertilizer->id;
+							  $reply.= ($fertilizer->type."\n");
+						  }
+						  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
+						  break;
+						  case 4:
 						  $pests = $crop->pests()->get();
 						  $reply = "";
 						  foreach($pests as $pest)
@@ -155,20 +169,6 @@ Route::get('/msgreply', function(){
 						  }
 						  $reply.="Send in the codes beside the pests to get direct link for information about the pest";
 						  $sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
-						  break;
-					  
-						  case 3:
-						  $fertilizers = $crop->fertilizers()->get();
-						  $reply = "";
-						  foreach($fertilizers as $fertilizer)
-						  {
-							  $code = $fertilizer_prefix.$fertilizer->id;
-							  $reply.= ($code." - ".$fertilizer->type."\n");
-						  }
-						  $reply.="Send in the codes beside the fertilizers to get direct link for information about the fertilizer";
-						  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
-						  break;
-						  case 4:$sms->reply("The last recorded amount produced for ".$crop->name." is ".$crop->amount_produced);
 						  break;
 						  case 5:$sms->reply("The recommended number of days to wait before harvesting ".$crop->name." are ".$crop->days_until_harvest);
 						  break;
