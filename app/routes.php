@@ -71,12 +71,12 @@ Route::get('/msgreply', function(){
 		
 		if($int_version== 0)
 		{
-			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code.The weather section provides the weather forecast for the next 4 upcoming days. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the tips section is where you will find the latest topics regarding best practices in the agricultural field. Thank you for using BALE SMS.";
+			$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";
 			
 			$sms->reply($help_msg);
 		}
 		elseif($int_version== 400)
-			$sms->reply("Send\n0 for help\n1 for Crops Section\n2 for Livestock Section\n3 for weather information\n4 for announcements section\n5 for the tips section"); // predial larceny
+			$sms->reply("Send\n0 for help\n1 for Crops Section\n2 for Livestock Section\n3 for announcements section\n4 for questions section"); // predial larceny
 		elseif($int_version ==1)
 		{
 			$reply ="";
@@ -97,14 +97,14 @@ Route::get('/msgreply', function(){
 			}
 			$sms->reply($reply);
 		}
-		elseif($int_version ==4)
+		elseif($int_version ==3)
 		{
 			$reply = "The latest announcement is {generic announcement}";
 			$sms->reply($reply);
 		}
-		elseif($int_version ==5)
+		elseif($int_version ==4)
 		{
-			$reply = "The current topics are {generic topic code}-{generic topic title}";
+			$reply = "Please reply with any question you have and an extension officer will attempt to answer you as soon as possible as best as possible.";
 			$sms->reply($reply);
 		}
 		elseif(substr($int_version,0, 3) == $crop_prefix)
@@ -115,10 +115,10 @@ Route::get('/msgreply', function(){
 				if(substr($int_version,3) == $crop->crop_id)
 				{
 					$code = $int_version;
-					$option1 = $code."1 - Last recorded price for ".$crop->name; 
-					$option2 = $code."2 - Recommended methods of pest management for ".$crop->name;
-					$option3 = $code."3 - Suggested methods of fertilization for ".$crop->name;
-					$option4 = $code."4 - Recorded amount of ".$crop->name." sold last month"; 
+					$option1 = $code."1 - Getting started with ".$crop->name; 
+					$option2 = $code."2 - latest tips for caring your ".$crop->name;
+					$option3 = $code."3 - latest methods of fertilization for ".$crop->name;
+					$option4 = $code."2 - Recommended methods of pest management for ".$crop->name;
 					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
 					
 					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
