@@ -1,4 +1,4 @@
-@extends('layouts.form')
+@extends('layouts.base')
 	@section('content')
 		<h1>New Announcement</h1>
 

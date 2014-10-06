@@ -54,6 +54,8 @@ class DashboardController extends \BaseController {
 		$croptip->crop_id = $id;
 
 		$croptip->save();
+
+		return Redirect::to('dashboard/crops/$id/tips');
 	}
 
 	public function getAnnouncementForm()
