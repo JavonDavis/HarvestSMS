@@ -49,24 +49,24 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::post('/announcements', 'DashboardController@postAnnouncementForm');
 	Route::get('/announcements', 'DashboardController@getAnnouncementTable');
 });
-
+include ( "NexmoMessage.php" );
 Route::get('/msgreply', function(){
-	ini_set('display_errors', 'On');
+	//ini_set('display_errors', 'On');
 
 	$crop_prefix = 100;
 	$pest_prefix = 200;
 	$fertilizer_prefix = 300;
 	$livestock_prefix = 400;
 
-	echo "string";
-	include ( "NexmoMessage.php" );
+	
+	
 	// include ("crop.php");
 	// Declare new NexmoMessage.
 	$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 	
 
-	$crops = Crop::all();
-	$livestocks = Livestock::all();
+	//$crops = Crop::all();
+	//$livestocks = Livestock::all();
 	//$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 	//echo $sms->displayOverview($info);
 	
@@ -89,6 +89,7 @@ Route::get('/msgreply', function(){
 			$sms->reply("Unknown code");
 		}
 	}
+	echo "string";
 });
 
 Route::get('/createJohn', function(){
