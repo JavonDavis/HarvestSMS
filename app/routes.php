@@ -76,7 +76,7 @@ Route::get('/msgreply', function(){
 			$sms->reply($help_msg);
 		}
 		elseif($int_version== 400)
-			$sms->reply("Send 0 for help\nSend 1 for Crops Section\nSend 2 for Livestock Section\nSend 3 for weather information\nSend 4 for announcements section\nSend 5 for the tips section"); // predial larceny
+			$sms->reply("Send\n0 for help\n1 for Crops Section\n2 for Livestock Section\n3 for weather information\n4 for announcements section\n5 for the tips section"); // predial larceny
 		elseif($int_version ==1)
 		{
 			$reply ="";
@@ -179,7 +179,7 @@ Route::get('/msgreply', function(){
 					
 					$sms->reply($option1."\n".$option2."\n".$option3);
 				}
-				elseif($id == $livestock>id)
+				elseif($id == $livestock->id)
 				{
 					  $lastDigit = substr($int_version, strlen($int_version)-1);
 					  
