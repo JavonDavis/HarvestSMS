@@ -164,7 +164,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 			foreach($announcements as $announcement)
 			{
 				$code = $announcement_prefix.$announcement->id;
-				$reply .=($code." for ".$announcement->name."\n");
+				$reply .=($code." for ".$announcement->description."\n");
 			}
 			$sms->reply($reply);
 		}
