@@ -71,12 +71,19 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::post('/announcements', 'DashboardController@postAnnouncementForm');
 	Route::get('/announcements', 'DashboardController@getAnnouncementTable');
 
+	Route::get('/test', function ()
+	{
+		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+		$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+		echo $sms->displayOverview($info);
+	});
+
 	Route::get('/questions', 'DashboardController@getQuestionTable');
 	Route::get('/answer/{id}', 'DashboardController@getAnswerForm');
 	Route::post('/questions/{id}', function($id){
 		$question = Question::find($id);
 		$answer = Input::get('answer');
-		
+
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$info = $sms->sendText( $question->from, 'BALE',$answer );
 		echo $sms->displayOverview($info);

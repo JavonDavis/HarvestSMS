@@ -2,7 +2,7 @@
 	@section('content')
 		<h1>Answer Question</h1>
 
-		{{ Form::open(array('url' => '/dashboard/questions/1', 'class' => 'form-horizontal')) }}
+		{{ Form::open(array('url' => '/dashboard/questions/' . $question->id, 'class' => 'form-horizontal')) }}
 
 		<h5>{{ $question->content }}</h5>
 
