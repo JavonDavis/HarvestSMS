@@ -231,7 +231,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 						  break;
 					  
 						  case 2:
-						  $tips = $crop->fertilizers()->get();
+						  $tips = $crop->croptips()->get();
 						  $reply = "";
 						  foreach($tips as $tip)
 						  {
