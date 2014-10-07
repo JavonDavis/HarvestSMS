@@ -93,6 +93,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 		echo $sms->displayOverview($info);
 	});
 });
+
 Route::get('/msgreply', function(){
 	//ini_set('display_errors', 'On');
 
@@ -100,6 +101,7 @@ Route::get('/msgreply', function(){
 	$pest_prefix = 200;
 	$fertilizer_prefix = 300;
 	$livestock_prefix = 400;
+	$announcement_prefix = 500;
 	$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";	
 
 	
@@ -119,12 +121,14 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$text = $sms->text;
 		if(Session::has('question'))
 		{
-			$reply = "Thank you for asking we'll get back to you as soon as possible :(";
-			$sms->reply($reply);
+			
 			$question = new Question;
 			$question->content = $text;
 			$question->from = $sms->from;
 			$question->save();
+			
+			$reply = "Thank you for asking we'll get back to you as soon as possible :)";
+			$sms->reply($reply);
 		}
 		elseif($text== 0)
 		{
@@ -158,7 +162,13 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		}
 		elseif($text ==3)
 		{
-			$reply = "The latest announcement is {generic announcement}";
+			$reply = "The latest announcements from your extension officers are:\n";
+			$announcements = Announcement::all();
+			foreach($announcements as $announcement)
+			{
+				$code = $announcement_prefix.$announcement->id;
+				$reply .=($code." for ".$announcement->description."\n");
+			}
 			$sms->reply($reply);
 		}
 		elseif($text ==4)
@@ -196,7 +206,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 					  
 					  switch($lastDigit)
 					  {
-						  case 1:$sms->reply("Getting start with ".($crop->name)." is ".($crop->getting_started));
+						  case 1:$sms->reply("Getting start with ".($crop->name).":\n".($crop->getting_started));
 						  break;
 					  
 						  case 2:
@@ -245,7 +255,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 				if(substr($text,3) == $livestock->id)
 				{
 					$code = $text;
-					$option1 = $code."1 - Last recorded price"; 
+					$option1 = $code."1 - Getting started with ".$livestock->name;
 					$option2 = $code."2 - Recommended feed for ".$livestock->name;
 					$option3 = $code."3 - Tips for caring for ".$livestock->name;
 					
@@ -257,7 +267,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 					  
 					  switch($lastDigit)
 					  {
-						  case 1:$sms->reply("The last recorded price for ".$livestock->name." is ".($livestock->price));
+						  case 1:$sms->reply("Getting started with ".$livestock->name.":\n".($livestock->getting_started));
 						  break;
 					  
 						  case 2:$sms->reply("The recommended feed for ".$livestock->name." is ".($livestock->feed));
