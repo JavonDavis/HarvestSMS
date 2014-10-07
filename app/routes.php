@@ -203,7 +203,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 					  
 					  switch($lastDigit)
 					  {
-						  case 1:$sms->reply("Getting start with ".($crop->name)." is ".($crop->getting_started));
+						  case 1:$sms->reply("Getting start with ".($crop->name).":\n".($crop->getting_started));
 						  break;
 					  
 						  case 2:
@@ -252,7 +252,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 				if(substr($text,3) == $livestock->id)
 				{
 					$code = $text;
-					$option1 = $code."1 - Last recorded price"; 
+					$option1 = $code."1 - Getting started with ".$livestock->name;
 					$option2 = $code."2 - Recommended feed for ".$livestock->name;
 					$option3 = $code."3 - Tips for caring for ".$livestock->name;
 					
@@ -264,7 +264,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 					  
 					  switch($lastDigit)
 					  {
-						  case 1:$sms->reply("The last recorded price for ".$livestock->name." is ".($livestock->price));
+						  case 1:$sms->reply("Getting started with ".$livestock->name.":\n".($livestock->getting_started));
 						  break;
 					  
 						  case 2:$sms->reply("The recommended feed for ".$livestock->name." is ".($livestock->feed));
