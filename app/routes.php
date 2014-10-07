@@ -44,7 +44,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 {
-	$sms = new NexmoMessage('a8ca5821', '3d21bce2');
+	
 	
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
@@ -63,10 +63,12 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 		$question = Question::find($id);
 		$answer = Input::get('answer');
 		
+		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$info = $sms->sendText( $question->from, 'BALE',$answer );
 		echo $sms->displayOverview($info);
 	});
 });
+
 Route::get('/msgreply', function(){
 	//ini_set('display_errors', 'On');
 
@@ -74,6 +76,7 @@ Route::get('/msgreply', function(){
 	$pest_prefix = 200;
 	$fertilizer_prefix = 300;
 	$livestock_prefix = 400;
+	$announcement_prefix = 500;
 	$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";	
 
 	
@@ -93,12 +96,14 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$text = $sms->text;
 		if(Session::has('question'))
 		{
-			$reply = "Thank you for asking we'll get back to you as soon as possible :(";
-			$sms->reply($reply);
+			
 			$question = new Question;
 			$question->content = $text;
 			$question->from = $sms->from;
 			$question->save();
+			
+			$reply = "Thank you for asking we'll get back to you as soon as possible :)";
+			$sms->reply($reply);
 		}
 		elseif($text== 0)
 		{
@@ -132,7 +137,13 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		}
 		elseif($text ==3)
 		{
-			$reply = "The latest announcement is {generic announcement}";
+			$reply = "The latest announcements from your extension officers are:\n";
+			$announcements = Announcement::all();
+			foreach($announcements as $announcement)
+			{
+				$code = $announceement_prefix.$announcement->id;
+				$reply .=($code." for ".$announcement->name."\n");
+			}
 			$sms->reply($reply);
 		}
 		elseif($text ==4)
