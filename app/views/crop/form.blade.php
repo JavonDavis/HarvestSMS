@@ -1,6 +1,6 @@
 @extends('layouts.base')
 	@section('content')
-		<h1>Crop Input</h1>
+		<h1>New Crop</h1>
 
 		{{ Form::open(array('url' => '/dashboard/crops', 'class' => 'form-horizontal')) }}
 
