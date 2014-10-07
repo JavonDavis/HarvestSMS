@@ -9,7 +9,7 @@
 				<th></th>
 				<th></th>
 				<th></th>
-				<th></th>
+				<!-- <th></th> -->
 				<th></th>
 				
 			</tr>
@@ -21,8 +21,8 @@
 				<td><a href="/dashboard/crops/{{ $crop->id }}/tips"><button>Tips</button></a></td>
 				<td><a href="/dashboard/crops/{{ $crop->id }}/pests"><button>Pests</button></a></td>
 				<td><a href="/dashboard/crops/{{ $crop->id }}/fertilizers"><button>Fertilizers</button></a></td>				
-				<td><a href="/dashboard/crops/{{ $crop->id }]/edit"><button type="button" class="btn btn-primary btn-sm">Edit</button></a></td>
-				<td><button type="button" class="btn btn-primary btn-sm">Delete</button></td>
+				<!-- <td><a href="/dashboard/crops/{{ $crop->id }}/edit"><button type="button" class="btn btn-primary btn-sm">Edit</button></a></td> -->
+				<td><a href="/dashboard/crops/{{ $crop->id }}/delete"><button type="button" class="btn btn-primary btn-sm">Delete</button></a></td>
 			</tr>
 			@endforeach		
 	@stop

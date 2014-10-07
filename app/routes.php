@@ -51,6 +51,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
+	Route::get('/crops/{id}/delete', 'DashboardController@deleteCrop');	
 	Route::get('/crops/{id}/edit', 'DashboardController@editCrop');
 	Route::get('/crops/{id}/pests', 'DashboardController@getCropsPests');
 	Route::get('/crops/{id}/fertilizers', 'DashboardController@getCropsFertilizers');	

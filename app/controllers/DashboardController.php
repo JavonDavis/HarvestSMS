@@ -83,6 +83,14 @@ class DashboardController extends \BaseController {
 		return Redirect::to('dashboard/crops/' . $id . '/tips');
 	}
 
+	public function deleteCrop($id)
+	{
+		$crop = Crop::find($id);
+		$crop->delete();
+
+		return Redirect::to('/dashboard/crops');
+	}
+
 	public function getAnnouncementForm()
 	{
 		return View::make('announcement.form');
