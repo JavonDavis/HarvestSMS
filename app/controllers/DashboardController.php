@@ -159,6 +159,21 @@ class DashboardController extends \BaseController {
 		return Redirect::to('dashboard/fertilizers/');
 	}
 
+	public function getFertilizerCrops($id)
+	{
+		$fertilizer = Fertilizer::find($id);
+		$crops = $fertilizer->crops()->get();
+		return View::make('fertilizer.crops')->with(array('crops' => $crops, 'fertilizer' => $fertilizer));
+	}
+
+	public function deleteFertilizer($id)
+	{
+		$fertilizer = Fertilizer::find($id);
+		$fertilizer->delete();
+
+		return Redirect::to('/dashboard/fertilizer');
+	}
+
 	public function getPestTable()
 	{
 		$pests = Pest::all();

@@ -62,6 +62,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/fertilizers', 'DashboardController@getFertilizerTable');
 	Route::get('/fertilizers/new', 'DashboardController@getFertilizerForm');
 	Route::post('/fertilizers', 'DashboardController@postfertilizerForm');
+	Route::get('/fertilizers/{id}/crops', 'DashboardController@getFertilizerCrops');
 
 	Route::get('/pests/new', 'DashboardController@getPestForm');
 	Route::get('/pests', 'DashboardController@getPestTable');

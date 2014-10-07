@@ -109,9 +109,9 @@
 		  		</a>
 		    </div>
 		    <div class="col-sm-4">
-		    	<a href="/dashboard/questions">
-		      <div class="tile blue">
-		        <h3 class="title">Questions</h3>
+		    	<a href="/dashboard/pests">
+		      <div class="tile green">
+		        <h3 class="title">Pests</h3>
 		      </div>
 		  		</a>
 		    </div>   
@@ -124,5 +124,14 @@
 		    </div>     
 		  </div>
 		</div>
+    <div class="row">
+        <div class="col-sm-4" style = "float: none; margin: 0 auto;">
+         <a href="/dashboard/questions">  
+          <div class="tile blue">
+            <h3 class="title">Questions</h3>
+          </div>
+        </a>
+        </div>
+    </div>
 
 	@stop
