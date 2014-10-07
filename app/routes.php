@@ -109,6 +109,7 @@ Route::get('/msgreply', function(){
 	$fertilizer_prefix = 300;
 	$livestock_prefix = 400;
 	$announcement_prefix = 500;
+	$tip_prefix_crop = 600;
 	$help_msg = "In the crops/animals section is where you will find a list of crops/animals accompanied by their code. The accouncement section is where the latest updates provided by your extension officers are posted.Lastly, the questions section is where you send any question of concern and an api will try to get back tou as soon as possible. Thank you for using BALE SMS.";	
 
 	
@@ -184,6 +185,13 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 			$sms->reply($reply);
 			Session::flash('question',$sms->from);
 		}
+		elseif(substr($text,0, 3) == $tip_prefix_crop)
+		{
+			$id = substr($text,3);
+			$tip = Croptip::findOrFail($id);
+			
+			$sms->reply($tip->description." - ".$tip->content);
+		}
 		elseif(substr($text,0, 3) == $crop_prefix)
 		{ 
 			$text = (int) $text;
@@ -209,9 +217,8 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 					$reply1 = substr($reply,0,strlen($reply)/2);
 					$reply2 = substr($reply,strlen($reply)/2,strlen($reply)/2);
 					
-					$num = $sms->from;
-					$sms->sendText($num,'Bale',$reply1);
-					$sms->sendText($num,'Bale',$reply2);
+					$sms->reply($reply);
+					//$sms->sendText($sms->from,'Bale',$reply2);
 				}
 				elseif($id == $crop->id)
 				{
@@ -223,7 +230,14 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 						  break;
 					  
 						  case 2:
-						  $sms->reply("Under Construction");
+						  $tips = $crop->fertilizers()->get();
+						  $reply = "";
+						  foreach($tips as $tip)
+						  {
+							  $code = $tip_prefix_crop.$tip->id;
+							  $reply.= ($code." - ".$tip->description."\n");
+						  }
+						  $sms->reply("Some tips are:\n".$reply);
 						  break;
 					  
 						  case 3:
@@ -231,7 +245,6 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 						  $reply = "";
 						  foreach($fertilizers as $fertilizer)
 						  {
-							  $code = $fertilizer_prefix.$fertilizer->id;
 							  $reply.= ($fertilizer->type."\n");
 						  }
 						  $sms->reply("The recommended fertilizers for ".$crop->name." are \n".$reply);
@@ -244,7 +257,6 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 							  $code = $pest_prefix.$pest->id;
 							  $reply.= ($code." - ".$pest->type."\n");
 						  }
-						  $reply.="Send in the codes beside the pests to get direct link for information about the pest";
 						  $sms->reply("The pests that normally affect ".$crop->name." are \n".$reply);
 						  break;
 						  case 5:$sms->reply("The recommended number of days to wait before harvesting ".$crop->name." are ".$crop->days_until_harvest);
