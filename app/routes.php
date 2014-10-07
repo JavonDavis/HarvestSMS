@@ -16,7 +16,7 @@
 include ( "NexmoMessage.php" );
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Redirect::to('/dashboard');
 });
 
 Route::group(array('prefix' => 'api/v1'), function() {
@@ -45,6 +45,7 @@ Route::group(array('prefix' => 'api/v1'), function() {
 Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 {
 	Route::get('/', 'DashboardController@getIndex');
+	Route::get('/help', 'DashboardController@getHelp');
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
@@ -91,6 +92,8 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$info = $sms->sendText( $question->from, 'BALE',$answer );
 		echo $sms->displayOverview($info);
+
+		$question->delete();
 	});
 });
 

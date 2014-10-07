@@ -8,6 +8,11 @@ class DashboardController extends \BaseController {
 		return View::make('dashboard');
 	}
 	
+	public function getHelp()
+	{
+		return View::make('help');
+	}
+
 	public function getCropForm()
 	{
 		$fertilizers = Fertilizer::all();
