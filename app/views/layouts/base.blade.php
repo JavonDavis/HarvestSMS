@@ -26,6 +26,9 @@
 
 
 	</head>
+
+    <script type="text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src = "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
  <body>
   <a href="/dashboard"><span class = "glyphicon glyphicon-home">Home</span></a>
     @yield('content')                

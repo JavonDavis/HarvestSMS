@@ -10,6 +10,11 @@
           line-height: inherit;
         }
 
+        img {
+          height: 1000px;
+          width: 4912px;
+        }
+
         strong {
           font-weight: 600;
         }
@@ -71,12 +76,42 @@
 
     </style>
 
-		<div class="container">
-		  <div class="row">
-		    <div class="col-md-12">
-		     <h1><strong>Basic Agricultural Learning Environment - Dashboard</strong></h1>
-		    </div>
-		  </div>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          
+          <div class="item active">
+            <img src="/unknown.jpg" alt="">
+            <div class="carousel-caption">
+              
+            </div>
+          </div>
+          <div class="item">
+            <img src="/cow-large.jpg" alt="">
+            <div class="carousel-caption">
+              
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+
+
+		<div class="container" style = "margin-top: 40px;">
 		  <div class="row">
 		    <div class="col-sm-4">
 		     <a href="/dashboard/crops">	
@@ -116,9 +151,9 @@
 		  		</a>
 		    </div>   
 		    <div class="col-sm-4">
-		    	<a href="/dashboard/help">
-		      <div class="tile blue">
-		        <h3 class="title">Help</h3>
+		    	<a href="/dashboard/questions">
+		      <div class="tile green">
+		        <h3 class="title">Questions</h3>
 		      </div>
 		  		</a>
 		    </div>     
@@ -126,9 +161,9 @@
 		</div>
     <div class="row">
         <div class="col-sm-4" style = "float: none; margin: 0 auto;">
-         <a href="/dashboard/questions">  
+         <a href="/dashboard/help">  
           <div class="tile blue">
-            <h3 class="title">Questions</h3>
+            <h3 class="title">Help</h3>
           </div>
         </a>
         </div>
