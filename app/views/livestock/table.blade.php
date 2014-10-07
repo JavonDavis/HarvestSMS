@@ -9,7 +9,7 @@
 				<th>Feed</th>
 				<th>Getting Started</th>
 				<th></th>
-				<th></th>
+				<!-- <th></th> -->
 				<th></th>
 				
 			</tr>
@@ -20,8 +20,8 @@
 				<td><p>{{ $livestock->care_methods }}</p></td>
 				<td><p>{{ $livestock->feed }}</p></td>
 				<td><p>{{ $livestock->getting_started }}</p></td>
-				<td><a href="/dashboard/crops/{{ $livestock->id }}/tips/new"><button type="button" class="btn btn-primary btn-sm">Add Tip</button></a></td>
-				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
+				<td><a href="/dashboard/livestock/{{ $livestock->id }}/tips/new"><button type="button" class="btn btn-primary btn-sm">Add Tip</button></a></td>
+				<!-- <td><button type="button" class="btn btn-primary btn-sm">Edit</button> -->
 				<td><button type="button" class="btn btn-primary btn-sm">Delete</button></td>
 			</tr>
 			@endforeach		

@@ -1,8 +1,8 @@
 @extends('layouts.base')
 	@section('content')
-		<h2>New tip for {{ $crop->name }}</h2>
+		<h2>New tip for {{ $livestock->name }}</h2>
 
-		{{ Form::open(array('url' => '/dashboard/crops/$crop->id/tips')) }}
+		{{ Form::open(array('url' => '/dashboard/livestock/' . $livestock->id . '/tips')) }}
 
 		{{ Form::label('description', 'Description') }}
 		{{ Form::text('description', '', array('class' => 'form-control')) }}

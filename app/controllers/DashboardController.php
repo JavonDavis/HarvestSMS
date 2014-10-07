@@ -67,7 +67,7 @@ class DashboardController extends \BaseController {
 	{
 		$crop = Crop::find($id);
 
-		return View::make('crop.tipform')->with('crop', $crop);
+		return View::make('crop.tipform')->with(array('crop' => $crop));
 	}
 
 	public function postCropTipForm($id)
@@ -225,6 +225,8 @@ class DashboardController extends \BaseController {
 		$livestock->getting_started = Input::get('getting_started');
 
 		$livestock->save();
+
+		return Redirect::to('/dashboard/livestock');
 	}
 
 	public function getLivestockTips($id)
