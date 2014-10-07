@@ -206,8 +206,8 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
 					
 					$reply = $option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5;
-					//$reply1 = substr($reply,0,strlen($reply)/2);
-					//$reply2 = substr($reply,strlen($reply)/2,strlen($reply)/2);
+					$reply1 = substr($reply,0,strlen($reply)/2);
+					$reply2 = substr($reply,strlen($reply)/2,strlen($reply)/2);
 					
 					$num = $sms->from;
 					$sms->sendText($num,'Bale',$reply1);
