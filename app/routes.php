@@ -39,6 +39,8 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	Route::resource('animals', 'AnimalApiController');
 	Route::get('/animals/{id}/tips', 'AnimalApiController@getTips');
 	Route::get('/animals/{id}/tips/{tipid}', 'AnimalApiController@getTip');
+
+	Route::resource('announcements', 'AnnouncementApiController');
 	
 });
 
@@ -365,6 +367,8 @@ Route::post('/login',function() {
 		{
 			Session::put('user',$user);
 			return Redirect::to('/dashboard');
+		} else {
+			return Redirect::to('/login');
 		}
 	}
 });

@@ -18,7 +18,7 @@ class DashboardController extends \BaseController {
 		$fertilizers = Fertilizer::all();
 		$pests = Pest::all();
 
-		return View::make('crop.form')->with('fertilizers', $fertilizers)->with('pests', $pests);
+		return View::make('crop.create')->with('fertilizers', $fertilizers)->with('pests', $pests);
 	}
 
 	public function postCropForm()
@@ -189,12 +189,19 @@ class DashboardController extends \BaseController {
 
 	public function getLivestockForm()
 	{
-		return View::make('livestock.form');
+		return View::make('livestock.create');
 	}
 
 	public function postLivestockForm()
 	{
-		# code...
+		$livestock = new Livestock;
+
+		$livestock->name = Input::get('name');
+		$livestock->care_methods = Input::get('care_methods');
+		$livestock->feed = Input::get('feed');
+		$livestock->getting_started = Input::get('getting_started');
+
+		$livestock->save();
 	}
 
 	public function getLivestockTips($id)
@@ -223,6 +230,5 @@ class DashboardController extends \BaseController {
 
 		return Redirect::to('dashboard/livestocks/$id/tips');
 	}
-
 
 }
