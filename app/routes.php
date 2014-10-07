@@ -75,7 +75,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/test', function ()
 	{
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
-		$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+		$info = $sms->sendText( '18765095176', 'MyApp', 'Hello!' );
 		echo $sms->displayOverview($info);
 	});
 
