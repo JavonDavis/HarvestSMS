@@ -9,6 +9,8 @@
 				<th></th>
 				<th></th>
 				<th></th>
+				<th></th>
+				<th></th>
 				
 			</tr>
 
@@ -16,8 +18,10 @@
 			<tr>
 				<td>{{ $crop->name }}</td>
 				<td>{{ $crop->days_until_harvest }}</td>
-				<td><a href="/dashboard/crops/{{ $crop->id }}/tips/new"><button type="button" class="btn btn-primary btn-sm">Add Tip</button></a></td>
-				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
+				<td><a href="/dashboard/crops/{{ $crop->id }}/tips"><button>Tips</button></a></td>
+				<td><a href="/dashboard/crops/{{ $crop->id }}/pests"><button>Pests</button></a></td>
+				<td><a href="/dashboard/crops/{{ $crop->id }}/fertilizers"><button>Fertilizers</button></a></td>				
+				<td><a href="/dashboard/crops/{{ $crop->id }]/edit"><button type="button" class="btn btn-primary btn-sm">Edit</button></a></td>
 				<td><button type="button" class="btn btn-primary btn-sm">Delete</button></td>
 			</tr>
 			@endforeach		

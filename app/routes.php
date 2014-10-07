@@ -44,10 +44,13 @@ Route::group(array('prefix' => 'api/v1'), function() {
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 {
-	
+	Route::get('/', 'DashboardController@getIndex');
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
+	Route::get('/crops/{id}/edit', 'DashboardController@editCrop');
+	Route::get('/crops/{id}/pests', 'DashboardController@getCropsPests');
+	Route::get('/crops/{id}/fertilizers', 'DashboardController@getCropsFertilizers');	
 	Route::get('/crops/{id}/tips', 'DashboardController@getCropTips');
 	Route::get('/crops/{id}/tips/new', 'DashboardController@getCropTipForm');
 	Route::post('/crops/{id}/tips', 'DashboardController@postCropTipForm');
@@ -58,6 +61,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 
 	Route::get('/pests/new', 'DashboardController@getPestForm');
 	Route::get('/pests', 'DashboardController@getPestTable');
+	Route::get('/pests/{id}/crops', 'DashboardController@getPestCrops');
 	Route::post('/pests', 'DashboardController@postPestForm');
 
 	Route::get('/livestock/new', 'DashboardController@getLivestockForm');
@@ -74,7 +78,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/test', function ()
 	{
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
-		$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+		$info = $sms->sendText( '14438558961', 'MyApp', 'Hello!' );
 		echo $sms->displayOverview($info);
 	});
 

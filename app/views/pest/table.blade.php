@@ -15,6 +15,7 @@
 			<tr>
 				<td>{{ $pest->type }}</td>
 				<td><p>{{ $pest->management_method }}</p></td>
+				<td><a href="/dashboard/pests/{{ $pest->id }}/crops"><button>Crops</button></a></td>
 				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
 				<td><button type="button" class="btn btn-primary btn-sm">Delete</button></td>
 			</tr>

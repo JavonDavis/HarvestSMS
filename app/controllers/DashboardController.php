@@ -2,6 +2,12 @@
 
 class DashboardController extends \BaseController {
 
+
+	public function getIndex()
+	{
+		return View::make('dashboard');
+	}
+	
 	public function getCropForm()
 	{
 		$fertilizers = Fertilizer::all();
@@ -34,8 +40,22 @@ class DashboardController extends \BaseController {
 	public function getCropTips($id)
 	{
 		$crop = Crop::find($id);
-		$tips = $crop->croptips()->get();
-		return View::make('crop.tips')->with(array('tips' => $tips, 'crop' => $crop));
+		$croptips = $crop->croptips()->get();
+		return View::make('crop.tips')->with(array('croptips' => $croptips, 'crop' => $crop));
+	}
+
+	public function getCropsPests($id)
+	{
+		$crop = Crop::find($id);
+		$pests = $crop->pests()->get();
+		return View::make('crop.pest')->with(array('crop' => $crop, 'pests' => $pests));
+	}
+
+	public function getCropsFertilizers($id)
+	{
+		$crop = Crop::find($id);
+		$fertilizers = $crop->fertilizers()->get();
+		return View::make('crop.fertilizer')->with(array('crop' => $crop, 'fertilizers' => $fertilizers));
 	}
 
 	public function getCropTipForm($id)
@@ -55,7 +75,7 @@ class DashboardController extends \BaseController {
 
 		$croptip->save();
 
-		return Redirect::to('dashboard/crops/$id/tips');
+		return Redirect::to('dashboard/crops/' . $id . '/tips');
 	}
 
 	public function getAnnouncementForm()
@@ -112,12 +132,18 @@ class DashboardController extends \BaseController {
 
 	public function getFertilizerForm()
 	{
-		return View::make('fertilizer.form');
+		return View::make('fertilizer.create');
 	}
 
 	public function postFertilizerForm()
 	{
-		# code...
+		$fertilizer = new Fertilizer;
+
+		$fertilizer->name = Input::get('name');
+
+		$fertilizer->save();
+
+		return Redirect::to('dashboard/fertilizers/');
 	}
 
 	public function getPestTable()
@@ -128,12 +154,26 @@ class DashboardController extends \BaseController {
 
 	public function getPestForm()
 	{
-		return View::make('pest.form');
+		return View::make('pest.create');
 	}
 
 	public function postPestForm()
 	{
-		# code...
+		$pest = new Pest;
+
+		$pest->type = Input::get('type');
+		$pest->management_method = Input::get('management');
+
+		$pest->save();
+
+		return Redirect::to('dashboard/pests/');
+	}
+
+	public function getPestCrops($id)
+	{
+		$pest = Pest::find($id);
+		$crops = $pest->crops()->get();
+		return View::make('pest.crops')->with(array('crops' => $crops, 'pest' => $pest));
 	}
 
 	public function getLivestockTable()

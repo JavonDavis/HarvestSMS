@@ -1,22 +1,26 @@
 @extends('layouts.base')
 	@section('content')
-	<h1>Crops</h1>
-		 <a href = "/dashboard/crops/new"><button type="button" class="btn btn-primary btn-md" id="add">Add Record</button></a>
+	<h1>Livestock</h1>
+		 <a href = "/dashboard/livestock/new"><button type="button" class="btn btn-primary btn-md" id="add">Add Record</button></a>
 		<table class="table table-striped">
 			<tr>
-				<th>Crop Name</th>
-				<th>Recommend Days Before Harvesting(Days)</th>
+				<th>Name</th>
+				<th>Care</th>
+				<th>Feed</th>
+				<th>Getting Started</th>
 				<th></th>
 				<th></th>
 				<th></th>
 				
 			</tr>
 
-			@foreach ($crops as $crop)
+			@foreach ($livestocks as $livestock)
 			<tr>
-				<td>{{ $crop->name }}</td>
-				<td>{{ $crop->days_until_harvest }}</td>
-				<td><a href="/dashboard/crops/{{ $crop->id }}/tips/new"><button type="button" class="btn btn-primary btn-sm">Add Tip</button></a></td>
+				<td>{{ $livestock->name }}</td>
+				<td><p>{{ $livestock->care_methods }}</p></td>
+				<td><p>{{ $livestock->feed }}</p></td>
+				<td><p>{{ $livestock->getting_started }}</p></td>
+				<td><a href="/dashboard/crops/{{ $livestock->id }}/tips/new"><button type="button" class="btn btn-primary btn-sm">Add Tip</button></a></td>
 				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
 				<td><button type="button" class="btn btn-primary btn-sm">Delete</button></td>
 			</tr>
