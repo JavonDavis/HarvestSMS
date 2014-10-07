@@ -7,12 +7,14 @@
 				<th>Fertilizer Name</th>
 				<th></th>
 				<th></th>
+				<th></th>
 				
 			</tr>
 
 			@foreach ($fertilizers as $fertilizer)
 			<tr>
 				<td>{{ $fertilizer->name }}</td>
+				<td><button type="button" class="btn btn-sm">Crops</button></td>
 				<td><button type="button" class="btn btn-primary btn-sm">Edit</button>
 				<td><button type="button" class="btn btn-primary btn-sm">Delete</button></td>
 			</tr>

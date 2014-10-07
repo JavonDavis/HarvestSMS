@@ -27,6 +27,7 @@
 
 	</head>
  <body>
+  <a href="/dashboard"><span class = "glyphicon glyphicon-home">Home</span></a>
     @yield('content')                
   </body>
 </html>
