@@ -18,15 +18,16 @@
     <![endif]-->
 
     <style type="text/css">
-
-    	body{
-    		margin: 0 auto;
-    		max-width: 800px;
-    	}
-
+      body {
+        margin: 0 auto;
+        max-width: 1200px;
+      }
     </style>
+
+
 	</head>
-	<body>
-        @yield('content')        
-    </body>
+ <body>
+  <a href="/dashboard"><span class = "glyphicon glyphicon-home">Home</span></a>
+    @yield('content')                
+  </body>
 </html>

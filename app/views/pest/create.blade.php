@@ -8,7 +8,7 @@
 			{{ Form::label('type', 'Pest type') }}
 			{{ Form::text('type', '', array('class' => 'form-control')) }}
 
-			{{ Form::label('management_method', 'Management') }}
+			{{ Form::label('management', 'Management') }}
 			{{ Form::textarea('management', '', array('class' => 'form-control')) }}
 
 		  	{{ Form::submit('Submit', array('class' => 'btn', 'id' => 'sub', 'onclick' => 'myFunction()')) }}

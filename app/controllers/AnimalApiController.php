@@ -9,7 +9,7 @@ class AnimalApiController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return Livestock::all()->toJson();
 	}
 
 
@@ -20,7 +20,20 @@ class AnimalApiController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$livestock = new Livestock;
+
+		$livestock->name = Input::get('name');
+		$livestock->care_methods = Input::get('care_methods');
+		$livestock->feed = Input::get('feed');
+		$livestock->getting_started = Input::get('getting_started');
+
+		$crop->save();
+
+		return Response::json(array(
+			'error' => 'none',
+			'message' => 'saved' 
+			));
+
 	}
 
 
@@ -32,7 +45,8 @@ class AnimalApiController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$livestock = Livestock::findOrFail($id);
+		return $livestock->toJson();
 	}
 
 
@@ -44,7 +58,19 @@ class AnimalApiController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$livestock = Livestock::findOrFail($id);
+
+		$livestock->name = (Input::get('name') !== NULL) ? Input::get('name') : $livestock->name;
+		$livestock->care_methods = (Input::get('care_methods') !== NULL) ? Input::get('care_methods') : $livestock->care_methods;
+		$livestock->feed = (Input::get('feed') !== NULL) ? Input::get('feed') : $livestock->feed;
+		$livestock->getting_started = (Input::get('getting_started') !== NULL) ? Input::get('getting_started') : $livestock->getting_started;
+
+		$crop->save();
+
+		return Response::json(array(
+				'error' => 'none',
+				'message' => 'updated'
+			));
 	}
 
 
@@ -56,7 +82,13 @@ class AnimalApiController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$livestock = Livestock::findOrFail($id);
+		$livestock->delete();
+
+		return Response::json(array(
+				'error' => 'none',
+				'deleted' => $id
+			));
 	}
 
 

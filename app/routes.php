@@ -16,7 +16,7 @@
 include ( "NexmoMessage.php" );
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Redirect::to('/dashboard');
 });
 
 Route::group(array('prefix' => 'api/v1'), function() {
@@ -39,16 +39,22 @@ Route::group(array('prefix' => 'api/v1'), function() {
 	Route::resource('animals', 'AnimalApiController');
 	Route::get('/animals/{id}/tips', 'AnimalApiController@getTips');
 	Route::get('/animals/{id}/tips/{tipid}', 'AnimalApiController@getTip');
+
+	Route::resource('announcements', 'AnnouncementApiController');
 	
 });
 
 Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 {
-
-	
+	Route::get('/', 'DashboardController@getIndex');
+	Route::get('/help', 'DashboardController@getHelp');
 	Route::get('/crops/new', 'DashboardController@getCropForm');
 	Route::post('/crops', 'DashboardController@postCropForm');
 	Route::get('/crops', 'DashboardController@getCropTable');
+	Route::get('/crops/{id}/delete', 'DashboardController@deleteCrop');	
+	Route::get('/crops/{id}/edit', 'DashboardController@editCrop');
+	Route::get('/crops/{id}/pests', 'DashboardController@getCropsPests');
+	Route::get('/crops/{id}/fertilizers', 'DashboardController@getCropsFertilizers');	
 	Route::get('/crops/{id}/tips', 'DashboardController@getCropTips');
 	Route::get('/crops/{id}/tips/new', 'DashboardController@getCropTipForm');
 	Route::post('/crops/{id}/tips', 'DashboardController@postCropTipForm');
@@ -56,9 +62,11 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/fertilizers', 'DashboardController@getFertilizerTable');
 	Route::get('/fertilizers/new', 'DashboardController@getFertilizerForm');
 	Route::post('/fertilizers', 'DashboardController@postfertilizerForm');
+	Route::get('/fertilizers/{id}/crops', 'DashboardController@getFertilizerCrops');
 
 	Route::get('/pests/new', 'DashboardController@getPestForm');
 	Route::get('/pests', 'DashboardController@getPestTable');
+	Route::get('/pests/{id}/crops', 'DashboardController@getPestCrops');
 	Route::post('/pests', 'DashboardController@postPestForm');
 
 	Route::get('/livestock/new', 'DashboardController@getLivestockForm');
@@ -75,7 +83,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/test', function ()
 	{
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
-		$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
+		$info = $sms->sendText( '14438558961', 'MyApp', 'Hello!' );
 		echo $sms->displayOverview($info);
 	});
 
@@ -88,6 +96,8 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		$info = $sms->sendText( $question->from, 'BALE',$answer );
 		echo $sms->displayOverview($info);
+
+		$question->delete();
 	});
 });
 
@@ -363,6 +373,8 @@ Route::post('/login',function() {
 		{
 			Session::put('user',$user);
 			return Redirect::to('/dashboard');
+		} else {
+			return Redirect::to('/login');
 		}
 	}
 });
