@@ -199,13 +199,27 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 				if(substr($text,3) == $crop->id)
 				{
 					$code = $text;
+<<<<<<< HEAD
 					$option1 = $code."1 - Getting started"; 
 					$option2 = $code."2 - Latest tips";
 					$option3 = $code."3 - Recommended fertilizers";
 					$option4 = $code."4 - Pests";
 					$option5 = $code."5 - When to harvest";
+=======
+					  $option1 = $code."1 - Getting started with ".$crop->name; 
+					$option2 = $code."2 - latest tips for caring your ".$crop->name;
+					$option3 = $code."3 - Recommended fertilizers for ".$crop->name;
+					$option4 = $code."4 - Pests that normally affect ".$crop->name;
+					$option5 = $code."5 - Suggested number of days before harvesting ".$crop->name;
+>>>>>>> e08cf3bd2cc0dd7300039ec0cd1e294917b88c58
 					
-					$sms->reply($option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5);
+					$reply = $option1."\n".$option2."\n".$option3."\n".$option4."\n".$option5;
+					$reply1 = substr($reply,0,strlen($reply)/2);
+					$reply2 = substr($reply,strlen($reply)/2,strlen($reply)/2);
+					
+					$num = $sms->from;
+					$sms->sendText($num,'Bale',$reply1);
+					$sms->sendText($num,'Bale',$reply2);
 				}
 				elseif($id == $crop->id)
 				{
