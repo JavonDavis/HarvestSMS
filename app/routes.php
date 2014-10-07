@@ -187,6 +187,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 		}
 		elseif(substr($text,0, 3) == $tip_prefix_crop)
 		{
+			$text = (int) $text;
 			$id = substr($text,3);
 			$tip = Croptip::findOrFail($id);
 			
