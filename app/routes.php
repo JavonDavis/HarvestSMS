@@ -75,7 +75,7 @@ Route::group(array('prefix' => 'dashboard', 'before' => 'login'),function ()
 	Route::get('/test', function ()
 	{
 		$sms = new NexmoMessage('a8ca5821', '3d21bce2');
-		$info = $sms->sendText( '18765095176', 'MyApp', 'Hello!' );
+		$info = $sms->sendText( '18768540368', 'MyApp', 'Hello!' );
 		echo $sms->displayOverview($info);
 	});
 
@@ -163,7 +163,7 @@ $sms = new NexmoMessage('a8ca5821', '3d21bce2');
 			$announcements = Announcement::all();
 			foreach($announcements as $announcement)
 			{
-				$code = $announceement_prefix.$announcement->id;
+				$code = $announcement_prefix.$announcement->id;
 				$reply .=($code." for ".$announcement->name."\n");
 			}
 			$sms->reply($reply);
