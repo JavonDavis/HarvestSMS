@@ -4,8 +4,8 @@
 
 		@foreach($pests as $pest)
 		<div>
-			<p>{{ $pest->type }}</p>
-			<p>Management: {{ $pest->management_method }}</p>
+			<h3>{{ $pest->type }}</h3>
+			<h4>Management: {{ $pest->management_method }}</h4>
 		</div>
 		@endforeach
 

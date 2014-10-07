@@ -1,6 +1,6 @@
 @extends('layouts.base')
 	@section('content')
-		<h2>Crops affected by {{ $fertilizer->name }}</h2>
+		<h2>Crops that can be used with {{ $fertilizer->name }}</h2>
 
 		@foreach($crops as $crop)
 		<li>
