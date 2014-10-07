@@ -93,7 +93,7 @@ class DashboardController extends \BaseController {
 
 	public function getAnnouncementForm()
 	{
-		return View::make('announcement.form');
+		return View::make('announcement.create');
 	}
 
 	public function postAnnouncementForm()
